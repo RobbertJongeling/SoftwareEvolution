@@ -1,5 +1,5 @@
-\documentclass[a4paper,twoside,twocolumn,11pt]{article}
-\usepackage{a4wide,graphicx,subfigure,fancyhdr,amsmath,amssymb,enumerate,hyperref, float}
+\documentclass[a4paper,twoside, twocolumn,11pt]{article}
+\usepackage{a4wide,graphicx,subfigure,fancyhdr,amsmath,amssymb,enumerate,hyperref, float,appendix}
 \usepackage[english]{babel}
 \numberwithin{equation}{section}
 
@@ -42,7 +42,7 @@
 \providecommand{\req}[1][req \arabic{reqc}]{
 	\refstepcounter{reqc}%
 	\label{#1}%
-	\noindent\textbf{Req. \arabic{reqc}}
+	\noindent\textbf{Req. \arabic{reqc}:}
 }
 %-------------------------------- Title ----------------------------------
 
@@ -65,15 +65,16 @@ This report contains an analysis of the requirements in the user requirements do
 In this section, we will discuss the methodologies used in the analysis process. The process is divided into four steps, the methodology for each step is described in a separate subsection.
 
 \subsection{Quality of individual requirements}
-We asses the quality of the individual requirements by a keyword-based approach. We use the words indicated in table 1 of the paper by Fabbrini et al. \cite{paper} We will check for the features vagueness, subjectivity and optionality. All the selected features belong to the property of non-ambiguity. We think it is interesting to investigate multiple features indicating one property in an attempt to get a total view of the problems with the requirements concerning that property.
+We asses the quality of the individual requirements by a keyword-based approach. We will check for the features vagueness, subjectivity and optionality. All the selected features belong to the property of non-ambiguity. We think it is interesting to investigate multiple features indicating one property in an attempt to get a total view of the problems with the requirements concerning that property.
 
-For the keyword-based approach, we will consider the words as mentioned in \cite{paper}. For the feature of vagueness, these are: \textit{clear, easy, strong, good, bad, useful, significant, adequate} and \textit{recent}. Considering the feature of subjectivity, these are: \textit{similar(ly), having in mind, take into account} and \textit{ as \ldots as possible}. And finally, for the feature of optionality, the keywords are: \textit{possibly, eventually, if possible, if needed, if appropriate} and \textit{if (it is the) case}.
+We use the words indicated in table 1 of the paper by Fabbrini et al. \cite{paper} for the keyword-based search. For the feature of vagueness, the keywords are: \textit{clear, easy, strong, good, bad, useful, significant, adequate} and \textit{recent}. Considering the feature of subjectivity, they are: \textit{similar(ly), having in mind, take into account} and \textit{ as \ldots as possible}. And finally, for the feature of optionality, they are: \textit{possibly, eventually, if possible, if needed, if appropriate} and \textit{if (it is the) case}.
 %misschien nog keywords toevoegen
+%//TODO en na keyword based approach nog zelf alle reqs doorlezen op ambiguity!!!
 
 It is likely that not all of the keywords are present in the requirements so we will check them all to get the highest number of results.
 
 \subsection{Identification of dependencies}
-To identify dependencies between requirements, we will first consider dependencies between features. Already in the requirements document \cite{VEMUS} there is a grouping of requirements per feature or part of the system. This grouping is adopted in the subsections of section \ref{reqs}. If there is a dependency between these features, we will check which requirements belonging to that feature are indicating that dependency. Next, we check for dependencies of requirements within features or parts of the system.
+To identify dependencies between requirements, we will first consider dependencies between features. Already in the requirements document \cite{VEMUS} there is a grouping of requirements per feature or part of the system. This grouping is adopted in the subsections of appendix \ref{reqs}. If there is a dependency between these features, we will check which requirements belonging to that feature are indicating that dependency. Next, we check for dependencies of requirements within features or parts of the system.%//TODO what in case there is no such distinction? (``Please note, that the entire discussion in this section should not be limited to the specific case you will discuss in the next section'')
 
 Next, we consider the requirements per feature and check dependencies between them. By checking the requirements in this way, we think we can find all dependencies between the requirements.
 
@@ -82,12 +83,50 @@ From the found dependencies, we will create a traceability graph, where the requ
 
 Requirements that are isolated, i.e. have no incoming nor outgoing edges may indicate an obsolete requirement. The presence of subgraphs that are unconnected to the rest of the graph may indicate really well separable functionality, or maybe unused functionality. Requirements that depend on a lot of other requirements will probably be unstable. Whereas requirements that affect a lot of others should be very stable. 
 
-\subsection{Combination of graph structure analysis with quality considerations}
-In this step of the analysis process, we combine the results of earlier steps to see what their implications are on requirements evolution.
+\subsection{Implications on requirements evolution}
+In this step of the analysis process, we combine the results of the graph structure analysis and the quality considerations to assess what their implications are on requirements evolution.
 %//TODO meer?
 
+\section{Case study}
+In this case study we will study the user requirements document of VEMUS \cite{VEMUS}, a digital environment providing music education. We specifically review the requirements as stated in pages 82-83 of the document. For ease of reference to specific requirements, we enumerate them in appendix \ref{reqs}.
+
+\subsection{Keyword search}
+%for subjectivity, searched for account and mind and possible
+
+\section{Results and discussion}
+\subsection{Keyword search}
+\subsubsection{Vagueness} 
+Bad: req \ref{48}. Not really problematic as there is a notion of a correct attack. So a bad attack is a deviation from that. The correct attack is not treated in the requirements but is apparently a given from the literature.\\\\
+Useful: req \ref{43}. In this case useful indicates a priority of the requirement; it would be useful to have an option of viewing the pitch only or the duration only. So this is not a problem of ambiguity.\\\\
+Adequate: req \ref{36}. In this case, the use of the word ``adequate'' indicates an ambiguity. It is not clear after how many uses constitutes this ``adequate practice''.
+
+\subsubsection{subjectivity}
+Similar: req \ref{34}. In this case, the word ``similar'' is used in an implementation suggestion. Also, the similarity is explicitly defined so there is no subjectivity problem here.\\
+
+\subsubsection{optionality}
+\textit{possibly, eventually, if possible, if needed, if appropriate} and \textit{if (it is the) case}.
+%searched for possibl, eventual, ``if '', appropriate
+Req. \ref{57}. Appropriate. Use of this word does not indicate optionality in this case but rather value; it is an appropriate way of doing things.
+
+There is no need for adaptive... Not an optional req.
+Generally, need is not used in context of if needed but rather it is needed that...
+
+
+
+\begin{thebibliography}{9}
+\bibitem{VEMUS}
+VEMUS consortium. \emph{Virtual Music School User Requirements Document}.
+April 2007.
+
+\bibitem{paper}
+F. Fabbrini, M. Fusani, S. Gnesi, G. Lami. \emph{The Linguistic Approach to the Natural Language Requirements Quality: Benefits of the use of an Automatic Tool.} 26th Annual IEEE Computer Society - NASA Goddard Space Flight Center Software Engineering Workshop, Greenbelt, MA, USA 27-29 November, 2001.
+\end{thebibliography}
+
+\onecolumn
+\pagestyle{empty} %//TODO empty pagestyle or similar to rest of report?
+\begin{appendices}
 \section{Requirements}\label{reqs}
-This section gives an overview of the requirements stated in \cite{VEMUS}.
+In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS user requirements document \cite{VEMUS}. In creating subsections, we adhere to the structure as provided in the original document, where this way of organizing is used.
 
 \subsection{Teacher-student feedback}
 	\req{Students need to be praised and reproached according their level and their goals. They must have a choice about how strict or lenient the system's feedback is.}\\
@@ -131,9 +170,9 @@ This section gives an overview of the requirements stated in \cite{VEMUS}.
 	\req{The teacher should be able to mark up parts of the score for the student to practice and specify which aspects of the student performance should be evaluated by the system}\\
 	\req{In any lesson plan the teacher may identify for each music score difficulties and aspects that need special attention.}\\
 	\req{The student should be able to practice the piece in steps (i.e. practice part A, then part B, then the whole piece) and get performance evaluation.}\\
-	\req{The teacher should be able to design and apply a practicing plan. A practicing plan would be a collection of order steps that could have similar form: Step $x$: Practice on $<$range in song$>$ focusing on $<$aspect(s)$>$ until $<$condition$>$.}\\
+	\req[34]{The teacher should be able to design and apply a practicing plan. A practicing plan would be a collection of order steps that could have similar form: Step $x$: Practice on $<$range in song$>$ focusing on $<$aspect(s)$>$ until $<$condition$>$.}\\
 	\req{The system will need to keep a record of performances for future reference and for monitoring the pupil's progress and to generate a progress report based on a)the performance skills category, b) Student's recorded performance evaluation and c) Student's devoted time on task}\\
-	\req{After adequate practice the learner should be able to activate all the parameters simultaneously and receive feedback on all of them.}\\
+	\req[36]{After adequate practice the learner should be able to activate all the parameters simultaneously and receive feedback on all of them.}\\
 	\req{At the end of the studying procedure it is important for the student to join the parts of the piece together in order to have the feel of the whole piece.}\\
 	\req{The system should provide the possibility to tuning to a single note (by means of a tuner tool).}\\
 	\req{The system should include exercises of graded difficulty for tuning up.}\\
@@ -142,12 +181,12 @@ This section gives an overview of the requirements stated in \cite{VEMUS}.
 	\req{The VEMUS visualizations should be simple, intuitive, not using many colors}\\
 	\req{The VEMUS visualizations should give a general feedback on students' performance and not a detailed one}\\
 	\req{The VEMUS visualizations should have musical meaning and in a way be relatedto musical symbols}\\
-	\req{While designing visualizations of the pitch it is needed to have a representation for each note and an option of viewing the pitch only or the duration only would be useful}\\
+	\req[43]{While designing visualizations of the pitch it is needed to have a representation for each note and an option of viewing the pitch only or the duration only would be useful}\\
 	\req{While designing visualizations of the dynamics the line thickness is more relevant for expressing dynamics and a comprehensive graph (e.g. covering a phrase) outside the score is needed}\\
 	\req{While designing visualizations of the timbre using the shapes and saturation is more intuitive than using the sonograms and between color saturation and shapes, shapes are preferable as the proposed colors are not successful at all. The colors should be represented more accurately. Maybe the color range of grey would be better to avoid many confusing colors.}\\
 	\req{While designing the Fingering Viewer a static 3D fingering viewer (which shifts fingering when clicking on a new note) is of value, provided that the position, appearance and shapes of the fingers are correct. The amplitude of movement should be realistic. A normal fingering table with open and filled circles is a necessary supplement. For the instruments with reed (clarinet, saxophone) and with mouthpiece (trumpet) images which make visible the right position of the lips (embouchure) should beincluded.}\\
 	\req{Graphic representations of how to use the tongue or blowing in the instrument is necessary as it contributes to creating a correct attack.}\\
-	\req{The system need not only to diagnose a bad attack but also to illustrate graphically how to remedy such a mistake}\\
+	\req[48]{The system need not only to diagnose a bad attack but also to illustrate graphically how to remedy such a mistake}\\
 	\req{A diagram or a schema to show how a player could achieve a correct attack with the application of the tongue or by blowing more or less should be included.}\\
 	\req{As sound production is of prime importance to wind instruments, a 3D representation that would support this need (illustrating airflow, attack, mouth position, et al) is required.}\\
 
@@ -158,20 +197,12 @@ This section gives an overview of the requirements stated in \cite{VEMUS}.
 	\req{The available content should be consisted with the school-based work and to include examples from the world musical literature (known works).}\\
 	\req{The system should also allow the scores' conversion to the known programs (Sibelius, Finale, Encore, Mozart) as well as to allow for "connections" of the whole displayed or audio music elements with the MIDI system.}\\
 	\req{The content will be organised in lessons and chapters following a logical order of increased difficulty.}\\
-	\req{As it is widely accepted by music teachers that assigning exercises and melodies to students depends on the level of the student, the instrument, and the preferences of the student, the organisation of the content according to the VEMUS Music School House seems to be an appropriate way to organise VEMUS content.}\\
+	\req[57]{As it is widely accepted by music teachers that assigning exercises and melodies to students depends on the level of the student, the instrument, and the preferences of the student, the organisation of the content according to the VEMUS Music School House seems to be an appropriate way to organise VEMUS content.}\\
 	\req{The educational content is expected to be updated and rearranged regularly}\\
 	\req{There is a need for a content repository for wind instruments teaching allowing storing and retrieving not only melodies and music exercises but also text, images, and video to support the teaching.}\\
 	\req{The teachers should be able to: insert new content; either content they produce themselves or content they acquire from other sources and re-arrange the content to meet their the requirements of their own classes or schools and/or to meet their own personal teaching preferences}\\
+\end{appendices}
 
 
-
-\begin{thebibliography}{9}
-\bibitem{VEMUS}
-VEMUS consortium. \emph{Virtual Music School User Requirements Document}.
-April 2007.
-
-\bibitem{paper}
-F. Fabbrini, M. Fusani, S. Gnesi, G. Lami. \emph{The Linguistic Approach to the Natural Language Requirements Quality: Benefits of the use of an Automatic Tool.} 26th Annual IEEE Computer Society - NASA Goddard Space Flight Center Software Engineering Workshop, Greenbelt, MA, USA 27-29 November, 2001.
-\end{thebibliography}
 
 \end{document}
