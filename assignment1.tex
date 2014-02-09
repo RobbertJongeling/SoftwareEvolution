@@ -95,13 +95,15 @@ Then, we scan through all requirements to find possibly missed ambiguous require
 We then start identifying dependencies between the requirements. Already in the requirements document \cite{VEMUS} there is a grouping of requirements per feature or part of the system. This grouping is adopted in the subsections of appendix \ref{reqs}.
 Next, we consider the requirements per feature and check dependencies between them. By checking the requirements in this way, we attempt to maximize the number of found dependencies that exist between the requirements.
 
-Next, we build a dependency graph using the tool \textit{GraphViz}. By creating a node for each requirement and defining an arc from node $a$ to node $b$ for each dependency of the form $a$ depends on $b$. We then analyze the resulting graph based on the general concerns raised in the section on traceability graph analysis. \ref{2.3}
+Next, we build a dependency graph using the tool \textit{GraphViz}. By creating a node for each requirement and defining an arc from node $a$ to node $b$ for each dependency of the form $a$ affects $b$ (or $b$ depends on $a$). In this way, we can follow the arrows to see which requirements need to be changed when changing one. 
+
+We then analyze the resulting graph based on the general concerns raised in the section on traceability graph analysis. \ref{2.3}
 
 Finally, we combine the results of identifying bad requirements and volatile requirements to discuss the suitability of the document for evolution. 
 
-%for subjectivity, searched for account and mind and possible
 
 \section{Results and discussion}
+%//TODO  threats to validity
 In this section we will present the results obtained from the analysis of the user requirements document of VEMUS \cite{VEMUS}.
 
 \subsection{Quality of individual requirements}
@@ -144,7 +146,18 @@ Req \ref{37} is an indicator of how subjectivity is used throughout the requirem
 \paragraph{Optionality}
 \ref{45}. ``\ldots Maybe \ldots would be better to \ldots." The word ``maybe" here indicates the optionality of this part of the requirement.
 
-\subsection{Identification of dependencies}
+\subsection{Dependencies}
+We present the result of the dependency analysis in the traceability graph in figure \ref{fig:graph}. Here, the nodes correspond to the numbered requirements in appendix \ref{reqs} and the arcs from a node $a$ to a node $b$ correspond to a dependency $a$ affects $b$ (or $b$ depends on $a$).
+
+\begin{figure}
+\center
+\includegraphics[scale=0.75]{graph.pdf}
+\caption{Traceability graph of requirements of VEMUS \cite{VEMUS}. Nodes correspond to requirements in \ref{reqs}. Arcs correspond to dependencies.}
+\label{fig:graph}
+\end{figure}
+
+\subsection{Implications on requirements evolution}
+
 
 \begin{thebibliography}{9}
 \bibitem{VEMUS}
