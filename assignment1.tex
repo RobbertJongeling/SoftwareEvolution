@@ -42,7 +42,7 @@
 \providecommand{\req}[1][req \arabic{reqc}]{
 	\refstepcounter{reqc}%
 	\label{#1}%
-	\noindent\textbf{Req. \arabic{reqc}:}
+	\noindent\textbf{Req.\arabic{reqc}:}
 }
 %-------------------------------- Title ----------------------------------
 
@@ -147,17 +147,32 @@ Req \ref{37} is an indicator of how subjectivity is used throughout the requirem
 \ref{45}. ``\ldots Maybe \ldots would be better to \ldots." The word ``maybe" here indicates the optionality of this part of the requirement.
 
 \subsection{Dependencies}
-We present the result of the dependency analysis in the traceability graph in figure \ref{fig:graph}. Here, the nodes correspond to the numbered requirements in appendix \ref{reqs} and the arcs from a node $a$ to a node $b$ correspond to a dependency $a$ affects $b$ (or $b$ depends on $a$).
+We present the result of the dependency analysis in the traceability graph in figure \ref{fig:graph}. Here, the nodes correspond to the numbered requirements in appendix \ref{reqs} and the arcs from a node $a$ to a node $b$ correspond to a dependency $a$ affects $b$ (or $b$ depends on $a$). In appendix \ref{graphapp} we include a larger version of the graph.
 
 \begin{figure}
 \center
-\includegraphics[scale=0.75]{graph.pdf}
+\includegraphics[scale=0.21]{graph1.pdf}
 \caption{Traceability graph of requirements of VEMUS \cite{VEMUS}. Nodes correspond to requirements in \ref{reqs}. Arcs correspond to dependencies.}
 \label{fig:graph}
 \end{figure}
 
-\subsection{Implications on requirements evolution}
+We see that the requirements 13,20,21 and 35 are isolated. When inspecting these requirements, we see that requirements 13, 20 and 21 are general statements about the use of the system. 
+Requirement 35 states functionality that is not explicitely used by any other requirement. This may prove to be problematic as it does seem to be an important feature of the system but is not mentioned explicitly in other requirements.
 
+Furthermore we see that a lot of requirements are affected (directly and indirectly) by requirements 22 and 23. This is not surprising as these two requirements entail the general purpose of the system; it should provide support for self guided learning and it should allow for automatic performance evaluation.
+
+We see a few pairs of requirements depending on eachother. In two cases, this is because it is the same requirement, this concerns the pairs 26,58 and 3,16. In the other cases, it concerns requirements that are closely realted. We see one small loop in the graph, between requirements 56,57 and 58. This concerns requirements about the organization and arrangement of the content. Which needs to adhere to these three requirements. This is a bit of a strange part as especially requirements 56 and 57 seem to contradict eachother. This may be a problem when requirements evolve.
+
+The global functionality partition as created in the requirements document can still be seen in the graph. For example, the ``VEMUS Visualizations'' part is clearly seperated from other requirements with only few relations to other parts of the system. The parts about teacher-student feedback and providing feedback are a lot more intertwined. 
+
+\subsection{Implications on requirements evolution}
+In the search of ambiguous requirements, we found requirements 14,17,26,36,40 and 45 to be in some way ambiguous. We could have also mentioned requirement 58 but as said before, 26 and 58 are the same requirement. In the graph we see that 58 is part of the cycle 56,57 and 58 of which we already noted that this is a strange construct and so a point of attention concerning requirements evolution.
+
+Requirements 17 and 36 do not affect other requirements so although one would rather have zero ambiguous requirements, it is not the end of the world that these are a bit ambiguous. As no other requirements will be affected when these are changed. 
+
+This is completely different in the case of requirement 40. We see in the graph that requirement 40 affects almost all requirements in the ``VEMUS Visualizations'' part. The requirement states that: ``The VEMUS visualizations should be simple, intuitive, not using many colors.'' With respect to requirements evolution. It will be important to design a more precise definition of this requirement. 
+
+We would recommend to define rules which each visualization has to adhere to. This will resolve this ambiguity and make the overall system more capable of coping with evolution of the requirements.
 
 \begin{thebibliography}{9}
 \bibitem{VEMUS}
@@ -211,7 +226,7 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 
 \subsection{Studying procedures}
 	\req{The teacher should be allowed to choose the studying procedure}\\
-	\req{The teacher should have the possibility to intervene to the way the student studies at home. He or she could define on which parameters the learner should emphasize and with what order he or sheshould deal with those parameters}\\
+	\req{The teacher should have the possibility to intervene to the way the student studies at home. He or she could define on which parameters the learner should emphasize and with what order he or she should deal with those parameters}\\
 	\req{In the self-practice lesson plan multiple (at least three) aspects (e.g. pitch, articulation, tone quality) of evaluation and feedback should be included}\\
 	\req{The teacher should be able to mark up parts of the score for the student to practice and specify which aspects of the student performance should be evaluated by the system}\\
 	\req{In any lesson plan the teacher may identify for each music score difficulties and aspects that need special attention.}\\
@@ -246,7 +261,14 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req[57]{As it is widely accepted by music teachers that assigning exercises and melodies to students depends on the level of the student, the instrument, and the preferences of the student, the organisation of the content according to the VEMUS Music School House seems to be an appropriate way to organise VEMUS content.}\\
 	\req{The educational content is expected to be updated and rearranged regularly}\\
 	\req{There is a need for a content repository for wind instruments teaching allowing storing and retrieving not only melodies and music exercises but also text, images, and video to support the teaching.}\\
-	\req{The teachers should be able to: insert new content; either content they produce themselves or content they acquire from other sources and re-arrange the content to meet their the requirements of their own classes or schools and/or to meet their own personal teaching preferences}\\
+	\req{The teachers should be able to: insert new content; either content they produce themselves or content they acquire from other sources and re-arrange the content to meet their the requirements of their own classes or schools and/or to meet their own personal teaching preferences}
+	
+\section{Traceability graph}\label{graphapp}
+Below, we present a larger version of the image in figure \ref{fig:graph}.
+\begin{figure}
+\center
+\includegraphics[scale=0.45]{graph1.pdf}
+\end{figure}
 \end{appendices}
 
 
