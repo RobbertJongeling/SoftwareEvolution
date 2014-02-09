@@ -157,13 +157,13 @@ We present the result of the dependency analysis in the traceability graph in fi
 \end{figure}
 
 We see that the requirements 13,20,21 and 35 are isolated. When inspecting these requirements, we see that requirements 13, 20 and 21 are general statements about the use of the system. 
-Requirement 35 states functionality that is not explicitely used by any other requirement. This may prove to be problematic as it does seem to be an important feature of the system but is not mentioned explicitly in other requirements.
+Requirement 35 states functionality that is not explicitly used by any other requirement. This may prove to be problematic as it does seem to be an important feature of the system but is not mentioned explicitly in other requirements.
 
 Furthermore we see that a lot of requirements are affected (directly and indirectly) by requirements 22 and 23. This is not surprising as these two requirements entail the general purpose of the system; it should provide support for self guided learning and it should allow for automatic performance evaluation.
 
-We see a few pairs of requirements depending on eachother. In two cases, this is because it is the same requirement, this concerns the pairs 26,58 and 3,16. In the other cases, it concerns requirements that are closely related. We see one small loop in the graph, between requirements 56,57 and 58. This concerns requirements about the organization and arrangement of the content. Which needs to adhere to these three requirements. This is a bit of a strange part as especially requirements 56 and 57 seem to contradict eachother. This may be a problem already and also when requirements evolve.
+We see a few pairs of requirements depending on each other. In two cases, this is because it is the same requirement, this concerns the pairs 26,58 and 3,16. In the other cases, it concerns requirements that are closely related. We see one small loop in the graph, between requirements 56,57 and 58. This concerns requirements about the organization and arrangement of the content. Which needs to adhere to these three requirements. This is a bit of a strange part as especially requirements 56 and 57 seem to contradict each other. This may be a problem already and also when requirements evolve.
 
-The global functionality partition as created in the requirements document can still be seen a bit in the graph. For example, the ``VEMUS Visualizations'' part is clearly seperated from other requirements with only few relations to other parts of the system. The parts about teacher-student feedback and providing feedback however are a lot more intertwined. Which stresses the idea that both parts are about the same feature, namely the automatic performance evaluation.
+The global functionality partition as created in the requirements document can still be seen a bit in the graph. For example, the ``VEMUS Visualizations'' part is clearly separated from other requirements with only few relations to other parts of the system. The parts about teacher-student feedback and providing feedback however are a lot more intertwined. Which stresses the idea that both parts are about the same feature, namely the automatic performance evaluation.
 
 \subsection{Implications on requirements evolution}
 In the search of ambiguous requirements, we found requirements 14,17,26,36,40 and 45 to be ambiguous in one way or another. We could have also mentioned requirement 58 but as said before, 26 and 58 are the same requirement. In the graph we see that 58 is part of the cycle 56,57 and 58 of which we already noted that this is a strange construct and so a point of attention concerning requirements evolution.
@@ -177,7 +177,7 @@ We would recommend to define rules which each visualization must comply with. Th
 \subsection{Threats to validity}
 In case of the assessment of ambiguous requirements, we may have had some false negatives, i.e. we may have missed some requirements that are ambiguous but we did not mention.
 
- We see that already with a relatively small amount of requirements, manual assessment of especially dependencies is becoming infeasable. In identifying dependencies betwen requirements, we also may have missed some present dependencies and we may have wrongly identified some.
+ We see that already with a relatively small amount of requirements, manual assessment of especially dependencies is becoming infeasible. In identifying dependencies between requirements, we also may have missed some present dependencies and we may have wrongly identified some.
 
 These mistakes could give rise to a different traceability graph and therefore could uncover a problem not yet spotted or could invalidate a problem found now. 
 
