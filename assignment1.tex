@@ -67,7 +67,7 @@ The analysis consists of an assessment of the quality of individual requirements
 In this section, we will discuss the methodologies used in the analysis process. The process is divided into four steps, the methodology for each step is described in a separate subsection.
 
 \subsection{Quality of individual requirements}
-We assess the quality of the individual requirements by a keyword-based approach. Meaning that we will search the requirements for indicators of features of ambiguity. If found, we will judge whether or not this indicator indicates ambiguity in that requirement. As the presence of an indicator of ambiguity is not a guarantee of the presence of ambiguity. As mentioned in the lecture, the word "normal" when used in the context of "normal use" will indicate ambiguity, but when used in the context of "normal distribution", there is no ambiguity at all. 
+We assess the quality of the individual requirements by a keyword-based approach. Meaning that we will search the requirements for indicators of features of ambiguity. If found, we will judge whether or not this indicator indicates ambiguity in that requirement. As the presence of an indicator of ambiguity is not a guarantee of the presence of ambiguity. As mentioned in the lecture, the word ``normal" when used in the context of ``normal use" will indicate ambiguity, but when used in the context of ``normal distribution", there is no ambiguity at all. 
 
 We will check for the features vagueness, subjectivity and optionality. All the selected features belong to the property of non-ambiguity. We think it is interesting to investigate multiple features indicating one property in an attempt to get a total view of the problems with the requirements concerning that property. 
 
@@ -161,18 +161,18 @@ Requirement 35 states functionality that is not explicitely used by any other re
 
 Furthermore we see that a lot of requirements are affected (directly and indirectly) by requirements 22 and 23. This is not surprising as these two requirements entail the general purpose of the system; it should provide support for self guided learning and it should allow for automatic performance evaluation.
 
-We see a few pairs of requirements depending on eachother. In two cases, this is because it is the same requirement, this concerns the pairs 26,58 and 3,16. In the other cases, it concerns requirements that are closely realted. We see one small loop in the graph, between requirements 56,57 and 58. This concerns requirements about the organization and arrangement of the content. Which needs to adhere to these three requirements. This is a bit of a strange part as especially requirements 56 and 57 seem to contradict eachother. This may be a problem when requirements evolve.
+We see a few pairs of requirements depending on eachother. In two cases, this is because it is the same requirement, this concerns the pairs 26,58 and 3,16. In the other cases, it concerns requirements that are closely related. We see one small loop in the graph, between requirements 56,57 and 58. This concerns requirements about the organization and arrangement of the content. Which needs to adhere to these three requirements. This is a bit of a strange part as especially requirements 56 and 57 seem to contradict eachother. This may be a problem already and also when requirements evolve.
 
-The global functionality partition as created in the requirements document can still be seen in the graph. For example, the ``VEMUS Visualizations'' part is clearly seperated from other requirements with only few relations to other parts of the system. The parts about teacher-student feedback and providing feedback are a lot more intertwined. 
+The global functionality partition as created in the requirements document can still be seen a bit in the graph. For example, the ``VEMUS Visualizations'' part is clearly seperated from other requirements with only few relations to other parts of the system. The parts about teacher-student feedback and providing feedback however are a lot more intertwined. Which stresses the idea that both parts are about the same feature, namely the automatic performance evaluation.
 
 \subsection{Implications on requirements evolution}
-In the search of ambiguous requirements, we found requirements 14,17,26,36,40 and 45 to be in some way ambiguous. We could have also mentioned requirement 58 but as said before, 26 and 58 are the same requirement. In the graph we see that 58 is part of the cycle 56,57 and 58 of which we already noted that this is a strange construct and so a point of attention concerning requirements evolution.
+In the search of ambiguous requirements, we found requirements 14,17,26,36,40 and 45 to be ambiguous in one way or another. We could have also mentioned requirement 58 but as said before, 26 and 58 are the same requirement. In the graph we see that 58 is part of the cycle 56,57 and 58 of which we already noted that this is a strange construct and so a point of attention concerning requirements evolution.
 
 Requirements 17 and 36 do not affect other requirements so although one would rather have zero ambiguous requirements, it is not the end of the world that these are a bit ambiguous. As no other requirements will be affected when these are changed. 
 
 This is completely different in the case of requirement 40. We see in the graph that requirement 40 affects almost all requirements in the ``VEMUS Visualizations'' part. The requirement states that: ``The VEMUS visualizations should be simple, intuitive, not using many colors.'' With respect to requirements evolution. It will be important to design a more precise definition of this requirement. 
 
-We would recommend to define rules which each visualization has to adhere to. This will resolve this ambiguity and make the overall system more capable of coping with evolution of the requirements.
+We would recommend to define rules which each visualization must comply with. This will resolve this ambiguity and make the overall system more capable of coping with evolution of the requirements.
 
 \begin{thebibliography}{9}
 \bibitem{VEMUS}
