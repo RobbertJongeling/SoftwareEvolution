@@ -61,6 +61,8 @@
 \section{Introduction}
 This report contains an analysis of the requirements in the user requirements document for the VEMUS project \cite{VEMUS} with respect to their suitability for evolution. VEMUS is a project that tries to provide a digital environment for music education. 
 
+We are examining the requirements document in an attempt to detect problems with the requirements as early as possible in the development process. Large projects tend to grow out of hand in terms of time and money spent. On top of that, the later in the development process these problems are encountered, the higher the costs in terms of time and money spent are to resolve them. This is why it is useful to assess the suitability of the requirements for evolution in this early stage.
+
 The analysis consists of an assessment of the quality of individual requirements, a study of the dependencies between requirements, the analysis of the traceability graph resulting from the found dependencies and a study of the implications of the findings on the requirements evolution.
 
 \section{Methodology}
@@ -135,6 +137,8 @@ When searching for the construct ``if needed", we search for the substring ``nee
 Now, we manually check each requirement in order to detect vagueness, subjectivity or optionality.
 
 \paragraph{Vagueness} 
+Req \ref{4}. ``frequent errors" is not a clear number.\\
+Req \ref{5}. ``A pool of"  is not quantifiable.\\
 Req \ref{14}. A ``small number of errors" is not quantifiable.\\
 Req \ref{17}. Similarly, a ``large number of mistakes" is also not quantifiable.\\
 Req \ref{26}. ``Regularly" is a vague notion. Once every 1000 years is also regular, but from the context, it seems they want updates more often that that.\\
@@ -144,15 +148,19 @@ Req \ref{40}. This requirement is vague in its entirety. A simple, intuitive vis
 Req \ref{37} is an indicator of how subjectivity is used throughout the requirements. The subjectivity does not come from the author of the requirements but from the prospective end-users of the system. As mentioned in the user requirements document: ``Data collection for the user requirements took place during workshops and interviews. (\ldots) In cases where it was considered important for the consortium to have additional input web surveys were used in order to collect more data." \cite{VEMUS}. Constructs often encountered in the requirements such as ``It is needed" , ``It is important that" or ``Teachers/the system should be able to" are traceable to the interviewed experts. Therefore it is not a problem of subjectivity.
 
 \paragraph{Optionality}
-\ref{45}. ``\ldots Maybe \ldots would be better to \ldots." The word ``maybe" here indicates the optionality of this part of the requirement.
+Req \ref{45}. ``\ldots Maybe \ldots would be better to \ldots." The word ``maybe" here indicates the optionality of this part of the requirement.
 
 \subsection{Dependencies}
+Before looking at individual requirements, we looked at dependencies between features of the system. We found that all features depend on the part: ``Distance learning music education in VEMUS". This is due to the fact that the requirements stated in that part are general requirements of the system. We also found that the parts ``Teacher-student feedback", ``Providing feedback", ``studying procedures" and ``Educational content" concern for a large part the same functionality of the system, namely the ability of the system to provide automatic performance evaluation. We found that the part ``Accompanying music" is not that much affected by the other parts although it is a studying procedure. Lastly, we found that the part ``VEMUS visualizations" is largely concerned with only the view part of the system and in a model-view-controller analogy, can be changed without affecting the other parts. In that same analogy, it can be the case that this parts needs changing when some of the others change. 
+
+Now we start investigating individual requirements. The dependencies are found by a manual form of keyword searching. We did not search the document for specific keywords but rather we read the requirements and when we encountered a keyword K in a requirement B that we had already read in requirement A, we investigated these two requirements closer in order to determine the possibility of there being a dependency relation between them.
+
 We present the result of the dependency analysis in the traceability graph in figure \ref{fig:graph}. Here, the nodes correspond to the numbered requirements in appendix \ref{reqs} and the arcs from a node $a$ to a node $b$ correspond to a dependency $a$ affects $b$ (or $b$ depends on $a$). In appendix \ref{graphapp} we include a larger version of the graph.
 
 \begin{figure}
 \center
 \includegraphics[scale=0.21]{graph1.pdf}
-\caption{Traceability graph of requirements of VEMUS \cite{VEMUS}. Nodes correspond to requirements in \ref{reqs}. Arcs correspond to dependencies.}
+\caption{Traceability graph of requirements of VEMUS \cite{VEMUS}. Nodes correspond to requirements in \ref{reqs}. Arcs correspond to dependencies. A larger image is presented in appendix \ref{graphapp}.}
 \label{fig:graph}
 \end{figure}
 
@@ -181,6 +189,7 @@ In case of the assessment of ambiguous requirements, we may have had some false 
 
 These mistakes could give rise to a different traceability graph and therefore could uncover a problem not yet spotted or could invalidate a problem found now. 
 
+Another possible threat to the validity of the results is a misinterpretation of the form of some of the requirements. There are some requirements which seem to be a general statement about the context of the system but not a real requirement. This concerns requirements such as requirements \ref{20} and \ref{21}. We did not consider these requirements as system requirements.
 
 \begin{thebibliography}{9}
 \bibitem{VEMUS}
@@ -201,8 +210,8 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req{Students need to be praised and reproached according their level and their goals. They must have a choice about how strict or lenient the system's feedback is.}\\
 	\req{Students must not be interrupted during the performance}\\
 	\req{The system should be able to provide feedback even to an unfinished performance}\\
-	\req{There must be annotations on students score with remarks or to outline some sections of the score because of frequent errors or due to some complexity, while they play or after they have finished their performance.}\\
-	\req{Teachers must have access to a pool of different icons to be used for annotations and also to be able to design their own icons for instrument-specific purposes. Additionally the idea of audio annotations was considered of great pedagogical value.}\\
+	\req[4]{There must be annotations on students score with remarks or to outline some sections of the score because of frequent errors or due to some complexity, while they play or after they have finished their performance.}\\
+	\req[5]{Teachers must have access to a pool of different icons to be used for annotations and also to be able to design their own icons for instrument-specific purposes. Additionally the idea of audio annotations was considered of great pedagogical value.}\\
 	
 \subsection{Accompanying music}
 	\req{Accompanying music, either as playing together or playing in turns, is considered important in music learning for many reasons: it helps the students keep up with the rhythm, it increases the motivation, interest and encouragement, it fosters the ability to continue playing despite difficulties to complete a performance to the end.}\\
@@ -210,7 +219,7 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req{There is no need for adaptive accompaniment from a pedagogical view but tempo should be adjustable (The system would better guide the student in keeping the tempo)}\\
 	\req[9]{The "Play after me" concept has been considered to be useful for dealing with complex errors (e.g. rhythm).}\\
 
-\subsection{Providing Feedback}
+\subsection{Providing feedback}
 	\req{The VEMUS performance evaluation should include the following elements: basic instrumental skills (attack, grisper fingering), basic musical skills (score reading, articulation, phrasing, score reading, rhythm, tempo) and in a more advanced level, skills on controlling the sound (intonation, squeaks, tone quality, air/finger)}\\
 	\req{The system's performance feedback which should be consistent to what a real teacher would think about a performance.}\\
 	\req{Teachers have to be able to adjust the criteria for evaluation making the feedback more "forgiving" for specific types of errors during a period, so the system should allow for an adaptable priority set by the teacher for each student ("Teacher's palette") including: A number of fixed settings related to age and personal settings for each student.}\\
@@ -219,12 +228,12 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req{The system should detect plausible causes for every mistake}\\
 	\req{The system has to provide assessment and feedback on incomplete performances}\\
 	\req[17]{The system has to provide assessment and feedback for performances with a large number of mistakes}\\
-	\req{Teachers agreed to retain the basics of the IMUTUS evaluation concept for displaying the results to the students. Still it is considered as a drawback that the performance evaluation is only provided in the form of a text in IMUTUS, without displaying the deficiencies by elements of musical notations}\\
+	\req[18]{Teachers agreed to retain the basics of the IMUTUS evaluation concept for displaying the results to the students. Still it is considered as a drawback that the performance evaluation is only provided in the form of a text in IMUTUS, without displaying the deficiencies by elements of musical notations}\\
 	\req{The system should provide hints for remedying the mistakes to the learners}\\
 	
 \subsection{Distance learning music education in VEMUS}
-	\req{There is a great need to access music resources in rural and remote areas}\\
-	\req{There is great lack of teachers of wind instruments in rural areas}\\
+	\req[20]{There is a great need to access music resources in rural and remote areas}\\
+	\req[21]{There is great lack of teachers of wind instruments in rural areas}\\
 	\req{The system should be able to provide support for self guided learning}\\
 	\req{The system should allow for automatic performance evaluation}\\
 	\req{The users need on-line support (synchronous or asyncronous)}\\
@@ -246,7 +255,7 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req{The system should provide the possibility to tuning to a single note (by means of a tuner tool).}\\
 	\req{The system should include exercises of graded difficulty for tuning up.}\\
 	
-\subsection{VEMUS Visualizations}
+\subsection{VEMUS visualizations}
 	\req[40]{The VEMUS visualizations should be simple, intuitive, not using many colors}\\
 	\req{The VEMUS visualizations should give a general feedback on students' performance and not a detailed one}\\
 	\req{The VEMUS visualizations should have musical meaning and in a way be related to musical symbols}\\
@@ -259,7 +268,7 @@ In this appendix, we enumerate the requirements from pages 82-83 of the VEMUS us
 	\req{A diagram or a schema to show how a player could achieve a correct attack with the application of the tongue or by blowing more or less should be included.}\\
 	\req{As sound production is of prime importance to wind instruments, a 3D representation that would support this need (illustrating airflow, attack, mouth position, et al) is required.}\\
 
-\subsection{Educational Content}
+\subsection{Educational content}
 	\req{Include to VEMUS content the basics of how sound is produced correctly in wind instruments and the possibility to visualize how different blows/or tongue positions affect the attack.}\\
 	\req{There is a need for preparatory exercises for wind instruments, which are closely linked to a successful performance.}\\
 	\req{Teachers should be allowed to choose educational content flexibly, depending on their background, taste and preferences.}\\
