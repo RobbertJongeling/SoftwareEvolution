@@ -8,8 +8,23 @@ import lang::java::m3::Core;
 import IO;
 
 //onderstaande code is grotendeels gejat van https://gist.github.com/jurgenvinju/8972255
-
+public loc emptyId = |id:///|;
 alias OFG = rel[loc from, loc to];
+ 
+void drawArcs(p) {
+	OFG ofg = buildGraph(p);
+	//while changes ofzo?
+	for (r <- ofg) {
+	//als ik die sketch goed begrijp
+	//die assignments werken natuurlijk niet maar het is pseudocode
+		outVoorDeFromLoc = prop(ofg, buildGen(p,r.from), buildKill(p,r.from), backwards(r.from));
+		outVoorDeToLoc = prop(ofg, buildGen(p,r.to), buildKill(p,r.to), backwards(r.to));
+	}
+	//dan zou je nu voor elke loc een outset moeten hebben en dan arcs tekenen van out naar loc
+	//tenminste in het geval van assosciations, ik weet niet hoe het bij die andere dingen werkt
+	
+	//deze functie zou dan ook niet echt void zijn maar meer dot stuff teruggooien die arcs moet tekenen
+} 
  
 OFG buildGraph(Program p) 
 	//a1->f1..ak->fk
@@ -30,15 +45,16 @@ bool backwards() {
 	//TODO for given parameter node (//TODO) return true if backwards propagation, else false
 }
 
-rel[loc,loc] buildGen() {
-	//TODO for given parameter node (//TODO) return gen set
+rel[loc,loc] buildGen(Program p, loc n) {//blijkbaar mag je iets niet 'node' noemen :/
+	//if(node of form cs.this) then return c, else return empty	
 }
 
-rel[loc,loc] buildKill() {
-	//TODO for given parameter node (//TODO) return kill set
+//kill set is alwaus empty for all locations
+rel[loc,loc] buildKill(Program p, loc n) {	
+	return <emptyID,emptyID>;
 }
 
-//sketch for flow propagation, stolen from gist
+//sketch for flow propagation, stolen from gist/slides
 OFG prop(OFG g, rel[loc,loc] gen, rel[loc,loc] kill, bool back) {
 	OFG IN = { };
 	OFG OUT = gen + (IN - kill);
