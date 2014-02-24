@@ -13,20 +13,9 @@ alias OFG = rel[loc from, loc to];
  
 void drawArcs(p) {
 	OFG ofg = buildGraph(p);
-	//while changes ofzo?
-	for (r <- ofg) {
-	//als ik die sketch goed begrijp
-	//die assignments werken natuurlijk niet maar het is pseudocode
-		outVoorDeFromLoc = prop(ofg, buildGen(p,r.from), buildKill(p,r.from), backwards(r.from));
-		outVoorDeToLoc = prop(ofg, buildGen(p,r.to), buildKill(p,r.to), backwards(r.to));
-	}
-	//dan zou je nu voor elke loc een outset moeten hebben en dan arcs tekenen van out naar loc
-	//tenminste in het geval van assosciations, ik weet niet hoe het bij die andere dingen werkt
-	
-	//deze functie zou dan ook niet echt void zijn maar meer dot stuff teruggooien die arcs moet tekenen
 } 
  
-OFG buildGraph(Program p) 
+OFG buildTheGraph(Program p) 
 	//a1->f1..ak->fk
 	= {<as[i], fps[i]> | newAssign(x, cl, c, as) <- p.statemens, constructor(c, fps) <- p.decls, i <- index(as) }
 	//cs.this -> x
@@ -42,16 +31,16 @@ OFG buildGraph(Program p)
 ;
 
 bool backwards() {
-	//TODO for given parameter node (//TODO) return true if backwards propagation, else false
+	return false;
 }
 
-rel[loc,loc] buildGen(Program p, loc n) {//blijkbaar mag je iets niet 'node' noemen :/
-	//if(node of form cs.this) then return c, else return empty	
+rel[loc,loc] buildGen(Program p) {
+	return {<cl + "this", cl> | newAssign(_,cl,_,_) <- p.statemens };
 }
 
 //kill set is alwaus empty for all locations
-rel[loc,loc] buildKill(Program p, loc n) {	
-	return <emptyID,emptyID>;
+rel[loc,loc] buildKill(OFG g) {	
+	return {};
 }
 
 //sketch for flow propagation, stolen from gist/slides
