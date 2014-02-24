@@ -1,0 +1,47 @@
+\documentclass[11pt,english]{article}
+
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[breaklinks=true]{hyperref}
+
+\geometry{
+	includeheadfoot,
+	margin=2.54cm
+}
+
+\input{title}
+
+\begin{document}
+	\maketitle
+
+	\tableofcontents
+	\newpage
+
+	\section{Introduction}
+	\input{sections/intro}
+	\newpage
+	
+	\section{Input and output}
+	\input{sections/questions}
+	\newpage
+	
+	\section{Toolchain}
+	\input{sections/toolchain}
+	\newpage
+	
+	\section{Application}
+	\input{sections/application}
+	\newpage
+
+	\section{Discussion}
+	\input{sections/discussion}
+	\newpage
+
+	\section{Conclusions}
+	\input{sections/conclusions}
+	\newpage
+\end{document}
+
