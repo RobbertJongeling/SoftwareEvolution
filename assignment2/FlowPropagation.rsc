@@ -11,8 +11,15 @@ import IO;
 public loc emptyId = |id:///|;
 alias OFG = rel[loc from, loc to];
  
-void drawArcs(p) {
-	OFG ofg = buildGraph(p);
+set[rel[loc,loc]] getOutput(p) {
+	OFG ofg = buildTheGraph(p);
+	gen = buildGen(p);
+	kill = buildKill(ofg);
+	outT = prop(ofg,gen,kill,true);
+	gen = buildGen(p);
+	kill = buildKill(ofg);
+	outF = prop(ofg,gen,kill,false);
+	return {outT, outF};
 } 
  
 OFG buildTheGraph(Program p) 
@@ -30,12 +37,9 @@ OFG buildTheGraph(Program p)
 	+ { <m + "return", x> | call(x, _, _, m, _) <- p.statemens }
 ;
 
-bool backwards() {
-	return false;
-}
-
 rel[loc,loc] buildGen(Program p) {
-	return {<cl + "this", cl> | newAssign(_,cl,_,_) <- p.statemens };
+	rel[loc a,loc b] inOFG = {<cl, x> | newAssign(x,cl, _, _) <- p.statemens};
+	return {<cl + "this", cl> | cl <- inOFG.a};
 }
 
 //kill set is alwaus empty for all locations
