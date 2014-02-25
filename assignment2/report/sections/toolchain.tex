@@ -1,0 +1,26 @@
+\subsection{Tool design}
+	When doing the initial tool design, we chose to use as much of the functionality from M3 as we could, because we noticed that a lot of the information that is needed for constructing class diagrams was available in one way or the other.
+	Because of this, we get the following information from M3 alone:
+
+	\begin{itemize}
+		\item Class names
+		\item Field list
+		\item Method list
+		\item Field and method visibility
+		\item Parameter and return types
+		\item Extends relation
+		\item Implements relation
+	\end{itemize}
+
+	Our implemention follows the style of an iterative program, rather than a functional one using lots of set comprehensions.
+	We did this for two reasons.
+	The first one is that we feel that it makes our code much more readable to the novice eyes and it allows for easier documentation.
+	The second reason is that all of our private functions help to build one big string representation of the model.
+	If we would chose to use set comprehensions to communicate data between our functions, we would have to transform the resulting set or relation to a string at some later moment.
+
+	Our approach keeps everything transparent and building up to the result, though it does mix functionality and representation of data.
+	We feel that this drawback is justified here, as the functionality we've introduced is not much more than getting the data out of M3 and sometimes performing some simple transformations on it.
+
+\subsection{Usage}
+	The Racal module \texttt{ClassDiagram} exposes the following method: \texttt{public str getDot(M3 model);}, which returns the Graphviz notation for the UML class diagram based on the M3 model that was given.
+
