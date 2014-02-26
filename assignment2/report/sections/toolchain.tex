@@ -20,7 +20,25 @@
 
 	Our approach keeps everything transparent and building up to the result, though it does mix functionality and representation of data.
 	We feel that this drawback is justified here, as the functionality we've introduced is not much more than getting the data out of M3 and sometimes performing some simple transformations on it.
+	
+	After we had this basic class diagram without dependencies and associations working, we set on to implement the algorithm described in \cite{rev-eng}.
+	Because of the notation of the given tips and tricks and the distance of the implementation of this algorithm from the visualization, the \texttt{FlowPropagation} module is written in a more functional style.
+
 
 \subsection{Usage}
-	The Racal module \texttt{ClassDiagram} exposes the following method: \texttt{public str getDot(M3 model);}, which returns the Graphviz notation for the UML class diagram based on the M3 model that was given.
+	Usage of the toolchain requires a working Rascal installation within Eclipse and the Java2OFG project in the build path.
 
+	The Racal module \texttt{ClassDiagram} exposes the following method: \texttt{public str getDot(loc projectLocation);}, which returns the Graphviz notation for the UML class diagram based on the Eclipse project that the given location points to.
+	Note that this has to be a location to an Eclipse project and can not be just any other location because Java2OFG requires this.
+
+	For ease of use, we have included the module \texttt{ClassDiagramIO}, which exposes \texttt{public void writeClassDiagramToFile(loc projectLoc, loc fileLoc);}.
+	Using this method, a file in Graphviz notation will be written to \texttt{fileLoc} that contains a UML class diagram for the Eclipse project in \texttt{projectLoc}.
+	
+	Because of this, the following Rascal code is enough to get started:
+	
+	\begin{lstlisting}
+	import ClassDiagramIO;
+	writeClassDiagramToFile(|project://eLib|, |file:///tmp/eLib.dot|);
+	\end{lstlisting}
+	
+	Then, the file can be visualized with for instance \texttt{dot -Tpng -O /tmp/eLib.dot}.
