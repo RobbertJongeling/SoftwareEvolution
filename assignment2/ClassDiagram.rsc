@@ -8,6 +8,9 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 import lang::java::m3::TypeSymbol;
 import TypeSymbolHelpers;
+import FlowPropagation;
+import lang::ofg::ast::FlowLanguage;
+import lang::ofg::ast::Java2OFG;
 
 str settings = "fontname = \"Courier New\"\nfontsize = 10\nnode [\nfontname = \"Courier New\"\nfontsize = 10\nshape = \"record\"\n]\nedge [\nfontname = \"Courier New\"\nfontsize = 10\n]\n";
 
@@ -32,10 +35,10 @@ str getFields(M3 model, loc class_loc){
 	ret = "";
 	
 	//Get all containments of type field that are associated with the given class location
-	list[loc] class_fields_locs = [ e | e <- model@containment[class_loc], e.scheme == "java+field"];
+	set[loc] class_fields_locs = { e | e <- model@containment[class_loc], e.scheme == "java+field"};
 	//Grab the types and modifiers associated with the found field locations
-	class_fields_types = domainR(model@types, toSet(class_fields_locs));
-	class_fields_modifiers = domainR(model@modifiers, toSet(class_fields_locs));
+	class_fields_types = domainR(model@types, class_fields_locs);
+	class_fields_modifiers = domainR(model@modifiers, class_fields_locs);
 	
 	//Loop through the found field locations
 	for(loc field_loc <- class_fields_locs){
@@ -63,10 +66,10 @@ str getMethods(M3 model, loc class_loc){
 	ret = "";
 	
 	//Get all containments of type method and constructor that are associated with the given class location
-	list[loc] class_methods_locs = [ e | e <- model@containment[class_loc], e.scheme == "java+method" || e.scheme == "java+constructor"];
+	set[loc] class_methods_locs = { e | e <- model@containment[class_loc], e.scheme == "java+method" || e.scheme == "java+constructor"};
 	//Grab the types and modifiers associated with the found field locations
-	class_methods_types = domainR(model@types, toSet(class_methods_locs));
-	class_methods_modifiers = domainR(model@modifiers, toSet(class_methods_locs));
+	class_methods_types = domainR(model@types, class_methods_locs);
+	class_methods_modifiers = domainR(model@modifiers, class_methods_locs);
 	
 	//Loop through the found method locations
 	for(loc method_loc <- class_methods_locs){
@@ -171,6 +174,34 @@ str getDepends(M3 model){
 }
 
 /**
+ * Returns a DOT string representation of the Association and Dependency relations in the model
+ *
+ * These are grouped together because they both require an OFG. 
+ */
+str getAssociationsAndDependencies(loc location, M3 model){
+	str ret = "";
+	
+	Program p = createOFG(location);
+	tuple[rel[loc,loc] ass, rel[loc,loc] deps] output = getOutput(model, p);
+	
+	ret += "edge[arrowhead = \"open\"; style = \"solid\"]\n";
+	for(tuple[loc,loc] t <- output.ass){
+		str from = getOneFrom(invert(model@names)[t[0]]);
+		str to = getOneFrom(invert(model@names)[t[1]]);
+		ret += "<from> -\> <to>;\n";
+	}
+	
+	ret += "edge[arrowhead = \"open\"; style = \"dashed\"]\n";
+	for(tuple[loc,loc] t <- output.deps){
+		str from = getOneFrom(invert(model@names)[t[0]]);
+		str to = getOneFrom(invert(model@names)[t[1]]);
+		ret += "<from> -\> <to>;\n";
+	}
+	
+	return ret;
+}
+
+/**
  * Returns a DOT string representation of the Extends relations in the model
  */
 str getExtends(M3 model){
@@ -201,18 +232,20 @@ str getImplements(M3 model){
 }
 
 /**
- * Returns a DOT digraph containing a UML class diagram of the given model
+ * Returns a DOT digraph containing a UML class diagram of the given location (must be an Eclipse project)
  *
  * The diagram includes
  * - Classes
  * - Fields
  * - Methods
  */
-public str getDot(M3 model){
+public str getDot(loc location){
+	model = createM3FromEclipseProject(location);
 	str ret = "digraph classes{\n";
 	ret += settings;
 	ret += getClasses(model);
 	/*ret += getDepends(model);*/
+	ret += getAssociationsAndDependencies(location, model);
 	ret += getExtends(model);
 	ret += getImplements(model);
 	ret += "}";
