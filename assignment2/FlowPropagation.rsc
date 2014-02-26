@@ -6,49 +6,91 @@ import List;
 import Relation;
 import lang::java::m3::Core;
 import IO;
+import String;
+import Set;
+import List;
+import Relation;
+import lang::java::m3::Core;
+import lang::java::jdt::m3::Core;
+import lang::java::m3::TypeSymbol;
+import TypeSymbolHelpers;
 
 //onderstaande code is grotendeels gejat van https://gist.github.com/jurgenvinju/8972255
 public loc emptyId = |id:///|;
 alias OFG = rel[loc from, loc to];
- 
-str getAssociations(M3 model, Program program) {
-	str ret = "";
-	ret += "edge[arrowhead = \"open\"; style= \"solid\"]\n";
-	//TODO voor elke gevonden association uit getAssocOutput een lijn tekenen
-	return ret;
-}
-  
-rel[loc,loc] getAssocOutput(M3 m, Program p) {//program p should be obtained by running createOFG from Java2OFG
+   
+tuple[rel[loc,loc] ass, rel[loc,loc] deps] getOutput(M3 m, Program p) {//program p should be obtained by running createOFG from Java2OFG
 	OFG ofg = buildTheGraph(p);
 	
+	//first without propagation, for dependencies that could use the already existing code //TODO make it happen :P
+	deps = {};
+	asss = getInitAsss(m);
+		
 	gen = buildGenTAAC(m,p);
 	kill = {};
 	//propagate using the gen set to get type of actually allocated objects referenced by program locations
 	//backward propagation
 	propt = prop(ofg, gen, kill, true);
-	toReturn = getAssocs(m, propt);
+	asss += getAssocs(m, propt);
+	deps += getDeps(m, propt);	
 	//forward propagation
 	propf = prop(ofg, gen, kill, false);	
-	toReturn += getAssocs(m, propf);
+	asss += getAssocs(m, propf);
+	deps += getDeps(m, propf);
 	
 	//propagate using the gen set of flow propagation specialization,
 	//aimed at determining type of objects stored in weakly typed containers
 	//backward propagation
 	propWTCt = prop(ofg, buildGenWTC(m,p,true), kill, true);
-	toReturn += getAssocs(m, propWTCt);
+	asss += getAssocs(m, propWTCt);
+	deps += getDeps(m, propWTCt);
 	//forward propagation
 	propWTCf = prop(ofg, buildGenWTC(m,p,false), kill, false);
-	toReturn += getAssocs(m, propWTCf);
+	asss += getAssocs(m, propWTCf);
+	deps += getDeps(m, propWTCf);
 	
-	return toReturn;
+	return <asss,deps>;
 } 
+
+rel[loc,loc] getInitAsss(M3 m) {
+	asss={};
+	for(class_loc <- classes(m)) {
+		list[loc] class_fields_locs = [e | e<-m@containment[class_loc], e.scheme=="java+field"];
+		class_fields_types = domainR(m@types, toSet(class_fields_locs));
+		for(loc field_loc <- class_fields_locs) {
+			TypeSymbol field_type = toList(class_fields_types[field_loc])[0];
+			if(class(l, _) := field_type) {
+				rel[loc cls,loc fld] fieldInClass = {<a,f> | <a,f> <- m@containment, f == field_loc};
+				asss += <getOneFrom(fieldInClass.cls), l>;
+			}
+		}
+	}
+	return asss;
+}
 
 /*
  * returns associations from propagated OFG
  */ 
 rel[loc,loc] getAssocs(M3 m, OFG g) {
-	allFields = {<b,a> | <b,a> <- g, b.scheme == "java+field"}; //field b is of actual type a
-	return {<c,a> | <c,b> <- m@containment, <b,a> <- allFields}; //return class c in which field b occurs
+	allFields = {<b,c> | <b,c> <- g, b.scheme == "java+field"}; //field b is of actual type c
+	return {<a,c> | <a,b> <- m@containment, <b,c> <- allFields}; //return class a in which field b occurs
+}
+
+/*
+ * returns dependencies from propagated OFG
+ */ 
+rel[loc,loc] getDeps(M3 model, OFG g) {
+	//get parameters
+	allParams = {<b,c> | <b,c> <- g, b.scheme == "java+parameter"}; //Param b is of actual class c
+	meths = {<m,c> | <m,b> <- model@containment, <b,c> <- allParams}; //return method m in which b is a parameter b
+	paramDeps = {<a,c> | <a,m> <- model@containment, <m,c> <- meths};//return class a in which method m occurs
+	
+	//get local variables
+	allVars = {<v,b> | <v,b> <- g, v.scheme == "java+variable"}; //Variable v is of actual type b
+	meths2 = {<m,b> | <m,v> <- model@containment, <v,b> <- allVars}; //return method m in which field b occurs
+	varDeps = {<a,b> | <a,m> <- model@containment, <m,b> <- meths2};
+	
+	return paramDeps + varDeps;
 }
  
 OFG buildTheGraph(Program p) 
@@ -62,7 +104,7 @@ OFG buildTheGraph(Program p)
 	+ { <y, m + "this"> | call(_, _, y, m, _) <- p.statemens}
 	//a1->f1 .. ak -> fk
 	+ { <as[i], fps[i]> | call(_, _, _, m, as) <- p.statemens, method(m, fps) <- p.decls, i <- index(as) }
-	//m.return -> x, geen idee of dit ergens op slaat
+	//m.return -> x
 	+ { <m + "return", x> | call(x, _, _, m, _) <- p.statemens }
 ;
 
@@ -82,7 +124,7 @@ rel[loc,loc] buildGenTAAC(M3 m, Program p) {
 	return {<cl + "this", cl> | newAssign(_,cl, _, _) <- p.statemens, cl in classes(m)};
 }
 
-//kill set is alwaus empty for all locations
+//kill set is always empty for all locations
 rel[loc,loc] buildKill(OFG g) {	
 	return {};
 }
