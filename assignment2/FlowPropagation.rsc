@@ -11,16 +11,45 @@ import IO;
 public loc emptyId = |id:///|;
 alias OFG = rel[loc from, loc to];
  
-set[rel[loc,loc]] getOutput(p) {
+str getAssociations(M3 model, Program program) {
+	str ret = "";
+	ret += "edge[arrowhead = \"open\"; style= \"solid\"]\n";
+	//TODO voor elke gevonden association uit getAssocOutput een lijn tekenen
+	return ret;
+}
+  
+rel[loc,loc] getAssocOutput(M3 m, Program p) {//program p should be obtained by running createOFG from Java2OFG
 	OFG ofg = buildTheGraph(p);
-	gen = buildGen(p);
-	kill = buildKill(ofg);
-	outT = prop(ofg,gen,kill,true);
-	gen = buildGen(p);
-	kill = buildKill(ofg);
-	outF = prop(ofg,gen,kill,false);
-	return {outT, outF};
+	
+	gen = buildGenTAAC(m,p);
+	kill = {};
+	//propagate using the gen set to get type of actually allocated objects referenced by program locations
+	//backward propagation
+	propt = prop(ofg, gen, kill, true);
+	toReturn = getAssocs(m, propt);
+	//forward propagation
+	propf = prop(ofg, gen, kill, false);	
+	toReturn += getAssocs(m, propf);
+	
+	//propagate using the gen set of flow propagation specialization,
+	//aimed at determining type of objects stored in weakly typed containers
+	//backward propagation
+	propWTCt = prop(ofg, buildGenWTC(m,p,true), kill, true);
+	toReturn += getAssocs(m, propWTCt);
+	//forward propagation
+	propWTCf = prop(ofg, buildGenWTC(m,p,false), kill, false);
+	toReturn += getAssocs(m, propWTCf);
+	
+	return toReturn;
 } 
+
+/*
+ * returns associations from propagated OFG
+ */ 
+rel[loc,loc] getAssocs(M3 m, OFG g) {
+	allFields = {<b,a> | <b,a> <- g, b.scheme == "java+field"}; //field b is of actual type a
+	return {<c,a> | <c,b> <- m@containment, <b,a> <- allFields}; //return class c in which field b occurs
+}
  
 OFG buildTheGraph(Program p) 
 	//a1->f1..ak->fk
@@ -37,9 +66,20 @@ OFG buildTheGraph(Program p)
 	+ { <m + "return", x> | call(x, _, _, m, _) <- p.statemens }
 ;
 
-rel[loc,loc] buildGen(Program p) {
-	rel[loc a,loc b] inOFG = {<cl, x> | newAssign(x,cl, _, _) <- p.statemens};
-	return {<cl + "this", cl> | cl <- inOFG.a};
+/*
+ * Builds the gen set according to Figures 3.4 and 3.5 from the book
+ */
+rel[loc,loc] buildGenWTC(M3 m, Program p, bool back) {
+	return back 
+		? {<y,c> | assign(_,c,y) <- p.statemens, c in classes(m)} + {<m + "return",c> | call(_,c,_,m,_) <- p.statemens, c in classes(m)} 
+		: {<cl + "this", cl> | newAssign(_,cl, _, _) <- p.statemens};
+}
+
+/*
+ * Builds the gen set according to Figure 3.2 from the book
+ */
+rel[loc,loc] buildGenTAAC(M3 m, Program p) {
+	return {<cl + "this", cl> | newAssign(_,cl, _, _) <- p.statemens, cl in classes(m)};
 }
 
 //kill set is alwaus empty for all locations
