@@ -22,7 +22,7 @@ alias OFG = rel[loc from, loc to];
 tuple[rel[loc,loc] ass, rel[loc,loc] deps] getOutput(M3 m, Program p) {//program p should be obtained by running createOFG from Java2OFG
 	OFG ofg = buildTheGraph(p);
 	
-	//first without propagation, for dependencies that could use the already existing code //TODO make it happen :P
+	//first without propagation, for dependencies that could use the already existing code
 	deps = {};
 	asss = getInitAsss(m);
 		
@@ -63,7 +63,7 @@ rel[loc,loc] getInitAsss(M3 m) {
 		for(loc field_loc <- class_fields_locs) {
 			TypeSymbol field_type = toList(class_fields_types[field_loc])[0];
 			if(class(l, _) := field_type) {
-				if(l in classes(m)) { 
+				if(l in classes(m) && ! (l in m@extends.to)) { //field is of type l and we are sure this does not change
 					rel[loc cls,loc fld] fieldInClass = {<a,f> | <a,f> <- m@containment, f == field_loc};
 					asss += <getOneFrom(fieldInClass.cls), l>;
 				}
