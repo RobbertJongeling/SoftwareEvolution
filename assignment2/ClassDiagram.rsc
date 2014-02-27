@@ -117,11 +117,12 @@ str getMethods(M3 model, loc class_loc){
  */
 str getClass(M3 model, loc class){
 	str ret = "";
-	
 	//Note: I'm very much assuming that loc is actually a class here
 	str classname = getOneFrom(invert(model@names)[class]);
+	TypeSymbol class_type = getOneFrom(model@types[class]);
+	str class_type_str = toString(class_type, model);
 	ret += "<classname> [\n";
-	ret += "label = \"{<classname>|";
+	ret += "label = \"{<class_type_str>|";
 	ret += getFields(model, class);
 	ret += "|";
 	ret += getMethods(model, class);
