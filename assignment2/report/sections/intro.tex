@@ -1,5 +1,6 @@
-This document is a report of the planning and execution of assignment 2 for 2IS55 Software Evolution.
+This report contains a description of the creation of a toolchain designed to reconstruct software architecture based on Java source code.
+Using this toolchain, we will reconstruct the class diagram of three software repositories. 
 
-The purpose of the assignment is to build a toolchain to reconstruct software architecture based on Java source code.
-Using this toolchain, we will reconstruct the class diagram of three software repositories.
+In Section \ref{io}, we discuss the input and output of our tool. We also discuss design choices and the support of several Java features.
+In Section \ref{toolchain}, we present the tool design and give an explanation of its usage. Then, in Section \ref{appl}, we apply the tool to three software repositories. We first apply the designed toolchain to \textit{eLib} and discuss its output in terms of found recovered information as well as visual quality of the produced class diagram. Next, we apply the toolchain to two different versions of the \textit{CyberNeko} HTML Parser and discuss its output. We compare the class diagrams of the two versions and try to relate changes to observed discussions on the nekohtml-user and nekohtml-developer mailing lists. Finally, in Section \ref{disc}, we discuss strengths and weaknesses discovered by applying the tool to the repositories.
 
