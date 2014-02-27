@@ -4,12 +4,12 @@
 
 	\begin{itemize}
 		\item Class names
-		\item Field list
-		\item Method list
-		\item Field and method visibility
-		\item Parameter and return types
-		\item Extends relation
-		\item Implements relation
+		\item Fields list
+		\item Methods list
+		\item Fields and methods visibility
+		\item Parameters and return types
+		\item Extends relations
+		\item Implements relations
 	\end{itemize}
 
 	Our implemention follows the style of an iterative program, rather than a functional one using lots of set comprehensions.
@@ -22,8 +22,25 @@
 	We feel that this drawback is justified here, as the functionality we've introduced is not much more than getting the data out of M3 and sometimes performing some simple transformations on it.
 	
 	After we had this basic class diagram without dependencies and associations working, we set on to implement the algorithm described in \cite{rev-eng}.
-	Because of the notation of the given tips and tricks and the distance of the implementation of this algorithm from the visualization, the \texttt{FlowPropagation} module is written in a more functional style.
+	Because of the notation of the given tips and tricks and the distance of the implementation of this algorithm from the visualization, the \texttt{FlowPropagation} module is written in a more functional style.\\
 
+\indent The module builds from the provided Java2OFG module. 
+We first get a Program by calling the Java2OFG method \texttt{createOFG(|project://eLib|)}. 
+From the results, we build the OFG according to the idea as proposed in the course slided (page 15 slideset 3). 
+Before creating the OFG, from the M3 model, we extract associations that can already be derived without propagation. 
+We do this to increase the number of discovered associations. 
+Next, we extend the sets of associations and dependencies by calling the flow propagation algorithm \texttt{prop} 
+as provided in the Tips\&Tricks document. 
+We propagate forward and backward using different \texttt{gen} sets. 
+First to determine the type of actually allocated objects, using the algorithm in Figure 3.2 of \cite{rev-eng}.
+Then to determine the type of objects stored in weakly typed containers, 
+using the algorithms in Figures 3.4 (forward propagation) and 3.5 (backward propagation).
+
+After collecting all associations and dependencies, we filter them. 
+Associations from a class $A$ to all classes $B_1, ... , B_n$ that extend a class $B$ 
+are replaced with a single association from class $A$ to class $B$. The same is done for dependencies. 
+This is a measure we take to improve the visual representation of the class diagram. 
+As the goal of this reconstruction is a visual inspection, we think this is justified.
 
 \subsection{Usage}
 	Usage of the toolchain requires a working Rascal installation within Eclipse and the Java2OFG project in the build path.
