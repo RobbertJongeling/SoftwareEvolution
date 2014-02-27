@@ -2,14 +2,17 @@ This section describes some design choices we made while developing the toolchai
 
 \subsection{Input}
 	\subsubsection{Support for inner classes}
-		Yes, inner classes show up in the class diagram, but they don't look different because UML.
+		Our tool detects inner classes and adds them to the class diagram, complete with all fields and methods.
+		
+		However, we have not been able to find a UML class diagram specification for inner classes, so they look the same as regular classes.
 	\subsubsection{Support for generics}
-		In return types/paramters, not in class diagram.
-		Because we have no idea how to display them.
+		We support generic types in paramters and return types, where we display the type that is required or returned.
+		
+		Again, we don't visualize generic classes themselves differently in the class diagram since we were not able to find a UML class diagram specification for them.
 
 \subsection{Output}
 	\subsubsection{Named associations}
-		No.
+		We don't support named associations, but we do display the name of the association in the field list.
 	\subsubsection{Multiplicities}
-		We show the multiplicity for the fields, not on the association.
+		We show the multiplicity for the fields, not on the association edge itself.
 
