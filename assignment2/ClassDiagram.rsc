@@ -13,6 +13,10 @@ import lang::ofg::ast::FlowLanguage;
 import lang::ofg::ast::Java2OFG;
 
 str settings = "fontname = \"Courier New\"\nfontsize = 10\nnode [\nfontname = \"Courier New\"\nfontsize = 10\nshape = \"record\"\n]\nedge [\nfontname = \"Courier New\"\nfontsize = 10\n]\n";
+str realizations_settings = "edge[arrowhead = \"empty\"; style = \"dashed\"]\n";
+str generalizations_settings = "edge[arrowhead = \"empty\"; style= \"solid\"]\n";
+str associations_settings = "edge[arrowhead = \"open\"; style = \"solid\"]\n";
+str dependencies_settings = "edge[arrowhead = \"open\"; style = \"dashed\"]\n";
 
 /**
  * Turns the String version of a Modifier into a UML string that denotes visibility
@@ -173,61 +177,50 @@ str getDepends(M3 model){
 	return ret;
 }
 
+
 /**
- * Returns a DOT string representation of the Association and Dependency relations in the model
- *
- * These are grouped together because they both require an OFG. 
+ * Returns a DOT string representation of the given Relation
  */
-str getAssociationsAndDependencies(loc location, M3 model){
+str relToString(rel[loc,loc] relation, M3 model){
+	str ret = "";
+	for(tuple[loc,loc] pair <- relation){
+		str class_a = getOneFrom(invert(model@names)[pair[0]]);
+		str class_b = getOneFrom(invert(model@names)[pair[1]]);
+		ret += "<class_a> -\> <class_b>;\n";
+	}
+	return ret;
+}
+
+/**
+ * Returns a DOT string representation of the following relations in de model:
+ *    - Realization
+ *    - Generalization
+ *    - Association
+ *    - Dependency
+ */
+str getRelations(M3 model, loc location){
 	str ret = "";
 	
 	Program p = createOFG(location);
 	tuple[rel[loc,loc] ass, rel[loc,loc] deps] output = getOutput(model, p);
 	
-	ret += "edge[arrowhead = \"open\"; style = \"solid\"]\n";
-	for(tuple[loc,loc] t <- output.ass){
-		str from = getOneFrom(invert(model@names)[t[0]]);
-		str to = getOneFrom(invert(model@names)[t[1]]);
-		ret += "<from> -\> <to>;\n";
-	}
+	rel[loc,loc] realizations = model@implements;
+	rel[loc,loc] generalizations = model@extends;
+	rel[loc,loc] associations = output.ass - realizations - generalizations;
+	rel[loc,loc] dependencies = output.deps - associations - realizations - generalizations;
 	
-	ret += "edge[arrowhead = \"open\"; style = \"dashed\"]\n";
-	for(tuple[loc,loc] t <- output.deps){
-		str from = getOneFrom(invert(model@names)[t[0]]);
-		str to = getOneFrom(invert(model@names)[t[1]]);
-		ret += "<from> -\> <to>;\n";
-	}
+	ret += realizations_settings;
+	ret += relToString(realizations, model);
 	
-	return ret;
-}
-
-/**
- * Returns a DOT string representation of the Extends relations in the model
- */
-str getExtends(M3 model){
-	str ret = "";
-	ret += "edge[arrowhead = \"empty\"; style= \"solid\"]\n";
-	for(tuple[loc,loc] extends <- model@extends){
-		str class_a = getOneFrom(invert(model@names)[extends[0]]);
-		str class_b = getOneFrom(invert(model@names)[extends[1]]);
-		ret += "<class_a> -\> <class_b>;\n";
-	}
-	return ret;
-}
-
-/**
- * Returns a DOT string representation of the Implements relations in the model
- *
- * @todo: Does Rascal have inheretance? Is there any way I can de-couple the getImplements and getExtends methods?
- */
-str getImplements(M3 model){
-	str ret = "";
-	ret += "edge[arrowhead = \"empty\"; style = \"dashed\"]\n";
-	for(tuple[loc,loc] implements <- model@implements){
-		str class_a = getOneFrom(invert(model@names)[extends[0]]);
-		str class_b = getOneFrom(invert(model@names)[extends[1]]);
-		ret += "<class_a> -\> <class_b>;\n";
-	}
+	ret += generalizations_settings;
+	ret += relToString(generalizations, model);
+	
+	ret += associations_settings;
+	ret += relToString(associations, model);
+	
+	ret += dependencies_settings;
+	ret += relToString(dependencies, model);
+	
 	return ret;
 }
 
@@ -244,10 +237,7 @@ public str getDot(loc location){
 	str ret = "digraph classes{\n";
 	ret += settings;
 	ret += getClasses(model);
-	/*ret += getDepends(model);*/
-	ret += getAssociationsAndDependencies(location, model);
-	ret += getExtends(model);
-	ret += getImplements(model);
+	ret += getRelations(model, location);
 	ret += "}";
 	return ret;
 }
