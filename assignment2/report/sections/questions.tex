@@ -1,18 +1,31 @@
-This section describes some design choices we made while developing the toolchain.
+This section describes some design choices we made while developing the tool chain.
 
 \subsection{Input}
+	The input consists of a project location and an output file location, more on this in Section~\ref{usage} on the usage of the tool.
+
 	\subsubsection{Support for inner classes}
 		Our tool detects inner classes and adds them to the class diagram, complete with all fields and methods.
 		
 		However, we have not been able to find a UML class diagram specification for inner classes, so they look the same as regular classes.
 	\subsubsection{Support for generics}
-		We support generic types in paramters and return types, where we display the type that is required or returned.
+		We support generic types in parameters and return types, where we display the type that is required or returned.
 		
 		Again, we don't visualize generic classes themselves differently in the class diagram since we were not able to find a UML class diagram specification for them.
 
 \subsection{Output}
-	\subsubsection{Named associations}
-		We don't support named associations, but we do display the name of the association in the field list.
-	\subsubsection{Multiplicities}
-		We show the multiplicity for the fields, not on the association edge itself.
+	The tool outputs a file containing the class diagram in dot format. 
+	This can be easily fed to a tool like Graphviz, to construct an image.
 
+	\subsubsection{Named associations}
+		We don't support named associations, but we do display the name of the association in the field list. 
+		The purpose of our tool is to recover and visualize the architecture of software for human understanding.
+		Named associations are an indicator of the designers intent for the system.
+		When working from a design to code, it would be useful to name associations in order to communicate this intent.
+		But as we are only interested in recovering the architecture that has been implemented and not in the intent behind this,
+		it is not useful to add them to the output.
+		
+	\subsubsection{Multiplicities}
+		We show the multiplicity for the fields, not on the association edge itself. 
+		The argumentation for not showing multiplicities is similar to that of not showing named associations.
+		We are recovering the architecture, we are not reasoning about the design of the system in an early stage, 
+		where multiplicities would be useful to indicate.

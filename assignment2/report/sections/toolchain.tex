@@ -42,10 +42,10 @@ are replaced with a single association from class $A$ to class $B$. The same is 
 This is a measure we take to improve the visual representation of the class diagram. 
 As the goal of this reconstruction is a visual inspection, we think this is justified.
 
-\subsection{Usage}
+\subsection{Usage}\label{usage}
 	Usage of the toolchain requires a working Rascal installation within Eclipse and the Java2OFG project in the build path.
 
-	The Racal module \texttt{ClassDiagram} exposes the following method: \texttt{public str getDot(loc projectLocation);}, which returns the Graphviz notation for the UML class diagram based on the Eclipse project that the given location points to.
+	The Racal module \texttt{ClassDiagram} exposes the following method:\\ \texttt{public str getDot(loc projectLocation);}, which returns the Graphviz notation for the UML class diagram based on the Eclipse project that the given location points to.
 	Note that this has to be a location to an Eclipse project and can not be just any other location because Java2OFG requires this.
 
 	For ease of use, we have included the module \texttt{ClassDiagramIO}, which exposes \texttt{public void writeClassDiagramToFile(loc projectLoc, loc fileLoc);}.
@@ -59,3 +59,5 @@ As the goal of this reconstruction is a visual inspection, we think this is just
 	\end{lstlisting}
 	
 	Then, the file can be visualized with for instance \texttt{dot -Tpng -O /tmp/eLib.dot}.
+	Note that on a windows machine, the folder tmp is not present, so this location will not work. 
+	An example location that will work on a windows system is: |file:///D:/eLib.dot|.
