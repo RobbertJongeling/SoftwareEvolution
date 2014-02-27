@@ -5,16 +5,36 @@ import lang::java::jdt::m3::Core;
 import lang::java::m3::TypeSymbol;
 import Set;
 import Relation;
+import List;
+import String;
 
 /**
  * Returns a user friendly String that represents a TypeSymbol.
  * Not all possible values of TypeSymbol have been implemented in a satisfactory way.
  */
 str toString(TypeSymbol t, M3 model){
-	if(\class(l, _) := t){
-		return getOneFrom(invert(model@names)[l]);
-	}else if(\interface(l, _) := t){
-		return getOneFrom(invert(model@names)[l]);
+	if(\class(l, tp) := t){
+		if(size(tp) == 0){
+			return getOneFrom(invert(model@names)[l]);
+		}else{
+			//I would have liked to do this in a neat functional way with a mapper() but I couldn't find how I could return a function in Rascal
+			list[str] parameters = [];
+			for(parameter <- tp){
+				parameters += toString(parameter, model);
+			}
+			return getOneFrom(invert(model@names)[l]) + "[" + intercalate(",", parameters) + "]";
+		}
+	}else if(\interface(l, tp) := t){
+		if(size(tp) == 0){
+			return getOneFrom(invert(model@names)[l]);
+		}else{
+			//I would have liked to do this in a neat functional way with a mapper() but I couldn't find how I could return a function in Rascal
+			list[str] parameters = [];
+			for(parameter <- tp){
+				parameters += toString(parameter, model);
+			}
+			return getOneFrom(invert(model@names)[l]) + "[" + intercalate(",", parameters) + "]";
+		}
 	}else if(\enum(l) := t){
 		return getOneFrom(invert(model@names)[l]);
 	}else if(\method(l, _, _, _) := t){
