@@ -49,6 +49,9 @@ tuple[rel[loc,loc] ass, rel[loc,loc] deps] getOutput(M3 m, Program p) {//program
 	asss += getAssocs(m, propWTCf);
 	deps += getDeps(m, propWTCf);
 	
+	asss = filterAsss(m, asss);
+	deps = filterDeps(m, deps);
+	
 	return <asss,deps>;
 } 
 
@@ -60,8 +63,10 @@ rel[loc,loc] getInitAsss(M3 m) {
 		for(loc field_loc <- class_fields_locs) {
 			TypeSymbol field_type = toList(class_fields_types[field_loc])[0];
 			if(class(l, _) := field_type) {
-				rel[loc cls,loc fld] fieldInClass = {<a,f> | <a,f> <- m@containment, f == field_loc};
-				asss += <getOneFrom(fieldInClass.cls), l>;
+				if(l in classes(m)) { 
+					rel[loc cls,loc fld] fieldInClass = {<a,f> | <a,f> <- m@containment, f == field_loc};
+					asss += <getOneFrom(fieldInClass.cls), l>;
+				}
 			}
 		}
 	}
@@ -145,3 +150,42 @@ OFG prop(OFG g, rel[loc,loc] gen, rel[loc,loc] kill, bool back) {
 	return OUT;
 }
 
+//removes associations to all children in an extends relation, replaces it with a single association to the parent.
+rel[loc,loc] filterAsss(M3 m, rel[loc,loc] asss) {
+	return filterExtends(m, asss);
+}
+
+//removes dependencies to all children in an extends relation, replaces it with a single dependency to the parent.
+//also, removes self-dependencies
+//TODO: study very carefully and verify that I do not throw away too many edges
+rel[loc,loc] filterDeps(M3 m, rel[loc,loc] deps) {	
+	deps = filterExtends(m,deps);
+	
+	//remove self-dependencies
+	for(tuple[loc a,loc b] dep <- deps) {
+		if(dep.a == dep.b) {
+			deps -= dep;
+		}
+	}
+	
+	return deps;
+}
+
+//removes associations or dependencies to all children in an extends relation, 
+//replaces it with a single association or dependency to the parent.
+rel[loc,loc] filterExtends(M3 m, rel[loc,loc] asssOrDeps) {
+	extended = {e | <_,e> <- m@extends};
+	for(loc cls <- classes(m)) {
+		rel[loc,loc] ofCls = {<c,a> | <c,a> <- asssOrDeps, c == cls};
+		
+		for(loc ext <- extended) {
+			rel[loc,loc] allChildren = {<cls, c> | <c,p> <- m@extends, p == ext};
+			//if all children are present in assiciations of class Cls, then they can be replaced with one association to parent
+			if(allChildren <= ofCls) {
+				asssOrDeps -= allChildren;
+				asssOrDeps += <cls,ext>;
+			}
+		}			
+	}
+	return asssOrDeps;
+}
