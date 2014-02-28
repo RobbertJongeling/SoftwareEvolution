@@ -1,4 +1,4 @@
-This section describes some design choices we made while developing the tool chain. 
+In this section we describe some design choices we made while developing the tool chain. 
 As well as the input the tool needs and the output the tool delivers. 
 We discuss the support for several Java features when considering the input and the support for several UML features when considering the output.
 
@@ -6,7 +6,7 @@ We discuss the support for several Java features when considering the input and 
 	The user input consists of a project location and an output file location. 
 	More on this in Section~\ref{usage} on the usage of the tool.
 	The tool needs a Java project as input and supports associations, dependencies, generalizations and realizations between classes. 
-	Within the classes themselves, the tool finds all fields, methods, their parameters and their return types.	
+	Within the classes themselves, the tool finds all fields with their types, methods with their return types and the parameters of each method with their types.
 	Next we discuss support for two Java features, inner classes and generics.
 
 	\subsubsection{Support for inner classes}
@@ -17,22 +17,22 @@ We discuss the support for several Java features when considering the input and 
 		We were not able to find a UML class diagram specification for generic classes, so we chose a representation ourselves.
 		If a certain class \texttt{A} has one type argument \texttt{T}, it shows up in the class diagram as \texttt{A[T]}.
 		
-		If this type \texttt{T} is used anywhere in the class, such as in a field or in a method paramter or return type, we will show it there.
+		If this type \texttt{T} is used anywhere in the class, such as in a field or in a method parameter or return type, we show it there.
 		
-		If a concretized class (that is, a generic class referenced with a certain type argument) shows up anywhere in the field or method list, we'll display its type argument in the same fashion as before, \texttt{Class[Type1]}.
+		If a concretized class (that is, a generic class referenced with a certain type argument) shows up anywhere in the field or method list, we display its type argument in the same fashion as before, \texttt{Class[Type1]}.
 		
 		In the case that a generic class accepts more than one argument, we show this as follows: \texttt{Class[Type1,Type2,\ldots]}.
 
 \subsection{Output}
-	The tool outputs a file containing the class diagram in dot format. 
-	This can be easily fed to a tool like Graphviz, to construct an image.
-	We decided to output a dot file instead of an image to support for example users craeting a \textit{Diff} of the output of the tool 	applied to different versions of the same tool.
+	The tool outputs a file containing the class diagram in DOT format. 
+	This can be easily used as input in a tool like Graphviz, to construct an image.
+	We decided to output a DOT file instead of an image to support for example users creating a \textit{Diff} of the output of the tool 	applied to different versions of the same tool.
 	
-	We made a few choises in the output syntax of the class diagram. 
-	Public and protected methods and variables are prefixed, as usual, by a `+' and a `\#'-sign respectively.
+	We made a few choices in the output syntax of the class diagram. 
+	Public and protected methods and variables are prefixed, as usual in UML, by a `+' and a `\#'-sign respectively.
 	We denote static methods and variables by prefixing them with an `@'-sign.
 	And denote final methods and variables by prefixing them with an `!'-sign.	
-	Next, we discuss support for named associations and multuplicities in the output.
+	Next, we discuss support for named associations and multiplicities in the output.
 
 	\subsubsection{Named associations}
 		We do not support named associations, but we do display the name of the association in the field list. 

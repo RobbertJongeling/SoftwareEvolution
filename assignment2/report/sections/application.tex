@@ -12,15 +12,15 @@ This is a reasonable time considering the relatively small size of eLib.
 The obtained diagram does not match the one presented in Figure~3.9 in the book by Tonella and Potrich~\cite{rev-eng} exactly. 
 Our tool does not discover the dependency between the \texttt{Journal} class and the \texttt{User} class. 
 Another difference is that they do not show the class \texttt{Main} in the class diagram and we do.
-This is a loss of precision that is not desired but which we have not found the reason for in the code. %dit is een lelijke zin
+The missing of a dependency is a loss of precision that is not desired but which we have not found the reason for in the code.
 The visual quality of the rendered image is good, the class diagram is readable and the general structure of eLib can be derived by looking at the diagram. 
-We decided to generate only edges with straight corners because curved edges tend to give a very messy picture.
+We decided to generate only edges with straight edges and 90 degree angles because curved edges tend to give a very messy looking picture.
 Also, we intersecting edges can be distinguished more easily when all edges are straight.
 
 \subsection{CyberNeko HTML}
 In this second case study, we compare two versions of the CyberNeko HTML Parser. 
 We compare the obtained class diagrams of versions 0.9.5 (Figure~\ref{fig:neko0.9}) and 1.9.5 (Figure~\ref{fig:neko1.9}) and identify similarities and differences between the two versions and study the evolution of the project.
-Finally, we try to relate observed changes in the diagrams to discussions on nekohtml-user and nekohtml-developer mailing lists to determine wether a change was explicitely required or rather a byproduct of other work.
+Finally, we try to relate observed changes in the diagrams to discussions on nekohtml-user and nekohtml-developer mailing lists to determine whether a change was explicitly required or rather a byproduct of other work.
 
 \begin{figure}[H]
 \center
@@ -44,9 +44,9 @@ In v1.9.14, the \texttt{HTMLScanner} class is associated with class \texttt{Filt
 The \texttt{HTMLTagBalancer} class is in v1.9.14 associated with class \texttt{ElementEntr}y, this association was not present in v0.9.5.
 The class \texttt{ParserConfigurationSettings} stands out in the class diagram of v0.9.5 as three different classes depend on it. In v1.9.14, this has reduced to one.
 
-The classes that are not connected to the rest of the classes (in the top right of the diagram), show little change over the versions. The quality of our tool can be doubted as there are some strange constructs apparant in the class diagram. Such as classes that have two dependencies to the same other class, classes that are associated with themselves or even a class that extends itself.
+The classes that are not connected to the rest of the classes (in the top right of the diagram), show little change over the versions. The quality of our tool can be doubted as there are some strange constructs apparent in the class diagram. Such as classes that have two dependencies to the same other class, classes that are associated with themselves or even a class that extends itself.
 
-An interesting thing to notice in regard to the \texttt{nekohtml-developer} mailing list (which is used primarily to share patches and bug reports) is that it became active for the first time in December of 2007, when v0.9.5 was first released.
+An interesting thing to notice with respect to the \texttt{nekohtml-developer} mailing list (which is primarily used to share patches and bug reports) is that it became active for the first time in December of 2007, when v0.9.5 was first released.
 This level of activity was more of less maintained throughout 2008 and 2009.
 After February of 2010, when v1.9.14 was released, the level of activity abruptly went down.
 Since then, the activity level has never again been as high as between v0.9.5 and v1.9.15.

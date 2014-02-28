@@ -1,14 +1,17 @@
 This report contains a description of the creation of a toolchain designed to reconstruct software architecture based on Java source code.
-Using this toolchain, we will reconstruct the class diagram of three software repositories. We will analyse the preformance and precision of out tool in terms of quality of the discovered class diagram and quality of its visual representation.
+Using this toolchain, we reconstruct the class diagram of three software repositories. We analyse the performance and precision of our toolchain in terms of quality of the discovered class diagram and quality of the visual representation of the class diagram.
 
 Class diagrams are used in several cases. 
 They can be used to generate code from or to serve as an architecture such that a programmer can create code based on it.
-These applications require a greater amount of detail in the generated class diagram than when considering the purpose of analysis of existing software.
-As we are interested in analysing existing software, we focus on elements that are important for that use in the design of the toolchain.
+These applications require a greater amount of detail of the class diagram than when considering the purpose of analysis of existing software.
+As we are interested in analysing existing software, we focus on elements that are important for that use in the design of the toolchain and specifically, the generated class diagram.
 
-This report is organized as follows:
-In Section \ref{io}, we discuss the input and output of our tool. We also discuss design choices and the support of several Java features.
+The remainder of this report is organized as follows:
+In Section \ref{io}, we discuss the input and output of our tool as well as design choices and the support of several Java features.
 In Section \ref{toolchain}, we present the tool design and give an explanation of its usage. 
-
-Then, in Section \ref{appl}, we apply the tool to three software repositories. We first apply the designed toolchain to \textit{eLib} and discuss its output in terms of found recovered information as well as visual quality of the produced class diagram. Next, we apply the toolchain to two different versions of the \textit{CyberNeko} HTML Parser and discuss its output. We compare the class diagrams of the two versions and try to relate changes to observed discussions on the nekohtml-user and nekohtml-developer mailing lists. Finally, in Section \ref{disc}, we discuss the strengths and weaknesses of our approach we discovered by applying the tool to the repositories.
+Then, in Section \ref{appl}, we apply the tool to three software repositories. 
+We first apply the designed toolchain to \textit{eLib} and discuss its output in terms of found recovered information as well as visual quality of the produced class diagram. 
+Next, we apply the toolchain to two different versions of the \textit{CyberNeko} HTML Parser and discuss its output. 
+We compare the class diagrams of the two versions and try to relate changes to observed discussions on the nekohtml-user and nekohtml-developer mailing lists. 
+Finally, in Section \ref{disc}, we discuss the strengths and weaknesses of our approach we discovered by applying the tool to the repositories.
 

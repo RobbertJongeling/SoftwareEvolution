@@ -1,5 +1,5 @@
 \subsection{Tool design}
-	When doing the initial tool design, we chose to use as much of the functionality from M3 as we could, because we noticed that a lot of the information that is needed for constructing class diagrams was available in one way or the other.
+	When doing the initial tool design, we chose to use as much of the functionality from M3 as we could, because we noticed that a lot of the information that is needed for constructing class diagrams was available already.
 	Because of this, we get the following information from M3 alone:
 
 	\begin{itemize}
@@ -12,7 +12,7 @@
 		\item Realizations (Implements relations)
 	\end{itemize}
 
-	Our implemention follows the style of an iterative program, rather than a functional one using lots of set comprehensions.
+	Our implementation follows the style of an iterative program, rather than a functional one using lots of set comprehensions.
 	We did this for two reasons.
 	The first one is that we feel that it makes our code much more readable to the novice eyes and it allows for easier documentation.
 	The second reason is that all of our private functions help to build one big string representation of the model.
@@ -21,12 +21,12 @@
 	Our approach keeps everything transparent and building up to the result, though it does mix functionality and representation of data.
 	We feel that this drawback is justified here, as the functionality we've introduced is not much more than getting the data out of M3 and sometimes performing some simple transformations on it.
 	
-	After we had this basic class diagram without dependencies and associations working, we set on to implement the algorithm described in \cite{rev-eng}.
+	After we had this basic class diagram without dependencies and associations working, we set on to implement the algorithm described in the book~\cite{rev-eng}.
 	Because of the notation of the given tips and tricks and the distance of the implementation of this algorithm from the visualization, the \texttt{FlowPropagation} module is written in a more functional style.\\
 
 \indent The \texttt{FlowPropagation} module builds from the provided Java2OFG module. 
 We first get a Program by calling the Java2OFG method \texttt{createOFG(|project://eLib|)}. 
-From the results, we build the OFG according to the idea as proposed in the course slided (page 15 slideset 3). 
+From the results, we build the object-flow graph (OFG) according to the idea as proposed in the course slides (page 15 slideset 3). 
 Before creating the OFG, we extract associations that can already be derived without propagation from the M3 model. 
 We do this to increase the number of discovered associations.  
 Next, we extend the sets of associations and dependencies by calling the flow propagation algorithm \texttt{prop} 
@@ -42,7 +42,7 @@ are replaced with a single association from class $A$ to class $B$. The same is 
 This is a measure we take to improve the visual representation of the class diagram by reducing clutter caused by a lot of edges. 
 The information loss is little and as the goal of this reconstruction is a visual inspection, we think this approach is justified.
 
-Now, all discovered relations are returned to the class diagram builder, where every relation is made into a string in dot format and added to the total program in the same style as the initial class diagram, without relations, is created. Now that the total DOT file is created, it is written to a file on the location provided when calling the program. The DOT file can then be transformed into an image by applying any tool that can process DOT files such as Graphviz.
+Now, all discovered relations are returned to the class diagram builder, where every relation is made into a string in DOT format and added to the total program in the same style as the initial class diagram, without relations, is created. Now that the total DOT file is created, it is written to a file on the location provided when calling the program. The DOT file can then be transformed into an image by applying any tool that can process DOT files such as Graphviz.
 
 \subsection{Usage}\label{usage}
 	Usage of the toolchain requires a working Rascal installation within Eclipse and the Java2OFG project in the build path.
@@ -51,9 +51,7 @@ Now, all discovered relations are returned to the class diagram builder, where e
 	Note that this has to be a location to an Eclipse project and can not be just any other location because Java2OFG requires this.
 
 	For ease of use, we have included the module \texttt{ClassDiagramIO}, which exposes \texttt{public void writeClassDiagramToFile(loc projectLoc, loc fileLoc);}.
-	Using this method, a file in Graphviz notation will be written to \texttt{fileLoc} that contains a UML class diagram for the Eclipse project in \texttt{projectLoc}.
-	
-	Because of this, the following Rascal code is enough to get started:
+	Using this method, a file in Graphviz notation will be written to \texttt{fileLoc} that contains a UML class diagram for the Eclipse project in \texttt{projectLoc}. Because of this, the following Rascal code is enough to get started:
 	
 	\begin{lstlisting}
 	import ClassDiagramIO;
