@@ -7,6 +7,13 @@ The obtained class diagram is shown in Figure~\ref{fig:eLib}, a larger version o
 \caption{Class diagram obtained by running Graphviz on the dot file outputted by the developed tool.}
 \label{fig:eLib}
 \end{figure}
+The tool performs the task of outputting the file in several seconds. 
+This is a reasonable time considering the relatively small size of eLib. 
+The obtained diagram does not match the one presented in Figure~3.9 in the book by Tonella and Potrich~\cite{rev-eng} exactly. 
+Our tool does not discover the dependency between the \texttt{Journal} class and the \texttt{User} class. 
+Another difference is that they do not show the class \texttt{Main} in the class diagram and we do.
+This is a loss of precision that is not desired but which we have not found the reason for in the code. %dit is een lelijke zin
+The visual quality of the rendered image is good, the class diagram is readable and the general structure of eLib can be derived by looking at the diagram.
 
 \subsection{Neko 0.9}
 \begin{figure}[H]

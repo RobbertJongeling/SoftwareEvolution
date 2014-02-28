@@ -15,6 +15,13 @@ This section describes some design choices we made while developing the tool cha
 \subsection{Output}
 	The tool outputs a file containing the class diagram in dot format. 
 	This can be easily fed to a tool like Graphviz, to construct an image.
+	
+	We mage a few choises in the output syntax of the class diagram. 
+	Public and protected methods and variables are prefixed, as usual, by a `+' and a `\#'-sign respectively.
+	We denote static methods and variables by prefixing them with an `@'-sign.
+	And denote final methods and variables by prefixing them with an `!'-sign.
+	
+	Next, we discuss support for named associations and multuplicities in the output.
 
 	\subsubsection{Named associations}
 		We don't support named associations, but we do display the name of the association in the field list. 
