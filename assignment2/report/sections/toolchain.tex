@@ -42,6 +42,8 @@ are replaced with a single association from class $A$ to class $B$. The same is 
 This is a measure we take to improve the visual representation of the class diagram by reducing clutter caused by a lot of edges. 
 The information loss is little and as the goal of this reconstruction is a visual inspection, we think this approach is justified.
 
+Now, all discovered relations are returned to the class diagram builder, where every relation is made into a string in dot format and added to the total program in the same style as the initial class diagram, without relations, is created. Now that the total DOT file is created, it is written to a file on the location provided when calling the program. The DOT file can then be transformed into an image by applying any tool that can process DOT files such as Graphviz.
+
 \subsection{Usage}\label{usage}
 	Usage of the toolchain requires a working Rascal installation within Eclipse and the Java2OFG project in the build path.
 
