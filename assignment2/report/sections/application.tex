@@ -22,10 +22,6 @@ In this second case study, we compare two versions of the CyberNeko HTML Parser.
 We compare the obtained class diagrams of versions 0.9.5 (Figure~\ref{fig:neko0.9}) and 1.9.5 (Figure~\ref{fig:neko1.9}) and identify similarities and differences between the two versions and study the evolution of the project.
 Finally, we try to relate observed changes in the diagrams to discussions on nekohtml-user and nekohtml-developer mailing lists to determine wether a change was explicitely required or rather a byproduct of other work.
 
-In a system as large as CyberNeko, it is of very little use to consider all small changes.
-Therefore we identify three classes that seem the most important in CyberNeko version 0.9.5 and focus on them.
-These are: \texttt{HTMLScanner}, \texttt{HTMLTagBalancer} and \texttt{HTMLElements}
-
 \begin{figure}[H]
 \center
 \includegraphics[width=\textwidth]{sections/results/{{neko-0.9}}}
@@ -40,4 +36,15 @@ These are: \texttt{HTMLScanner}, \texttt{HTMLTagBalancer} and \texttt{HTMLElemen
 \caption{Class diagram obtained by running Graphviz on the dot file outputted by the developed tool applied on CyberNeko version 1.9.14.}
 \label{fig:neko1.9}
 \end{figure}
+
+In a system as large as CyberNeko, it is of very little use to consider all small changes.
+Therefore we identify three classes that seem the most important in CyberNeko version 0.9.5 and focus on them.
+These are: \texttt{HTMLScanner}, \texttt{HTMLTagBalancer} and \texttt{ParserConfigurationSettings}.
+In v1.9.14, the \texttt{HTMLScanner} class is associated with class \texttt{FilterInputStream}, this association was not present in v0.9.5. It was then associated with \texttt{PlaybackInputStream}, which extended \texttt{FilterInputStream}
+The \texttt{HTMLTagBalancer} class is in v1.9.14 associated with class \texttt{ElementEntr}y, this association was not present in v0.9.5.
+The class \texttt{ParserConfigurationSettings} stands out in the class diagram of v0.9.5 as three different classes depend on it. In v1.9.14, this has reduced to one.
+
+The classes that are not connected to the rest of the classes (in the top right of the diagram), show little change over the versions. The quality of our tool can be doubted as there are some strange constructs apparant in the class diagram. Such as classes that have two dependencies to the same other class, classes that are associated with themselves or classes that extend themselves.
+
+
 
