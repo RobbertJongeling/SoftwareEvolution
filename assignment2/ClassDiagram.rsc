@@ -12,7 +12,7 @@ import FlowPropagation;
 import lang::ofg::ast::FlowLanguage;
 import lang::ofg::ast::Java2OFG;
 
-str settings = "fontname = \"Courier New\"\nfontsize = 10\nnode [\nfontname = \"Courier New\"\nfontsize = 10\nshape = \"record\"\n]\nedge [\nfontname = \"Courier New\"\nfontsize = 10\n]\n";
+str settings = "fontname = \"Courier New\"\nfontsize = 10\nsplines=ortho;\nnode [\nfontname = \"Courier New\"\nfontsize = 10\nshape = \"record\"\n]\nedge [\nfontname = \"Courier New\"\nfontsize = 10\n]\n";
 str realizations_settings = "edge[arrowhead = \"empty\"; style = \"dashed\"]\n";
 str generalizations_settings = "edge[arrowhead = \"empty\"; style= \"solid\"]\n";
 str associations_settings = "edge[arrowhead = \"open\"; style = \"solid\"]\n";
