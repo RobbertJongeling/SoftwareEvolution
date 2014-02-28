@@ -14,8 +14,14 @@ We discuss the support for several Java features when considering the input and 
 		However, we have not been able to find a UML class diagram specification for inner classes, so they look the same as regular classes.
 		
 	\subsubsection{Support for generics}
-		We support generic types in parameters and return types, where we display the type that is required or returned.
-		Again, we don't visualize generic classes themselves differently in the class diagram since we were not able to find a UML class diagram specification for them.
+		We were not able to find a UML class diagram specification for generic classes, so we chose a representation ourselves.
+		If a certain class \texttt{A} has one type argument \texttt{T}, it shows up in the class diagram as \texttt{A[T]}.
+		
+		If this type \texttt{T} is used anywhere in the class, such as in a field or in a method paramter or return type, we will show it there.
+		
+		If a concretized class (that is, a generic class referenced with a certain type argument) shows up anywhere in the field or method list, we'll display its type argument in the same fashion as before, \texttt{Class[Type1]}.
+		
+		In the case that a generic class accepts more than one argument, we show this as follows: \texttt{Class[Type1,Type2,\ldots]}.
 
 \subsection{Output}
 	The tool outputs a file containing the class diagram in dot format. 
