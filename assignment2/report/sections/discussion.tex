@@ -1,0 +1,19 @@
+In this section, we discuss strengths, weaknesses and limitations of the developed tool and relate them to design choices documented in Section~\ref{toolchain}. 
+
+Based on a test with a version of our tool that did not implement this, the filtering of edges is a necessity.
+The visual output is readable, for as far as that is possible with a program the size of CyberNeko.
+Cluttering of the edges is minimal and when they intersect, edges are clearly separable due to their orthogonal intersections.
+
+The performance of our tool in terms of time spent creating the output file is quite reasonable.
+On the eLib program, our tool takes about 5 seconds to produce the output file.
+On the CyberNeko versions 0.9.5 and 1.9.14, our tool takes about 90 seconds respectively to produce the output file.
+The choice of an implementation style of an iterative program may have contributed to this performance.
+
+A limitation, especially of the produced output, is the almost random layout of the resulting class diagram.
+In order to compare manually, it would be useful to have two similar images.
+For example, it would be useful if the classes in the class diagram of CyberNeko version 1.9.14 were positioned on the same places in the image as in the class diagram of CyberNeko version 0.9.5. 
+Of course, the system changes and so does the class diagram, but a way to keep them more similar would make manual evaluation much easier. 
+Also, when the images are kept very similar, an interesting thing to do would be to make a Diff image of the two images.
+We did this with the output of our tool but the result was not at all satisfying as the images were too different from each other.
+
+%Weakness: er zitten bugs in? 
