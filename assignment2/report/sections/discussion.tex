@@ -16,4 +16,8 @@ Of course, the system changes and so does the class diagram, but a way to keep t
 Also, when the images are kept very similar, an interesting thing to do would be to make a Diff image of the two images.
 We did this with the output of our tool but the result was not at all satisfying as the images were too different from each other.
 
-%Weakness: er zitten bugs in? 
+As mentioned in the case study of eLib, our tool was not able to find one dependency that does exist there.
+It is therefore likely that it is also missing dependencies in the analysis of CyberNeko.
+Also, we noticed that in the class diagram of CyberNeko version 0.9.5, the \texttt{Writer} class has two dependencies on the \texttt{ParserConfigurationSettings} class.
+Which is strange, because the dependencies are a set and therefore every element should be unique. 
+Another weakness is the existence of self-associations. A few classes in the obtained class diagrams are associated with themselves, this is also unexpected behaviour that threatens the validity of our results.
