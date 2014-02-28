@@ -19,8 +19,14 @@ Also, we intersecting edges can be distinguished more easily when all edges are 
 
 \subsection{CyberNeko HTML}
 In this second case study, we compare two versions of the CyberNeko HTML Parser. 
-We compare the obtained class diagrams of versions 0.9.5 (Figure~\ref{fig:neko0.9}) and 1.9.5 (Figure~\ref{fig:neko1.9}) and identify similarities and differences between the two versions and study the evolution of the project.
+We compare the obtained class diagrams of versions 0.9.5 (Figure~\ref{fig:neko0.9}) and 1.9.14 (Figure~\ref{fig:neko1.9}) and identify similarities and differences between the two versions and study the evolution of the project.
 Finally, we try to relate observed changes in the diagrams to discussions on nekohtml-user and nekohtml-developer mailing lists to determine whether a change was explicitly required or rather a byproduct of other work.
+
+To get CyberNeko v1.9.14 to compile, we had to change a few lines.
+As documented in classes \texttt{XercesBridge_2_0} and \texttt{XercesBridge_2_1}, these Xerces bridge classes will not compile with recent versions of Xerces.
+Since we were using a recent version of Xerces, we had to make a few modifications to get CyberNeko to compile.
+Specifically, we commented out lines 45, 51 and 57 of \texttt{XercesBridge_2_0.java} and line 53 of \texttt{XercesBridge_2_1}.
+We are aware that our modifications might alter the object flow graph, but in our opinion these classes don not represent core functionality and since our only option was to disregard them we think this approach is justified.
 
 \begin{figure}[H]
 \center
