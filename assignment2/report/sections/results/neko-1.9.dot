@@ -1,0 +1,212 @@
+digraph classes{
+fontname = "Courier New"
+fontsize = 10
+node [
+fontname = "Courier New"
+fontsize = 10
+shape = "record"
+]
+edge [
+fontname = "Courier New"
+fontsize = 10
+]
+CurrentEntity [
+label = "{CurrentEntity|+ buffer: Array1[char]\l+! literalSystemId: String\l+! version: String\l- endReached_: boolean\l+! baseSystemId: String\l- lineNumber_: int\l+ length: int\l+! publicId: String\l- columnNumber_: int\l+ offset: int\l+! encoding: String\l+! expandedSystemId: String\l- stream_: Reader\l+ characterOffset_: int\l|# read(): int\l- incLine(): void\l hasNext(): boolean\l- incLine(nbLines: int): void\l- rewind(i: int): void\l+ CurrentEntity(stream: Reader, literalSystemId: String, baseSystemId: String, publicId: String, encoding: String, expandedSystemId: String)\l- closeQuietly(): void\l- getCharacterOffset(): int\l- restorePosition(originalCharacterOffset: int, originalColumnNumber: int, originalOffset: int): void\l- debugBufferIfNeeded(prefix: String): void\l- getNextChar(): char\l- resetBuffer(characterOffset: int, buffer: XMLStringBuffer, columnNumber: int, lineNumber: int): void\l# load(offset: int): int\l- debugBufferIfNeeded(prefix: String, suffix: String): void\l- setStream(inputStreamReader: InputStreamReader): void\l- rewind(): void\l- getCurrentChar(): char\l- getColumnNumber(): int\l+ getLineNumber(): int\l}"
+]
+Entry [
+label = "{Entry|+ value: String\l+ key: int\l+ next: Entry\l|+ Entry(value: String, key: int, next: Entry)\l}"
+]
+Writer [
+label = "{Writer|# fPrintChars: boolean\l# fPrinter: PrintWriter\l@+! NOTIFY_CHAR_REFS: String\l@#! AUGMENTATIONS: String\l# fSeenHttpEquiv: boolean\l# fElementDepth: int\l@+! NOTIFY_HTML_BUILTIN_REFS: String\l# fSeenRootElement: boolean\l#@! FILTERS: String\l# fEncoding: String\l# fNormalize: boolean\l|+ Writer()\l# printStartElement(attributes: XMLAttributes, element: QName): void\l# printEntity(name: String): void\l+ startElement(element: QName, augs: Augmentations, attributes: XMLAttributes): void\l+ characters(augs: Augmentations, text: XMLString): void\l+ comment(text: XMLString, augs: Augmentations): void\l-@ printUsage(): void\l+ startDocument(nscontext: NamespaceContext, encoding: String, locator: XMLLocator, augs: Augmentations): void\l@+ main(argv: Array1[String]): void\l+ Writer(writer: Writer, encoding: String)\l+ endGeneralEntity(augs: Augmentations, name: String): void\l# printEndElement(element: QName): void\l+ endElement(augs: Augmentations, element: QName): void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations): void\l# printAttributeValue(text: String): void\l+ startGeneralEntity(augs: Augmentations, id: XMLResourceIdentifier, name: String, encoding: String): void\l+ emptyElement(element: QName, attributes: XMLAttributes, augs: Augmentations): void\l+ Writer(outputStream: OutputStream, encoding: String)\l# printCharacters(text: XMLString, normalize: boolean): void\l}"
+]
+DefaultFilter [
+label = "{DefaultFilter|# fDocumentSource: XMLDocumentSource\l# fDocumentHandler: XMLDocumentHandler\l|+ getDocumentSource(): XMLDocumentSource\l+ getDocumentHandler(): XMLDocumentHandler\l+ startElement(element: QName, augs: Augmentations, attributes: XMLAttributes): void\l+ getRecognizedFeatures(): Array1[String]\l+ characters(augs: Augmentations, text: XMLString): void\l+ comment(text: XMLString, augs: Augmentations): void\l+ processingInstruction(data: XMLString, target: String, augs: Augmentations): void\l+ setFeature(featureId: String, state: boolean): void\l+ startDocument(nscontext: NamespaceContext, encoding: String, locator: XMLLocator, augs: Augmentations): void\l+ endDocument(augs: Augmentations): void\l+ getPropertyDefault(propertyId: String): object\l+ endGeneralEntity(augs: Augmentations, name: String): void\l+ xmlDecl(standalone: String, encoding: String, augs: Augmentations, version: String): void\l+ setDocumentHandler(handler: XMLDocumentHandler): void\l+ getRecognizedProperties(): Array1[String]\l#@ merge(array2: Array1[String], array1: Array1[String]): Array1[String]\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations): void\l+ endElement(augs: Augmentations, element: QName): void\l+ startCDATA(augs: Augmentations): void\l+ getFeatureDefault(featureId: String): Boolean\l+ ignorableWhitespace(augs: Augmentations, text: XMLString): void\l+ doctypeDecl(root: String, augs: Augmentations, systemId: String, publicId: String): void\l+ startGeneralEntity(augs: Augmentations, id: XMLResourceIdentifier, name: String, encoding: String): void\l+ endCDATA(augs: Augmentations): void\l+ emptyElement(element: QName, attributes: XMLAttributes, augs: Augmentations): void\l+ setDocumentSource(source: XMLDocumentSource): void\l+ endPrefixMapping(prefix: String, augs: Augmentations): void\l+ textDecl(encoding: String, augs: Augmentations, version: String): void\l+ setProperty(value: object, propertyId: String): void\l+ reset(componentManager: XMLComponentManager): void\l+ startPrefixMapping(prefix: String, augs: Augmentations, uri: String): void\l}"
+]
+ErrorReporter [
+label = "{ErrorReporter|# fLastLocale: Locale\l# fErrorMessages: ResourceBundle\l|# formatSimpleMessage(args: Array1[object], key: String): String\l+ formatMessage(args: Array1[object], key: String): String\l# createException(key: String, args: Array1[object]): XMLParseException\l+ reportError(key: String, args: Array1[object]): void\l+ reportWarning(args: Array1[object], key: String): void\l}"
+]
+HTMLTagBalancer [
+label = "{HTMLTagBalancer|-@! RECOGNIZED_PROPERTIES_DEFAULTS: Array1[object]\l-@! RECOGNIZED_FEATURES: Array1[String]\l# tagBalancingListener: HTMLTagBalancingListener\l# fReportErrors: boolean\l- forcedEndElement_: boolean\l@#! IGNORE_OUTSIDE_CONTENT: String\l# fSeenDoctype: boolean\l# fNamesAttrs: short\l-! fInfosetAugs: HTMLAugmentations\l# fNamespaces: boolean\l-@! RECOGNIZED_FEATURES_DEFAULTS: Array1[Boolean]\l-@! RECOGNIZED_PROPERTIES: Array1[String]\l#! fInlineStack: InfoStack\l# fDocumentHandler: XMLDocumentHandler\l# fAugmentations: boolean\l@#! NAMES_LOWERCASE: short\l- fragmentContextStack_: Array1[QName]\l- fragmentContextStackSize_: int\l@#! DOCUMENT_FRAGMENT: String\l#! fElementStack: InfoStack\l@#! DOCUMENT_FRAGMENT_DEPRECATED: String\l@#! NAMES_ATTRS: String\l@#! ERROR_REPORTER: String\l@#! SYNTHESIZED_ITEM: HTMLEventInfo\l-! fQName: QName\l# fSeenAnything: boolean\l# fSeenRootElementEnd: boolean\l# fNamesElems: short\l- endElementsBuffer_: List\l# fDocumentSource: XMLDocumentSource\l#@! NAMES_UPPERCASE: short\l@+! FRAGMENT_CONTEXT_STACK: String\l-! fEmptyAttrs: XMLAttributes\l#@! NAMES_NO_CHANGE: short\l#@! REPORT_ERRORS: String\l# fErrorReporter: HTMLErrorReporter\l# fOpenedForm: boolean\l# fDocumentFragment: boolean\l#@! AUGMENTATIONS: String\l#@! NAMES_MATCH: short\l- lostText_: LostText\l# fSeenHeadElement: boolean\l#@! NAMES_ELEMS: String\l- forcedStartElement_: boolean\l# fIgnoreOutsideContent: boolean\l# fSeenRootElement: boolean\l# fSeenBodyElement: boolean\l#@! NAMESPACES: String\l|+ getRecognizedFeatures(): Array1[String]\l+ startDocument(nscontext: NamespaceContext, encoding: String, locator: XMLLocator, augs: Augmentations): void\l@#! modifyName(mode: short, name: String): String\l#! callEndElement(augs: Augmentations, element: QName): void\l+ xmlDecl(standalone: String, encoding: String, augs: Augmentations, version: String): void\l+ getRecognizedProperties(): Array1[String]\l+ endElement(augs: Augmentations, element: QName): void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations): void\l+ startCDATA(augs: Augmentations): void\l- notifyDiscardedEndElement(augs: Augmentations, element: QName): void\l+ getFeatureDefault(featureId: String): Boolean\l+ ignorableWhitespace(augs: Augmentations, text: XMLString): void\l+ startGeneralEntity(augs: Augmentations, name: String, id: XMLResourceIdentifier, encoding: String): void\l+ endCDATA(augs: Augmentations): void\l+ textDecl(encoding: String, augs: Augmentations, version: String): void\l setTagBalancingListener(tagBalancingListener: HTMLTagBalancingListener): void\l+ reset(manager: XMLComponentManager): void\l+ startPrefixMapping(prefix: String, augs: Augmentations, uri: String): void\l+ getDocumentSource(): XMLDocumentSource\l#! callStartElement(augs: Augmentations, attrs: XMLAttributes, element: QName): void\l# getParentDepth(parents: Array1[Element], bounds: short): int\l- forceStartBody(): void\l+ getDocumentHandler(): XMLDocumentHandler\l+ startElement(augs: Augmentations, elem: QName, attrs: XMLAttributes): void\l+ characters(augs: Augmentations, text: XMLString): void\l- consumeBufferedEndElements(): void\l- notifyDiscardedStartElement(augs: Augmentations, elem: QName, attrs: XMLAttributes): void\l+ comment(text: XMLString, augs: Augmentations): void\l+ setFeature(state: boolean, featureId: String): void\l+ processingInstruction(data: XMLString, target: String, augs: Augmentations): void\l+ endDocument(augs: Augmentations): void\l#! emptyAttributes(): XMLAttributes\l+ getPropertyDefault(propertyId: String): object\l+ endGeneralEntity(augs: Augmentations, name: String): void\l+ setDocumentHandler(handler: XMLDocumentHandler): void\l- createQName(tagName: String): QName\l+ doctypeDecl(augs: Augmentations, rootElementName: String, systemId: String, publicId: String): void\l#@! getNamesValue(value: String): short\l#! synthesizedAugs(): Augmentations\l- consumeEarlyTextIfNeeded(): void\l#! getElementDepth(element: Element): int\l+ emptyElement(element: QName, augs: Augmentations, elem: Element, attrs: XMLAttributes): void\l# getElement(elementName: QName): Element\l+ setDocumentSource(source: XMLDocumentSource): void\l+ endPrefixMapping(prefix: String, augs: Augmentations): void\l- forceStartElement(attrs: XMLAttributes, augs: Augmentations, elem: QName): boolean\l+ setProperty(value: object, propertyId: String): void\l}"
+]
+ObjectFactory [
+label = "{ObjectFactory|-@ fLastModified: long\l-@ fXercesProperties: Properties\l-@! DEFAULT_PROPERTIES_FILENAME: String\l-@! DEFAULT_LINE_LENGTH: int\l-@! DEBUG: boolean\l|-@ findJarServiceProvider(factoryId: String): object\l@ findClassLoader(): ClassLoader\l@ findProviderClass(doFallback: boolean, cl: ClassLoader, className: String): Class\l-@ debugPrintln(msg: String): void\l@ createObject(propertiesFilename: String, fallbackClassName: String, factoryId: String): object\l@ createObject(factoryId: String, fallbackClassName: String): object\l@ newInstance(className: String, doFallback: boolean, cl: ClassLoader): object\l}"
+]
+SAXParser [
+label = "{SAXParser||+ SAXParser()\l}"
+]
+SecuritySupport12 [
+label = "{SecuritySupport12|| getSystemClassLoader(): ClassLoader\l getContextClassLoader(): ClassLoader\l getParentClassLoader(cl: ClassLoader): ClassLoader\l getLastModified(f: File): long\l getFileInputStream(file: File): FileInputStream\l getResourceAsStream(name: String, cl: ClassLoader): InputStream\l getFileExists(f: File): boolean\l getSystemProperty(propName: String): String\l}"
+]
+NamespaceSupport [
+label = "{NamespaceSupport|# fTop: int\l# fEntries: Array1[Entry]\l# fLevels: Array1[int]\l|+ reset(): void\l+ getURI(prefix: String): String\l+ getParentContext(): NamespaceContext\l+ popContext(): void\l+ getDeclaredPrefixCount(): int\l+ getDeclaredPrefixAt(index: int): String\l+ NamespaceSupport()\l+ getAllPrefixes(): Enumeration\l+ pushContext(): void\l+ declarePrefix(prefix: String, uri: String): boolean\l+ getPrefix(uri: String): String\l}"
+]
+InfoStack [
+label = "{InfoStack|+ data: Array1[Info]\l+ top: int\l|+ pop(): Info\l+ push(info: Info): void\l+ toString(): String\l+ peek(): Info\l}"
+]
+Identity [
+label = "{Identity|#@! FILTERS: String\l@#! AUGMENTATIONS: String\l|+ endElement(augs: Augmentations, element: QName): void\l+ startElement(element: QName, attributes: XMLAttributes, augs: Augmentations): void\l@# synthesized(augs: Augmentations): boolean\l+ emptyElement(attributes: XMLAttributes, augs: Augmentations, element: QName): void\l}"
+]
+NamespaceBinder [
+label = "{NamespaceBinder|#@! NAMES_UPPERCASE: short\l#! fNamespaceContext: NamespaceSupport\l@#! NAMES_LOWERCASE: short\l#@! NAMES_NO_CHANGE: short\l# fInsertNamespaces: boolean\l-@! FEATURE_DEFAULTS: Array1[Boolean]\l@+! XHTML_1_0_URI: String\l@#! NAMESPACES: String\l-! fQName: QName\l# fNamespacePrefixes: boolean\l#@! NAMES_ELEMS: String\l#@! OVERRIDE_NAMESPACES: String\l@#! NAMES_ATTRS: String\l# fOverrideNamespaces: boolean\l@+! XMLNS_URI: String\l# fNamespacesURI: String\l-@! RECOGNIZED_FEATURES: Array1[String]\l@+! XML_URI: String\l# fNamesElems: short\l# fNamesAttrs: short\l#@! NAMESPACES_URI: String\l# fNamespaces: boolean\l#@! INSERT_NAMESPACES: String\l-@! PROPERTY_DEFAULTS: Array1[object]\l-@! RECOGNIZED_PROPERTIES: Array1[String]\l|+ reset(manager: XMLComponentManager): void\l+ getRecognizedProperties(): Array1[String]\l+ endElement(element: QName, augs: Augmentations): void\l+ getFeatureDefault(featureId: String): Boolean\l+ getPropertyDefault(propertyId: String): object\l# bindNamespaces(element: QName, attrs: XMLAttributes): void\l#@! getNamesValue(value: String): short\l@#! modifyName(name: String, mode: short): String\l+ startElement(element: QName, augs: Augmentations, attrs: XMLAttributes): void\l+ getRecognizedFeatures(): Array1[String]\l#@ splitQName(qname: QName): void\l+ startDocument(encoding: String, augs: Augmentations, nscontext: NamespaceContext, locator: XMLLocator): void\l+ emptyElement(attrs: XMLAttributes, augs: Augmentations, element: QName): void\l}"
+]
+PlaybackInputStream [
+label = "{PlaybackInputStream|# fDetected: boolean\l# fByteLength: int\l# fPlayback: boolean\l# fByteOffset: int\l# fByteBuffer: Array1[byte]\l-@! DEBUG_PLAYBACK: boolean\l+ fPushbackLength: int\l# fCleared: boolean\l+ fPushbackOffset: int\l|+ clear(): void\l+ read(array: Array1[byte], length: int, offset: int): int\l+ read(): int\l+ detectEncoding(encodings: Array1[String]): void\l+ read(array: Array1[byte]): int\l+ playback(): void\l+ PlaybackInputStream(in: InputStream)\l}"
+]
+XercesBridge_2_0 [
+label = "{XercesBridge_2_0||+ getVersion(): String\l+ XMLDocumentHandler_startPrefixMapping(documentHandler: XMLDocumentHandler, uri: String, prefix: String, augs: Augmentations): void\l# XercesBridge_2_0()\l+ XMLDocumentHandler_startDocument(documentHandler: XMLDocumentHandler, encoding: String, nscontext: NamespaceContext, augs: Augmentations, locator: XMLLocator): void\l+ XMLDocumentHandler_endPrefixMapping(prefix: String, augs: Augmentations, documentHandler: XMLDocumentHandler): void\l}"
+]
+Entry [
+label = "{Entry|+ prefix: String\l+ uri: String\l|+ Entry(uri: String, prefix: String)\l}"
+]
+ConfigurationError [
+label = "{ConfigurationError|- exception: Exception\l| getException(): Exception\l ConfigurationError(msg: String, x: Exception)\l}"
+]
+XercesBridge_2_1 [
+label = "{XercesBridge_2_1||+ getVersion(): String\l+ XercesBridge_2_1()\l+ XMLDocumentHandler_startDocument(documentHandler: XMLDocumentHandler, nscontext: NamespaceContext, encoding: String, locator: XMLLocator, augs: Augmentations): void\l+ XMLDocumentFilter_setDocumentSource(filter: XMLDocumentFilter, lastSource: XMLDocumentSource): void\l}"
+]
+XercesBridge_2_2 [
+label = "{XercesBridge_2_2||+ XMLDocumentHandler_startPrefixMapping(documentHandler: XMLDocumentHandler, uri: String, prefix: String, augs: Augmentations): void\l+ XMLDocumentHandler_startDocument(documentHandler: XMLDocumentHandler, nscontext: NamespaceContext, encoding: String, locator: XMLLocator, augs: Augmentations): void\l# XercesBridge_2_2()\l+ getVersion(): String\l+ XMLDocumentFilter_setDocumentSource(filter: XMLDocumentFilter, lastSource: XMLDocumentSource): void\l}"
+]
+Info [
+label = "{Info|+ element: Element\l+ qname: QName\l+ attributes: XMLAttributes\l|+ toString(): String\l+ Info(attributes: XMLAttributes, element: Element, qname: QName)\l+ Info(qname: QName, element: Element)\l}"
+]
+DOMFragmentParser [
+label = "{DOMFragmentParser|@#! RECOGNIZED_FEATURES: Array1[String]\l# fCurrentNode: Node\l#@! DOCUMENT_FRAGMENT: String\l#@! ERROR_HANDLER: String\l# fInCDATASection: boolean\l# fDocumentFragment: DocumentFragment\l# fDocument: Document\l# fParserConfiguration: XMLParserConfiguration\l@#! RECOGNIZED_PROPERTIES: Array1[String]\l# fDocumentSource: XMLDocumentSource\l@#! CURRENT_ELEMENT_NODE: String\l|+ startDocument(encoding: String, locator: XMLLocator, augs: Augmentations): void\l+ doctypeDecl(root: String, pubid: String, sysid: String, augs: Augmentations): void\l+ startGeneralEntity(encoding: String, augs: Augmentations, name: String, id: XMLResourceIdentifier): void\l+ ignorableWhitespace(augs: Augmentations, text: XMLString): void\l+ DOMFragmentParser()\l+ getErrorHandler(): ErrorHandler\l+ endCDATA(augs: Augmentations): void\l+ emptyElement(element: QName, augs: Augmentations, attrs: XMLAttributes): void\l+ setDocumentSource(source: XMLDocumentSource): void\l+ textDecl(encoding: String, augs: Augmentations, version: String): void\l+ endPrefixMapping(prefix: String, augs: Augmentations): void\l+ setProperty(value: object, propertyId: String): void\l+ startPrefixMapping(prefix: String, augs: Augmentations, uri: String): void\l+ getDocumentSource(): XMLDocumentSource\l+ getFeature(featureId: String): boolean\l+ startElement(augs: Augmentations, attrs: XMLAttributes, element: QName): void\l+ characters(augs: Augmentations, text: XMLString): void\l+ getProperty(propertyId: String): object\l+ startDocument(nscontext: NamespaceContext, locator: XMLLocator, encoding: String, augs: Augmentations): void\l+ processingInstruction(data: XMLString, target: String, augs: Augmentations): void\l+ comment(text: XMLString, augs: Augmentations): void\l+ setFeature(state: boolean, featureId: String): void\l+ endDocument(augs: Augmentations): void\l+ xmlDecl(standalone: String, encoding: String, augs: Augmentations, version: String): void\l+ parse(fragment: DocumentFragment, source: InputSource): void\l+ endGeneralEntity(augs: Augmentations, name: String): void\l+ parse(fragment: DocumentFragment, systemId: String): void\l+ endElement(augs: Augmentations, element: QName): void\l+ startCDATA(augs: Augmentations): void\l+ setErrorHandler(errorHandler: ErrorHandler): void\l}"
+]
+XercesBridge_2_3 [
+label = "{XercesBridge_2_3||+ NamespaceContext_declarePrefix(ns: String, namespaceContext: NamespaceContext, avalue: String): void\l+ XercesBridge_2_3()\l}"
+]
+SynthesizedItem [
+label = "{SynthesizedItem||+ getEndCharacterOffset(): int\l+ getBeginLineNumber(): int\l+ toString(): String\l+ isSynthesized(): boolean\l+ getEndColumnNumber(): int\l+ getBeginCharacterOffset(): int\l+ getEndLineNumber(): int\l+ getBeginColumnNumber(): int\l}"
+]
+HTMLElements [
+label = "{HTMLElements|@+! RB: short\l@+! DEL: short\l@+! SPACER: short\l@+! OPTGROUP: short\l@+! WBR: short\l@+! HTML: short\l@+! SMALL: short\l@+! LISTING: short\l@+! FIELDSET: short\l@+! EM: short\l@+! NOFRAMES: short\l@+! MULTICOL: short\l@+! COL: short\l@+! IFRAME: short\l@+! BIG: short\l@+! BODY: short\l@+! BASEFONT: short\l@+! PLAINTEXT: short\l@+! U: short\l@+! LABEL: short\l@+! ADDRESS: short\l@+! UL: short\l@+! S: short\l@+! STRONG: short\l@+! Q: short\l@+! P: short\l@+! INS: short\l@+! KEYGEN: short\l@+! KBD: short\l@+! BDO: short\l@+! FRAME: short\l@+! DT: short\l@+! BLOCKQUOTE: short\l@+! BGSOUND: short\l@+! AREA: short\l@+! LEGEND: short\l@+! I: short\l@+! ISINDEX: short\l@+! HR: short\l@+! CAPTION: short\l@+! DL: short\l@+! ILAYER: short\l@+! B: short\l@+! TFOOT: short\l@+! META: short\l@+! A: short\l@+! RTC: short\l@+! COMMENT: short\l@+! DD: short\l@+! MAP: short\l@+! TT: short\l@+! BLINK: short\l@+! COLGROUP: short\l@+! TR: short\l@+! EMBED: short\l@+! LI: short\l@+! SELECT: short\l@+! TITLE: short\l@+! LINK: short\l@+! THEAD: short\l#@! ELEMENTS: ElementList\l@+! LAYER: short\l@+! OPTION: short\l@+! TH: short\l@+! SUP: short\l@+! TABLE: short\l@+! SAMP: short\l#@! ELEMENTS_ARRAY: Array2[Array1[Element]]\l@+! TD: short\l@+! UNKNOWN: short\l@+! H6: short\l@+! INPUT: short\l@+! CODE: short\l@+! H5: short\l@+! H4: short\l@+! H3: short\l@+! H2: short\l@+! H1: short\l@+! IMG: short\l@+! ACRONYM: short\l@+! NO_SUCH_ELEMENT: Element\l@+! SUB: short\l@+! HEAD: short\l@+! MENU: short\l@+! OL: short\l@+! NOEMBED: short\l@+! APPLET: short\l@+! RUBY: short\l@+! RBC: short\l@+! CITE: short\l@+! CENTER: short\l@+! STYLE: short\l@+! FRAMESET: short\l@+! NOLAYER: short\l@+! NOBR: short\l@+! BASE: short\l@+! DFN: short\l@+! BR: short\l@+! FONT: short\l@+! NEXTID: short\l@+! NOSCRIPT: short\l@+! SCRIPT: short\l@+! VAR: short\l@+! SPAN: short\l@+! PRE: short\l@+! MARQUEE: short\l@+! FORM: short\l@+! RT: short\l@+! OBJECT: short\l@+! XMP: short\l@+! RP: short\l@+! XML: short\l@+! TEXTAREA: short\l@+! TBODY: short\l@+! DIV: short\l@+! SOUND: short\l@+! BUTTON: short\l@+! STRIKE: short\l@+! PARAM: short\l@+! DIR: short\l@+! ABBR: short\l|@+! getElement(code: short): Element\l@+! getElement(ename: String): Element\l@+! getElement(ename: String, element: Element): Element\l}"
+]
+LocationItem [
+label = "{LocationItem|# fBeginColumnNumber: int\l# fEndLineNumber: int\l# fBeginCharacterOffset: int\l# fBeginLineNumber: int\l# fEndCharacterOffset: int\l# fEndColumnNumber: int\l|+ isSynthesized(): boolean\l LocationItem(other: LocationItem)\l+ getEndColumnNumber(): int\l+ getEndLineNumber(): int\l+ getBeginColumnNumber(): int\l+ getBeginCharacterOffset(): int\l+ getBeginLineNumber(): int\l+ getEndCharacterOffset(): int\l+ LocationItem()\l+ setValues(endColumn: int, beginColumn: int, endLine: int, endOffset: int, beginLine: int, beginOffset: int): void\l+ toString(): String\l}"
+]
+ElementRemover [
+label = "{ElementRemover|# fRemovedElements: Hashtable\l# fAcceptedElements: Hashtable\l# fRemovalElementDepth: int\l# fElementDepth: int\l@#! NULL: object\l|+ startPrefixMapping(prefix: String, augs: Augmentations, uri: String): void\l# handleOpenTag(attributes: XMLAttributes, element: QName): boolean\l+ startElement(element: QName, augs: Augmentations, attributes: XMLAttributes): void\l+ characters(augs: Augmentations, text: XMLString): void\l+ comment(text: XMLString, augs: Augmentations): void\l+ processingInstruction(data: XMLString, target: String, augs: Augmentations): void\l+ startDocument(nscontext: NamespaceContext, encoding: String, augs: Augmentations, locator: XMLLocator): void\l+ endGeneralEntity(augs: Augmentations, name: String): void\l+ acceptElement(attributes: Array1[String], element: String): void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations): void\l+ endElement(augs: Augmentations, element: QName): void\l# elementAccepted(element: String): boolean\l+ ignorableWhitespace(augs: Augmentations, text: XMLString): void\l+ startCDATA(augs: Augmentations): void\l+ startGeneralEntity(augs: Augmentations, id: XMLResourceIdentifier, name: String, encoding: String): void\l+ endCDATA(augs: Augmentations): void\l+ emptyElement(attributes: XMLAttributes, element: QName, augs: Augmentations): void\l+ endPrefixMapping(prefix: String, augs: Augmentations): void\l# elementRemoved(element: String): boolean\l+ removeElement(element: String): void\l+ textDecl(encoding: String, augs: Augmentations, version: String): void\l}"
+]
+HTMLAugmentations [
+label = "{HTMLAugmentations|#! fItems: Hashtable\l|+ clear(): void\l+ HTMLAugmentations()\l+ putItem(key: String, item: object): object\l+ keys(): Enumeration\l+ removeAllItems(): void\l+ removeItem(key: String): object\l+ getItem(key: String): object\l HTMLAugmentations(augs: Augmentations)\l}"
+]
+DOMParser [
+label = "{DOMParser||+ doctypeDecl(sysid: String, pubid: String, root: String, augs: Augmentations): void\l+ DOMParser()\l-@ getParserSubVersion(): int\l}"
+]
+HTMLEntities [
+label = "{HTMLEntities|@#! ENTITIES: Properties\l@#! SEITITNE: IntProperties\l|-@ load0(filename: String): void\l@+ get(c: int): String\l@+ get(name: String): int\l}"
+]
+ElementList [
+label = "{ElementList|+ data: Array1[Element]\l+ size: int\l|+ addElement(element: Element): void\l}"
+]
+HTMLConfiguration [
+label = "{HTMLConfiguration|#@! ERROR_DOMAIN: String\l# fLocale: Locale\l#@! NAMESPACES: String\l@#! ERROR_REPORTER: String\l# fDTDHandler: XMLDTDHandler\l@#! SIMPLE_ERROR_FORMAT: String\l@#! FILTERS: String\l# fCloseStream: boolean\l@#! REPORT_ERRORS: String\l-@! DOCSOURCE: Array1[Class]\l#! fTagBalancer: HTMLTagBalancer\l# fDocumentHandler: XMLDocumentHandler\l# fEntityResolver: XMLEntityResolver\l@#! AUGMENTATIONS: String\l@#! NAMES_ELEMS: String\l#@ XML4J_4_0_x: boolean\l# fDTDContentModelHandler: XMLDTDContentModelHandler\l#@! NAMES_ATTRS: String\l#! fErrorReporter: HTMLErrorReporter\l#@ XERCES_2_0_1: boolean\l# fErrorHandler: XMLErrorHandler\l#@ XERCES_2_0_0: boolean\l#! fHTMLComponents: Vector\l#! fNamespaceBinder: NamespaceBinder\l#! fDocumentScanner: HTMLScanner\l@#! BALANCE_TAGS: String\l|# createDocumentScanner(): HTMLScanner\l+ setProperty(propertyId: String, value: object): void\l+ cleanup(): void\l+ setLocale(locale: Locale): void\l+ getEntityResolver(): XMLEntityResolver\l+ getDocumentHandler(): XMLDocumentHandler\l+ getDTDContentModelHandler(): XMLDTDContentModelHandler\l+ parse(complete: boolean): boolean\l+ setFeature(state: boolean, featureId: String): void\l+ setDTDHandler(handler: XMLDTDHandler): void\l+ getErrorHandler(): XMLErrorHandler\l+ setDTDContentModelHandler(handler: XMLDTDContentModelHandler): void\l+ setInputSource(inputSource: XMLInputSource): void\l+ pushInputSource(inputSource: XMLInputSource): void\l+ setDocumentHandler(handler: XMLDocumentHandler): void\l+ evaluateInputSource(inputSource: XMLInputSource): void\l+ setEntityResolver(resolver: XMLEntityResolver): void\l+ setErrorHandler(handler: XMLErrorHandler): void\l+ HTMLConfiguration()\l+ getLocale(): Locale\l# reset(): void\l# addComponent(component: HTMLComponent): void\l+ parse(source: XMLInputSource): void\l+ getDTDHandler(): XMLDTDHandler\l}"
+]
+Element [
+label = "{Element|+ code: short\l+ name: String\l@+! BLOCK: int\l@+! EMPTY: int\l+ closes: Array1[short]\l+ parent: Array1[Element]\l+ parentCodes: Array1[short]\l@+! INLINE: int\l@+! SPECIAL: int\l+ flags: int\l+ bounds: short\l@+! CONTAINER: int\l|+! isInline(): boolean\l+! isBlock(): boolean\l+! isEmpty(): boolean\l+! isSpecial(): boolean\l+ equals(o: object): boolean\l+ toString(): String\l+ isParent(element: Element): boolean\l+ hashCode(): int\l+ Element(flags: int, code: short, closes: Array1[short], name: String, parent: short)\l+ closes(tag: short): boolean\l+ Element(code: short, flags: int, closes: Array1[short], name: String, parent: short, bounds: short)\l+ Element(code: short, name: String, parents: Array1[short], closes: Array1[short], flags: int)\l+ Element(code: short, parents: Array1[short], name: String, closes: Array1[short], flags: int, bounds: short)\l+! isContainer(): boolean\l}"
+]
+XercesBridge [
+label = "{XercesBridge|-@! instance: XercesBridge\l|-@ makeInstance(): XercesBridge\l?+ getVersion(): String\l+ XMLDocumentFilter_setDocumentSource(filter: XMLDocumentFilter, lastSource: XMLDocumentSource): void\l@+ getInstance(): XercesBridge\l-@ newInstanceOrNull(className: String): XercesBridge\l+ XMLDocumentHandler_endPrefixMapping(documentHandler: XMLDocumentHandler, prefix: String, augs: Augmentations): void\l+ XMLDocumentHandler_startPrefixMapping(prefix: String, documentHandler: XMLDocumentHandler, augs: Augmentations, uri: String): void\l?+ XMLDocumentHandler_startDocument(locator: XMLLocator, encoding: String, augs: Augmentations, documentHandler: XMLDocumentHandler, nscontext: NamespaceContext): void\l+ NamespaceContext_declarePrefix(ns: String, namespaceContext: NamespaceContext, avalue: String): void\l}"
+]
+LostText [
+label = "{LostText|-! entries: List\l|+ isEmpty(): boolean\l+ refeed(tagBalancer: XMLDocumentHandler): void\l+ add(augs: Augmentations, text: XMLString): void\l}"
+]
+SecuritySupport [
+label = "{SecuritySupport|-@! securitySupport: object\l| getContextClassLoader(): ClassLoader\l getFileInputStream(file: File): FileInputStream\l getParentClassLoader(cl: ClassLoader): ClassLoader\l getLastModified(f: File): long\l getResourceAsStream(name: String, cl: ClassLoader): InputStream\l@ getInstance(): SecuritySupport\l getFileExists(f: File): boolean\l getSystemProperty(propName: String): String\l getSystemClassLoader(): ClassLoader\l}"
+]
+Entry [
+label = "{Entry|- text_: XMLString\l- augs_: Augmentations\l|+ Entry(text: XMLString, augs: Augmentations)\l}"
+]
+HTMLScanner [
+label = "{HTMLScanner|@+! HTML_4_01_STRICT_PUBID: String\l-@! ENTITY_CHARS: BitSet\l@+! OVERRIDE_DOCTYPE: String\l-! fResourceId: XMLResourceIdentifierImpl\l#@! SYNTHESIZED_ITEM: HTMLEventInfo\l#@! NAMES_ELEMS: String\l# fDoctypePubid: String\l# fIso8859Encoding: boolean\l# fContentScanner: Scanner\l@#! STATE_CONTENT: short\l@#! DOCTYPE_PUBID: String\l# fCDATASections: boolean\l@+! PARSE_NOSCRIPT_CONTENT: String\l# fEndCharacterOffset: int\l@+! IGNORE_SPECIFIED_CHARSET: String\l-@! RECOGNIZED_FEATURES: Array1[String]\l# fParseNoFramesContent: boolean\l-@! DEBUG_SCANNER_STATE: boolean\l-@! DEBUG_BUFFER: boolean\l@+! STYLE_STRIP_CDATA_DELIMS: String\l# fNamesAttrs: short\l# fNotifyHtmlBuiltinRefs: boolean\l-@! RECOGNIZED_PROPERTIES: Array1[String]\l@#! NAMES_LOWERCASE: short\l# fElementCount: int\l# fOverrideDoctype: boolean\l@+! HTML_4_01_FRAMESET_SYSID: String\l#! fCurrentEntityStack: Stack\l-! fSingleBoolean: Array1[boolean]\l# fDefaultIANAEncoding: String\l@+! STYLE_STRIP_COMMENT_DELIMS: String\l# fByteStream: PlaybackInputStream\l-! fLocationItem: LocationItem\l# fScanner: Scanner\l# fStyleStripCommentDelims: boolean\l# fCurrentEntity: CurrentEntity\l#@! NAMES_ATTRS: String\l@+! HTML_4_01_STRICT_SYSID: String\l@#! DEFAULT_ENCODING: String\l# fNotifyCharRefs: boolean\l#@! DEBUG_CALLBACKS: boolean\l-@! RECOGNIZED_FEATURES_DEFAULTS: Array1[Boolean]\l# fDoctypeSysid: String\l@#! DOCTYPE_SYSID: String\l@#! NAMES_NO_CHANGE: short\l@#! REPORT_ERRORS: String\l# fBeginLineNumber: int\l-@! DEBUG_SCANNER: boolean\l-! fStringBuffer2: XMLStringBuffer\l@+! SCRIPT_STRIP_CDATA_DELIMS: String\l@+! NOTIFY_HTML_BUILTIN_REFS: String\l#@! AUGMENTATIONS: String\l@#! ERROR_REPORTER: String\l@+! HTML_4_01_TRANSITIONAL_PUBID: String\l# fSpecialScanner: SpecialScanner\l# fFixWindowsCharRefs: boolean\l# fScriptStripCDATADelims: boolean\l@+! NOTIFY_CHAR_REFS: String\l# fEndLineNumber: int\l# fReportErrors: boolean\l@#! DEFAULT_BUFFER_SIZE: int\l@+! FIX_MSWINDOWS_REFS: String\l@+! INSERT_DOCTYPE: String\l# fParseNoScriptContent: boolean\l@+! SCRIPT_STRIP_COMMENT_DELIMS: String\l#@! STATE_START_DOCUMENT: short\l@+! NOTIFY_XML_BUILTIN_REFS: String\l# fBeginCharacterOffset: int\l# fScannerState: short\l# fErrorReporter: HTMLErrorReporter\l# fBeginColumnNumber: int\l#! fStringBuffer: XMLStringBuffer\l@+! CDATA_SECTIONS: String\l@#! STATE_MARKUP_BRACKET: short\l# fNormalizeAttributes: boolean\l# fIgnoreSpecifiedCharset: boolean\l# fElementDepth: int\l-@! RECOGNIZED_PROPERTIES_DEFAULTS: Array1[object]\l-! fNonNormAttr: XMLStringBuffer\l# fEndColumnNumber: int\l# fInsertDoctype: boolean\l# fIANAEncoding: String\l-! fInfosetAugs: HTMLAugmentations\l@+! HTML_4_01_FRAMESET_PUBID: String\l@#! STATE_END_DOCUMENT: short\l# fNamesElems: short\l-@! DEBUG_CHARSET: boolean\l# fAugmentations: boolean\l# fDocumentHandler: XMLDocumentHandler\l@#! NORMALIZE_ATTRIBUTES: String\l@+! HTML_4_01_TRANSITIONAL_SYSID: String\l# fScriptStripCommentDelims: boolean\l# fNotifyXmlBuiltinRefs: boolean\l@#! NAMES_UPPERCASE: short\l# fJavaEncoding: String\l# fStyleStripCDATADelims: boolean\l|#! resourceId(): XMLResourceIdentifier\l# fixWindowsCharacter(origChar: int): int\l@# builtinXmlRef(name: String): boolean\l@#! getNamesValue(value: String): short\l#! synthesizedAugs(): Augmentations\l+ cleanup(closeall: boolean): void\l+ getLiteralSystemId(): String\l+ getExpandedSystemId(): String\l+ getXMLVersion(): String\l- getReader(inputSource: XMLInputSource): Reader\l+ setInputSource(source: XMLInputSource): void\l+ getColumnNumber(): int\l# scanDoctype(): void\l# setScannerState(state: short): void\l# skipNewlines(): int\l# skip(s: String, caseSensitive: boolean): boolean\l# scanLiteral(): String\l+ scanDocument(complete: boolean): boolean\l@ reduceToContent(endMarker: String, buffer: XMLStringBuffer, startMarker: String): void\l+ getDocumentHandler(): XMLDocumentHandler\l# setScanner(scanner: Scanner): void\l#! locationAugs(): Augmentations\l+ setFeature(state: boolean, featureId: String): void\l- endsWith(string: String, buffer: XMLStringBuffer): boolean\l+ getRecognizedFeatures(): Array1[String]\l@# getValue(aname: String, attrs: XMLAttributes): String\l+ getPropertyDefault(propertyId: String): object\l+ pushInputSource(inputSource: XMLInputSource): void\l- endCommentAvailable(): boolean\l+ evaluateInputSource(inputSource: XMLInputSource): void\l+ setDocumentHandler(handler: XMLDocumentHandler): void\l@+ expandSystemId(baseSystemId: String, systemId: String): String\l+ getRecognizedProperties(): Array1[String]\l# scanName(): String\l+ getFeatureDefault(featureId: String): Boolean\l+ getCharacterOffset(): int\l# readPreservingBufferContent(): int\l+ getPublicId(): String\l+ setProperty(value: object, propertyId: String): void\l isEncodingCompatible(encoding2: String, encoding1: String): boolean\l+ getLineNumber(): int\l+ getBaseSystemId(): String\l+ reset(manager: XMLComponentManager): void\l# scanEntityRef(content: boolean, str: XMLStringBuffer): int\l# read(): int\l+ getEncoding(): String\l#@ fixURI(str: String): String\l#@! modifyName(name: String, mode: short): String\l# skipSpaces(): boolean\l# skipMarkup(balance: boolean): boolean\l}"
+]
+IntProperties [
+label = "{IntProperties|- entries: Array1[Entry]\l|+ put(value: String, key: int): void\l+ get(key: int): String\l}"
+]
+Purifier [
+label = "{Purifier|-! fInfosetAugs: HTMLAugmentations\l# fNamespaces: boolean\l@+! SYNTHESIZED_NAMESPACE_PREFX: String\l# fNamespaceContext: NamespaceContext\l# fPublicId: String\l# fAugmentations: boolean\l# fSeenRootElement: boolean\l@#! SYNTHESIZED_ITEM: HTMLEventInfo\l@#! NAMESPACES: String\l# fSynthesizedNamespaceCount: int\l-! fStringBuffer: XMLStringBuffer\l- fQName: QName\l-@! RECOGNIZED_FEATURES: Array1[String]\l# fInCDATASection: boolean\l# fSeenDoctype: boolean\l# fSystemId: String\l@#! AUGMENTATIONS: String\l|+ comment(augs: Augmentations, text: XMLString): void\l# purifyText(text: XMLString): XMLString\l# synthesizeBinding(attrs: XMLAttributes, ns: String): void\l+ reset(manager: XMLComponentManager): void\l# purifyQName(qname: QName): QName\l#@ toHexString(padlen: int, c: int): String\l+ startDocument(encoding: String, locator: XMLLocator, augs: Augmentations): void\l+ startElement(attrs: XMLAttributes, element: QName, augs: Augmentations): void\l+ characters(augs: Augmentations, text: XMLString): void\l+ processingInstruction(target: String, augs: Augmentations, data: XMLString): void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations, nscontext: NamespaceContext): void\l+ xmlDecl(augs: Augmentations, version: String, standalone: String, encoding: String): void\l# handleStartElement(element: QName, attrs: XMLAttributes): void\l+ endElement(element: QName, augs: Augmentations): void\l+ startCDATA(augs: Augmentations): void\l+ doctypeDecl(sysid: String, root: String, pubid: String, augs: Augmentations): void\l#! synthesizedAugs(): Augmentations\l# purifyName(localpart: boolean, name: String): String\l+ endCDATA(augs: Augmentations): void\l+ emptyElement(attrs: XMLAttributes, augs: Augmentations, element: QName): void\l# handleStartDocument(): void\l}"
+]
+ElementEntry [
+label = "{ElementEntry|-! name_: QName\l-! augs_: Augmentations\l| ElementEntry(element: QName, augs: Augmentations)\l}"
+]
+ContentScanner [
+label = "{ContentScanner|-! fAttributes: XMLAttributesImpl\l-! fQName: QName\l|# scanPseudoAttribute(attributes: XMLAttributesImpl): boolean\l# scanAttribute(empty: Array1[boolean], attributes: XMLAttributesImpl): boolean\l- scanScriptContent(): void\l# scanCDATA(): void\l# scanStartElement(empty: Array1[boolean]): String\l- isEnded(ename: String): boolean\l+ scan(complete: boolean): boolean\l- removeSpaces(content: String): String\l# scanCharacters(): void\l# scanComment(): void\l# scanMarkupContent(buffer: XMLStringBuffer, cend: char): boolean\l# scanEndElement(): void\l- changeEncoding(charset: String): boolean\l# addLocationItem(attributes: XMLAttributes, index: int): void\l# nextContent(len: int): String\l# scanAttribute(endc: char, attributes: XMLAttributesImpl, empty: Array1[boolean]): boolean\l- scanNoXxxContent(tagName: String): void\l# scanPI(): void\l}"
+]
+SpecialScanner [
+label = "{SpecialScanner|# fStyle: boolean\l-! fStringBuffer: XMLStringBuffer\l-! fQName: QName\l# fTitle: boolean\l# fTextarea: boolean\l# fElementName: String\l|+ setElementName(ename: String): Scanner\l+ scan(complete: boolean): boolean\l# scanCharacters(delimiter: int, buffer: XMLStringBuffer): void\l}"
+]
+edge[arrowhead = "empty"; style = "dashed"]
+ErrorReporter -> HTMLErrorReporter;
+NamespaceSupport -> NamespaceContext;
+LocationItem -> HTMLEventInfo;
+HTMLConfiguration -> XMLPullParserConfiguration;
+HTMLScanner -> XMLDocumentScanner;
+ContentScanner -> Scanner;
+SpecialScanner -> Scanner;
+HTMLScanner -> XMLLocator;
+HTMLComponent -> XMLComponent;
+HTMLScanner -> HTMLComponent;
+HTMLAugmentations -> Augmentations;
+DefaultFilter -> XMLDocumentFilter;
+HTMLTagBalancer -> XMLDocumentFilter;
+DOMFragmentParser -> XMLDocumentHandler;
+DefaultFilter -> HTMLComponent;
+HTMLTagBalancer -> HTMLComponent;
+LocationItem -> Cloneable;
+SynthesizedItem -> HTMLEventInfo;
+edge[arrowhead = "empty"; style= "solid"]
+SAXParser -> AbstractSAXParser;
+Purifier -> DefaultFilter;
+XercesBridge_2_2 -> XercesBridge;
+SecuritySupport12 -> SecuritySupport;
+XercesBridge_2_1 -> XercesBridge;
+XercesBridge_2_0 -> XercesBridge;
+HTMLConfiguration -> ParserConfigurationSettings;
+PlaybackInputStream -> FilterInputStream;
+ConfigurationError -> Error;
+Writer -> DefaultFilter;
+DOMParser -> DOMParser;
+ElementRemover -> DefaultFilter;
+XercesBridge_2_3 -> XercesBridge_2_2;
+NamespaceBinder -> DefaultFilter;
+Identity -> DefaultFilter;
+edge[arrowhead = "open"; style = "solid"]
+IntProperties -> Entry;
+NamespaceSupport -> Entry;
+HTMLConfiguration -> NamespaceBinder;
+DOMFragmentParser -> ParserConfigurationSettings;
+HTMLScanner -> FilterInputStream;
+HTMLTagBalancer -> LostText;
+HTMLTagBalancer -> HTMLAugmentations;
+HTMLScanner -> SpecialScanner;
+HTMLConfiguration -> HTMLTagBalancer;
+InfoStack -> Info;
+HTMLElements -> Element;
+Purifier -> NamespaceSupport;
+HTMLElements -> ElementList;
+HTMLConfiguration -> HTMLScanner;
+HTMLEntities -> IntProperties;
+HTMLTagBalancer -> ElementEntry;
+ElementEntry -> HTMLAugmentations;
+HTMLScanner -> LocationItem;
+Purifier -> HTMLAugmentations;
+LostText -> Entry;
+Info -> Element;
+HTMLTagBalancer -> InfoStack;
+HTMLScanner -> HTMLAugmentations;
+HTMLScanner -> CurrentEntity;
+Entry -> HTMLAugmentations;
+NamespaceBinder -> NamespaceSupport;
+SecuritySupport -> SecuritySupport;
+Entry -> Entry;
+edge[arrowhead = "open"; style = "dashed"]
+HTMLAugmentations -> LocationItem;
+HTMLTagBalancingListener -> Info;
+XercesBridge -> NamespaceSupport;
+HTMLTagBalancingListener -> HTMLAugmentations;
+ObjectFactory -> SecuritySupport;
+HTMLTagBalancer -> Info;
+Writer -> ParserConfigurationSettings;
+ContentScanner -> LocationItem;
+}
