@@ -1,13 +1,17 @@
 This section describes some design choices we made while developing the tool chain. 
-As well as the input the tool needs and the output the tool delivers.
+As well as the input the tool needs and the output the tool delivers. 
+We discuss the support for several Java features when considering the input and the support for several UML features when considering the output.
 
 \subsection{Input}
-	The input consists of a project location and an output file location, more on this in Section~\ref{usage} on the usage of the tool.
+	The user input consists of a project location and an output file location. 
+	More on this in Section~\ref{usage} on the usage of the tool.
+	The tool needs a Java project as input and supports associations, dependencies, generalizations and realizations between classes. 
+	Within the classes themselves, the tool finds all fields, methods, their parameters and their return types.	
+	Next we discuss support for two Java features, inner classes and generics.
 
 	\subsubsection{Support for inner classes}
 		Our tool detects inner classes and adds them to the class diagram, complete with all fields and methods. 
 		However, we have not been able to find a UML class diagram specification for inner classes, so they look the same as regular classes.
-		
 		
 	\subsubsection{Support for generics}
 		We support generic types in parameters and return types, where we display the type that is required or returned.
@@ -21,8 +25,7 @@ As well as the input the tool needs and the output the tool delivers.
 	We made a few choises in the output syntax of the class diagram. 
 	Public and protected methods and variables are prefixed, as usual, by a `+' and a `\#'-sign respectively.
 	We denote static methods and variables by prefixing them with an `@'-sign.
-	And denote final methods and variables by prefixing them with an `!'-sign.
-	
+	And denote final methods and variables by prefixing them with an `!'-sign.	
 	Next, we discuss support for named associations and multuplicities in the output.
 
 	\subsubsection{Named associations}
