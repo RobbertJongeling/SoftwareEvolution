@@ -1,6 +1,7 @@
 digraph classes{
 fontname = "Courier New"
 fontsize = 10
+splines=ortho;
 node [
 fontname = "Courier New"
 fontsize = 10
