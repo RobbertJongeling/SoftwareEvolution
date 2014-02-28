@@ -1,6 +1,14 @@
 This report contains a description of the creation of a toolchain designed to reconstruct software architecture based on Java source code.
-Using this toolchain, we will reconstruct the class diagram of three software repositories. 
+Using this toolchain, we will reconstruct the class diagram of three software repositories.
 
+Class diagrams are used in several cases. 
+They can be used to generate code from or to serve as an architecture such that a programmer can create code based on it.
+These applications require a greater amount of detail in the generated class diagram than when considering the purpose of analysis of existing software.
+As we are interested in analysing existing software, we focus on elements that are important for that use in the design of the toolchain.
+
+This report is organized as follows:
 In Section \ref{io}, we discuss the input and output of our tool. We also discuss design choices and the support of several Java features.
-In Section \ref{toolchain}, we present the tool design and give an explanation of its usage. Then, in Section \ref{appl}, we apply the tool to three software repositories. We first apply the designed toolchain to \textit{eLib} and discuss its output in terms of found recovered information as well as visual quality of the produced class diagram. Next, we apply the toolchain to two different versions of the \textit{CyberNeko} HTML Parser and discuss its output. We compare the class diagrams of the two versions and try to relate changes to observed discussions on the nekohtml-user and nekohtml-developer mailing lists. Finally, in Section \ref{disc}, we discuss strengths and weaknesses discovered by applying the tool to the repositories.
+In Section \ref{toolchain}, we present the tool design and give an explanation of its usage. 
+
+Then, in Section \ref{appl}, we apply the tool to three software repositories. We first apply the designed toolchain to \textit{eLib} and discuss its output in terms of found recovered information as well as visual quality of the produced class diagram. Next, we apply the toolchain to two different versions of the \textit{CyberNeko} HTML Parser and discuss its output. We compare the class diagrams of the two versions and try to relate changes to observed discussions on the nekohtml-user and nekohtml-developer mailing lists. Finally, in Section \ref{disc}, we discuss the strengths and weaknesses of our approach we discovered by applying the tool to the repositories.
 

@@ -1,22 +1,24 @@
-This section describes some design choices we made while developing the tool chain.
+This section describes some design choices we made while developing the tool chain. 
+As well as the input the tool needs and the output the tool delivers.
 
 \subsection{Input}
 	The input consists of a project location and an output file location, more on this in Section~\ref{usage} on the usage of the tool.
 
 	\subsubsection{Support for inner classes}
-		Our tool detects inner classes and adds them to the class diagram, complete with all fields and methods.
-		
+		Our tool detects inner classes and adds them to the class diagram, complete with all fields and methods. 
 		However, we have not been able to find a UML class diagram specification for inner classes, so they look the same as regular classes.
+		
+		
 	\subsubsection{Support for generics}
 		We support generic types in parameters and return types, where we display the type that is required or returned.
-		
 		Again, we don't visualize generic classes themselves differently in the class diagram since we were not able to find a UML class diagram specification for them.
 
 \subsection{Output}
 	The tool outputs a file containing the class diagram in dot format. 
 	This can be easily fed to a tool like Graphviz, to construct an image.
+	We decided to output a dot file instead of an image to support for example users craeting a \textit{Diff} of the output of the tool 	applied to different versions of the same tool.
 	
-	We mage a few choises in the output syntax of the class diagram. 
+	We made a few choises in the output syntax of the class diagram. 
 	Public and protected methods and variables are prefixed, as usual, by a `+' and a `\#'-sign respectively.
 	We denote static methods and variables by prefixing them with an `@'-sign.
 	And denote final methods and variables by prefixing them with an `!'-sign.
@@ -24,7 +26,7 @@ This section describes some design choices we made while developing the tool cha
 	Next, we discuss support for named associations and multuplicities in the output.
 
 	\subsubsection{Named associations}
-		We don't support named associations, but we do display the name of the association in the field list. 
+		We do not support named associations, but we do display the name of the association in the field list. 
 		The purpose of our tool is to recover and visualize the architecture of software for human understanding.
 		Named associations are an indicator of the designers intent for the system.
 		When working from a design to code, it would be useful to name associations in order to communicate this intent.

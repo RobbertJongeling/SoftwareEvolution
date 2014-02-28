@@ -1,6 +1,6 @@
 \subsection{eLib}
 In this first of two case studies, we consider the eLib benchmark as available from \url{http://www.win.tue.nl/~aserebre/2IS55/2011-2012/eLib.zip}.
-The obtained class diagram is shown in Figure~\ref{fig:eLib}, a larger version of this image is presented in appendix~\ref{app:eLib}. 
+The obtained class diagram is shown in Figure~\ref{fig:eLib}.
 \begin{figure}[H]
 \center
 \includegraphics[width=\textwidth]{sections/results/eLib}
@@ -13,7 +13,9 @@ The obtained diagram does not match the one presented in Figure~3.9 in the book 
 Our tool does not discover the dependency between the \texttt{Journal} class and the \texttt{User} class. 
 Another difference is that they do not show the class \texttt{Main} in the class diagram and we do.
 This is a loss of precision that is not desired but which we have not found the reason for in the code. %dit is een lelijke zin
-The visual quality of the rendered image is good, the class diagram is readable and the general structure of eLib can be derived by looking at the diagram.
+The visual quality of the rendered image is good, the class diagram is readable and the general structure of eLib can be derived by looking at the diagram. 
+We decided to generate only edges with straight corners because curved edges tend to give a very messy picture.
+Also, we intersecting edges can be distinguished more easily when all edges are straight.
 
 \subsection{Neko 0.9}
 \begin{figure}[H]
