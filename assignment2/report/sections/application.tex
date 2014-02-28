@@ -46,6 +46,13 @@ The class \texttt{ParserConfigurationSettings} stands out in the class diagram o
 
 The classes that are not connected to the rest of the classes (in the top right of the diagram), show little change over the versions. The quality of our tool can be doubted as there are some strange constructs apparant in the class diagram. Such as classes that have two dependencies to the same other class, classes that are associated with themselves or even a class that extends itself.
 
+In general, the class diagram for v0.9.5 is a lot wider than that of v1.9.14.
+The way we constructed the class diagrams makes that classes with a lot of incoming arcs are lower in the diagram than classes with less incoming arcs.
+Classes on the same 'row' have a similar rank.
+In v0.9.5 there were about three ranks with a lot of the classes in them while v1.9.14 has a lot more different ranks.
+This implies that the classes in v1.9.14 are structured in a more hierarchical way than the classes in v0.9.5, which are structured in a way more loose, flat way.
+Just going from this, we note that the structure of v1.9.14 is a lot better than that of v0.9.5.
+
 An interesting thing to notice in regard to the \texttt{nekohtml-developer} mailing list (which is used primarily to share patches and bug reports) is that it became active for the first time in December of 2007, when v0.9.5 was first released.
 This level of activity was more of less maintained throughout 2008 and 2009.
 After February of 2010, when v1.9.14 was released, the level of activity abruptly went down.
