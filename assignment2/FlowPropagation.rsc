@@ -78,7 +78,7 @@ rel[loc,loc] getInitAsss(M3 m) {
  */ 
 rel[loc,loc] getAssocs(M3 m, OFG g) {
 	allFields = {<b,c> | <b,c> <- g, b.scheme == "java+field"}; //field b is of actual type c
-	return {<a,c> | <a,b> <- m@containment, <b,c> <- allFields}; //return class a in which field b occurs
+	return {<a,c> | <a,b> <- m@containment, <b,c> <- allFields, c in classes(m)}; //return class a in which field b occurs
 }
 
 /*
@@ -87,11 +87,11 @@ rel[loc,loc] getAssocs(M3 m, OFG g) {
 rel[loc,loc] getDeps(M3 model, OFG g) {
 	//get parameters
 	allParams = {<b,c> | <b,c> <- g, b.scheme == "java+parameter"}; //Param b is of actual class c
-	meths = {<m,c> | <m,b> <- model@containment, <b,c> <- allParams}; //return method m in which b is a parameter b
+	meths = {<m,c> | <m,b> <- model@containment, <b,c> <- allParams, c in classes(model)}; //return method m in which b is a parameter b
 	paramDeps = {<a,c> | <a,m> <- model@containment, <m,c> <- meths};//return class a in which method m occurs
 	
 	//get local variables
-	allVars = {<v,b> | <v,b> <- g, v.scheme == "java+variable"}; //Variable v is of actual type b
+	allVars = {<v,b> | <v,b> <- g, v.scheme == "java+variable", b in classes(model)}; //Variable v is of actual type b
 	meths2 = {<m,b> | <m,v> <- model@containment, <v,b> <- allVars}; //return method m in which field b occurs
 	varDeps = {<a,b> | <a,m> <- model@containment, <m,b> <- meths2};
 	
