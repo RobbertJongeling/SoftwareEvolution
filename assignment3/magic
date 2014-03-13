@@ -1,0 +1,45 @@
+ #!/bin/bash
+
+#list all folders countaining a version of Azureus/Vuze
+folders=$(ls /home/ubuntu/ccfinder-src/source/source)
+
+#magic loop, doing all pairwise comparisons and calculating the metric
+for folder in $folders; do
+	#determine sloc, as per the paper, with using wc -l.
+	declare -i sloc_$folder
+	sloc[$folder]=$(( find /home/ubuntu/ccfinder-src/source/source/$folder -name '*.java' -print0 | xargs -0 cat) | wc -l)
+	#echo $folder: ${sloc[$folder]}
+
+	#do comparissons
+	for folder2 in $folders; do	
+		#make sure to triangulate, not rectangulate
+		if [ $folder -gt $folder2 ] && [ $folder -gt 3030 ]; then 	
+			#echo $folder-is greater than-$folder2			
+			../ccfx d java -b 50 -dn /home/ubuntu/ccfinder-src/source/source/$folder -is -dn /home/ubuntu/ccfinder-src/source/source/$folder2 -w f-w-g+ -o $folder-$folder2.ccfxd 
+
+			#filter output file for RNR < 0.5
+			../ccfx m $folder-$folder2.ccfxd -c -o clone-$folder-$folder2.tsv			
+			../picosel -o toremain-$folder-$folder2.txt from clone-$folder-$folder2.tsv select CID where RNR .ge. 0.5
+			../ccfx s $folder-$folder2.ccfxd -o $folder-$folder2-filtered.ccfxd -ci toremain-$folder-$folder2.txt
+
+			#-w
+			../ccfx m $folder-$folder2-filtered.ccfxd -w -o line-$folder-$folder2.tsv
+			cat line-$folder-$folder2.tsv|awk 'NR>1{print $4}' > cloc-$folder-$folder2.txt
+			Cij=$(paste -sd+ cloc-$folder-$folder2.txt | bc)
+
+			#output
+			echo $folder,$folder2,$Cij,${sloc[$folder]},${sloc[$folder2]} >> output.txt
+
+			#remove all temporary created files now?
+			rm -f $folder-$folder2.ccfxd
+			rm -f clone-$folder-$folder2.tsv
+			rm -f toremain-$folder-$folder2.txt 
+			rm -f $folder-$folder2-filtered.ccfxd
+			rm -f line-$folder-$folder2.tsv
+			rm -f cloc-$folder-$folder2.txt
+			rm -f clone-$folder-$folder2-filtered.tsv
+		fi
+	done
+done
+
+

@@ -1,0 +1,201 @@
+\documentclass[a4paper,twoside, twocolumn, 11pt]{article}
+\usepackage{a4wide,graphicx,subfigure,fancyhdr,amsmath,amssymb,enumerate,hyperref, float,appendix}
+\usepackage[english]{babel}
+\numberwithin{equation}{section}
+
+%----------------------- Macros and Definitions --------------------------
+
+\setlength\headheight{20pt}
+\addtolength\topmargin{-10pt}
+\addtolength\footskip{20pt}
+
+\setlength{\parskip}{4pt}
+\setlength{\columnsep}{20pt}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ch}{\mathcal{CH}}
+
+\newcommand{\solution}[1]{\noindent{\bf  #1)}}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyhead[LO,RE]{\sffamily\bfseries\large}
+\fancyhead[RO,LE]{\sffamily\bfseries\large }
+\fancyfoot[LO,RE]{\sffamily\bfseries\large }
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO,LE]{\sffamily\bfseries\large Assignment 3 2IS55}
+\fancyhead[LO,RE]{\sffamily\bfseries\large Code duplication}
+\fancyfoot[LO,RE]{\sffamily\bfseries\large }
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+\newcounter{reqc}
+\setcounter{reqc}{0}
+\providecommand{\req}[1][req \arabic{reqc}]{
+	\refstepcounter{reqc}%
+	\label{#1}%
+	\noindent\textbf{Req.\arabic{reqc}:}
+}
+%-------------------------------- Title ----------------------------------
+
+\title{\vspace{-\baselineskip}\sffamily\bfseries Assignment 3 2IS55: Code duplication}
+
+\author{Jongeling, R.M. - 0747896 - {\tt r.m.jongeling@student.tue.nl}}
+
+\date{\today}
+
+%--------------------------------- Text ----------------------------------
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+The purpose of this paper is to perform a replication of the study performed by Livieri et al. in 2007 \cite{paper}.
+In this study, they analyze the evolution of the Linux Kernel using code-clone coverage.
+In this paper, we follow their approach as closely as possible to analyze the evolution of Azureus/Vuze.
+%//TODO add content
+
+\section{Workflow}
+In this section, we will discuss the techniques used to perform the study.
+The study consists of three clearly separable steps, preprocessing, code-clone finding and post-processing.
+The preprocessing step would normally consist of downloading the tool ccFinder and the code of Azureus/Vuze.
+As we use the provided Virtual Machine to perform this assignment, the preprocessing step had already been performed.
+
+\subsection{Clone detection}
+In the code-cloning step, we chose to write a Bash script performing all comparisons needed.
+The script we wrote is attached in Appendix \ref{script}.
+To run the script, place it within a subfolder of the \texttt{ccfinder-src/ubuntu32} folder on the VM. 
+Then browse to that folder using the command line and run the script by running the command ./script (where``script") is the name of the script.
+If this does not work, make sure the checkbox``Allow executing file as program" is checked in the properties of the file (RMB on file, select properties, then choose tab ``Permissions")
+
+%If you decided to develop some of your tools yourself (e.g., scripts) please describe the functionality of these tools and add a listing as an appendix.
+In the script, we first list all folders in the \texttt{/home/ubuntu/ccfinder-src/source/source} folder.
+Each of these folders contains a single version of the Azureus/Vuze program.
+Then, we loop over all folders and determine the number of lines of code of each version.
+This is done in the same way as Livieri et al. describe, using the command \texttt{wc -l}.
+In the inner loop, we again loop over all folders, such that we can do a pairwise comparison of the versions.
+We make sure to only compare the versions one-way, the clones between version $x$ and version $y$ are of course exactly the same as between version $y$ and version $x$.
+Also, we do not compare versions to themselves as the value of $Coverage_{ii}(i,i)$ would trivially yield one.
+
+The most important command in the script is command \texttt{ccfx d java -dn <v1> -is -dn <v2> -w f-w-g+}. 
+Where $<v1>$ and $<v2>$ correspond to a path to a folder containing a version of the program.
+This command detects clones between the two versions, $folder$ and $folder2$ with minimal token length 50, indicated by \texttt{-b 50}.
+The \texttt{d java} means, use execution mode \texttt{d}, for detection and consider only Java source files.
+The \texttt{-dn} part makes sure we consider all files in the specified folder.
+\texttt{-is} is a separator, indicating that the two specified folders belong to different groups. 
+This is used in the part \texttt{-w f-w-g+}, which makes sure we do not detect code clones within files or between files of the same file group but only between files from the distinct file groups.
+
+\subsection{Post processing}
+The output of the script is for every comparison a line in the following format: $V_i$, $V_j$, $Loc(C_{ij})$,$ Loc(V_i)$, $Loc(V_j)$.
+The metric can then be calculated by dividing $Loc(C_{ij})$ by the sum of $ Loc(V_i)$ and $Loc(V_j)$.
+%//TODO more
+
+
+\section{Case study}
+In this section, we discuss the code clone detection possibilities of the tool CCFinder as well as the studied program Azureus/Vuze.
+
+\subsection{CCFinder}
+
+
+\subsection{Azureus/Vuze}
+%What is its purpose?
+%How old is it?
+%How big is it now (number of lines of code, files and packages)?
+%Which versions of the application have you considered?
+%Why have you considered these versions?
+Vuze is a bittorrent client aimed to be ``an end-to-end software application for all your torrent needs" \footnote{vuze.com}.
+The project first started under the name ``Azureus" in June 2003, from June 2008, the project has continued under the name ``Vuze".
+At the time of this writing, the last stable release is version 5.3.0.0 and dates from February 7, 2014. \footnote{http://sourceforge.net/projects/azureus/}
+%//TODO It contains 3.887 files, y lines of code and has a size of 31.5 MB
+Azureus/Vuze is one of the most successful open source projects on Sourceforge, it has been downloaded a total of 540.2 million times from Sourceforge \footnote{http://sourceforge.net/top/}.
+
+We have considered all 79 versions of the program of which the source code had been placed on the VM. 
+These are interesting versions because it contains early versions, from when it was known as ``Azureus" as well as later versions, when the program was renamed to ``Vuze".
+There were more changes to the program than just a name change %//TODO source, uitleg
+and it is interesting to investigate if this is visible in the clone ratios. %//TODO clone ratios?
+
+\section{Results and discussion}
+
+\section{Conclusions}
+
+\begin{thebibliography}{9}
+\bibitem{paper}
+S. Livieri, Y. Higo, M. Matsushita, K. Inoue. \emph{Analysis of the Linux Kernel Evolution Using Code Clone Coverage.} Proceedings of the Fourth International Workshop on Mining Software Repositories (MSR 2007),  pp. 22-1 22-4, Washington, DC, USA, 2007.
+\end{thebibliography}
+
+\onecolumn
+\pagestyle{empty} %//TODO empty pagestyle or similar to rest of report?
+\begin{appendices}
+\section{Bash script}\label{script}
+\scriptsize
+\begin{verbatim}
+#!/bin/bash
+
+#list all folders countaining a version of Azureus/Vuze
+folders=$(ls /home/ubuntu/ccfinder-src/source/source)
+
+#loop doing all pairwise comparisons and calculating the metric
+for folder in $folders; do
+    #determine sloc, as per the paper, with using wc -l.
+    declare -i sloc_$folder
+    sloc[$folder]=$(( find /home/ubuntu/ccfinder-src/source/source/$folder 
+        -name '*.java' -print0 | xargs -0 cat) | wc -l)
+
+    #do comparissons
+    for folder2 in $folders; do    
+        #make sure to triangulate, not rectangulate
+        if [ $folder -gt $folder2 ]; then     
+            ../ccfx d java -b 50 -dn /home/ubuntu/ccfinder-src/source/source/$folder 
+                -is -dn /home/ubuntu/ccfinder-src/source/source/$folder2 -w f-w-g+ 
+                    -o $folder-$folder2.ccfxd 
+
+            #filter output file for RNR < 0.5
+            ../ccfx m $folder-$folder2.ccfxd -c -o clone-$folder-$folder2.tsv            
+            ../picosel -o toremain-$folder-$folder2.txt from clone-$folder-$folder2.tsv 
+                select CID where RNR .ge. 0.5
+            ../ccfx s $folder-$folder2.ccfxd -o $folder-$folder2-filtered.ccfxd -ci 
+                toremain-$folder-$folder2.txt
+
+            #calculate number of lines per clone
+            ../ccfx m $folder-$folder2-filtered.ccfxd -w 
+                -o line-$folder-$folder2.tsv cat line-$folder-$folder2.tsv
+               |awk 'NR>1{print $4}' > cloc-$folder-$folder2.txt
+            Cij=$(paste -sd+ cloc-$folder-$folder2.txt | bc)
+
+            #output
+            echo $folder,$folder2,$Cij,${sloc[$folder]},${sloc[$folder2]} 
+                >> output.txt
+
+            #remove all temporary created files now
+            rm -f $folder-$folder2.ccfxd
+            rm -f clone-$folder-$folder2.tsv
+            rm -f toremain-$folder-$folder2.txt 
+            rm -f $folder-$folder2-filtered.ccfxd
+            rm -f line-$folder-$folder2.tsv
+            rm -f cloc-$folder-$folder2.txt
+            rm -f clone-$folder-$folder2-filtered.tsv
+        fi
+    done
+done
+
+
+
+\end{verbatim}
+\end{appendices}
+
+
+
+\end{document}
