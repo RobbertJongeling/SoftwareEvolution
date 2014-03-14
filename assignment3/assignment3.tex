@@ -64,15 +64,23 @@
 
 \section{Introduction}
 The purpose of this paper is to perform a replication of the study performed by Livieri et al. in 2007 \cite{paper}.
-In this study, they analyze the evolution of the Linux Kernel using code-clone coverage.
-In this paper, we follow their approach as closely as possible to analyze the evolution of $Azureus/Vuze$.
+In this study, Livieri et al. analyze the evolution of the Linux Kernel using code-clone coverage.
+In this paper, we follow their approach as closely as possible and apply it to 66 versions of the program $Azureus/Vuze$.
+For code clone detection we use the tool CCFinder, in contrast to Livieri et al. we do not use the distributed version of this tool.
+The result of our analysis is shown as a heat map comparing every pair of versions.
+
 %//TODO add content
 
 \section{Workflow}
-In this section, we will discuss the techniques used to perform the study.
-The study consists of three clearly separable steps, preprocessing, code-clone finding and post-processing.
+In this section, we will discuss the techniques used to perform the replication study.
+Our study consists of three clearly separable steps, preprocessing, code-clone finding and post-processing.
 The preprocessing step would normally consist of downloading the tool $CCFinder$ and the code of $Azureus/Vuze$.
 As we use the provided Virtual Machine to perform this assignment, the preprocessing step had already been performed.
+
+Livieri et al. have defined a code clone coverage ratio $Coverage_{ij}$ for each pair of versions $V_i$ and $V_j$. 
+It is defined as follows: $Coverage_{ij} = \frac{Loc(C_{ij})}{Loc(V_i) + Loc(V_j)}$.
+Where $C_{ij}$ are the code clone segments between $V_i$ and $V_j$ and $Loc(x)$ is the total number of lines of code in $x$.
+The purpose of our script is to output for every comparison of two versions a line consisting of the version numbers and the value of this metric.
 
 \subsection{Clone detection}
 In the code-cloning step, we chose to write a Bash script performing all comparisons needed.
@@ -86,6 +94,7 @@ In the script, we first list all folders in the \texttt{/home/ubuntu/ccfinder-sr
 Each of these folders contains a single version of the $Azureus/Vuze$ program.
 Then, we loop over all folders and determine the number of lines of code of each version.
 This is done in the same way as Livieri et al. describe, using the command \texttt{wc -l}.
+
 In the inner loop, we again loop over all folders, such that we can do a pairwise comparison of the versions.
 We make sure to only compare the versions one-way, the clones between version $x$ and version $y$ are of course exactly the same as between version $y$ and version $x$.
 Also, we do not compare versions to themselves as the value of $Coverage_{ii}(i,i)$ would trivially yield one.
@@ -124,17 +133,18 @@ This clean-up marks the end of the inner loop of the script.
 
 \subsection{Post processing}
 The output of the script is for every comparison a line in the following format: $V_iV_j$, $Coverage_{ij}(i,j)$.
-To create the heatgraph, we then import the outputted comma separated table and import in into Excel.
+To create the heatgraph, we then import the outputted comma separated table and import in into Microsoft Excel 2010.
 Let the column containing the folder names be $A$ and the column containing all the $Coverage$ values be $B$
 We then create a 2D table by listing all folders in the source folder on both the X and Y axes.
 
 We put the following formula in each cell $(m,n)$ of the table: 
-\texttt{=VLOOKUP(CONCATENATE(Y(m);X(n)); A1:B2145; 2; FALSE)}.
+\texttt{=VLOOKUP(CONCATENATE(Ym;Xn); A1:B2145; 2; FALSE)}.
 This formula looks up the $Coverage$ value of a certain cell by concatenating the version on the Y-axis and the version on the X-axis of the 2D table.
 If there is no value in the 1D table, it returns the error: \texttt{\#N/A}.
 
 Now that we have a 2D table of the $Coverage$ values, we create a heat map by using the conditional formatting function of Excel.
-Also, to get a more appealing image, we hide the values of each cell in the table by setting the cells format to \texttt{;;;}, delete all \texttt{\#N/A} values and we resize the cells to be square.
+We create a new rule where the minimum value is 0 and the maximum value is 1.
+Also, to get a more appealing image, we hide the values of each cell in the table by setting the cells format to \texttt{;;;}, delete all \texttt{\#N/A} values and resize the cells to squares.
 
 
 \section{Case study}
@@ -155,12 +165,48 @@ At the time of this writing, the last stable release is version 5.3.0.0 and date
 %//TODO It contains 3.887 files, y lines of code and has a size of 31.5 MB
 Azureus/Vuze is one of the most successful open source projects on Sourceforge, it has been downloaded a total of 540.2 million times from Sourceforge \footnote{http://sourceforge.net/top/}.
 
-We have considered all 79 versions of the program of which the source code had been placed on the VM. 
+We have considered the first 66 versions of the program of which the source code had been placed on the VM. 
+This choice has been made because of practical reasons. We ran the script on a single thread as we were informed that the multi threaded option of CCFinder might crash the program.
+Also, not all runs were performed uninterrupted. 
+%//TODO misschien weglaten
+If one leaves his computer on overnight to run the script, one does not expect to be stabbed in the back by his own operating system which decides to install updates and restart the machine whilst the script is running. 
 These are interesting versions because it contains early versions, from when it was known as ``Azureus" as well as later versions, when the program was renamed to ``Vuze".
 There were more changes to the program than just a name change %//TODO source, uitleg
 and it is interesting to investigate if this is visible in the clone ratios. %//TODO clone ratios?
 
 \section{Results and discussion}
+Figure \ref{fig:min-max} shows the heat map resulting from our study. 
+The darker the color, the higher the code clone coverage ratio. 
+The darkest color of the color map corresponds to the maximum value of the coverage ratio over all measurements.
+In the same way, the lightest value corresponds to the minimum value of the coverage ratio, this is very close to zero. 
+We choose to not let the darkest color correspond to a value of 1 and the lightest color to 0 in order to have a more contrasting image.
+As the largest value is just a little bit more than 0.5, a lot of detail is lost when we let the color scheme range from 0 to 1.
+
+We now discuss findings from our study.
+In accordance to the findings of Livieri et al. and our own expectations, the highest coverage ratios are found near the diagonal.
+Also as expected, the lowest coverage ratios are found between versions that are the furthest apart in terms of version number.
+
+Versions 2.0.2.5 and 2.0.2.6 have the highest coverage ratio.
+This is not a surprising result as these are the versions that are also the closest together in terms of their release number. 
+The heat map shows a small triangular shape between versions 2.0.2.5 and 2.0.2.7. 
+This is further confirmation of them being closely related to each other and a lot less to the rest of the versions.
+
+Other, larger, triangular shapes can be seen between versions 2.5.0.0 and 3.5.0.2, 3.1.0.0 and 4.2.0.4 and the versions 4.3.0.0 and 4.4.1.0.
+These triangular patterns indicate that all versions in the triangle have a relatively high mutual code clone coverage ratio.
+This may indicate that they are all part of the same or a closely related minor release.
+But interestingly, they do not all seem to be bounded by a single major or minor release.
+
+The triangle starting at version 3.1.0.0 is of particular interest as from that version on, the project Azureus was transformed to Vuze.
+In general, we can say that since the introduction of Vuze, the versions have become more similar, this could for example indicate a higher release frequency where there is fewer growth of the program in between releases.
+
+%//TODO much more! e.g. rectangles starting from 2.5.0.0
+
+\begin{figure*}
+\center
+\includegraphics[width=\textwidth]{first66min-max.pdf}
+\caption{Heat map of the code clone coverage ratio between different Azureus/Vuze versions.}
+\label{fig:min-max}
+\end{figure*}
 
 \section{Conclusions}
 
