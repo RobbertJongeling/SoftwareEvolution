@@ -71,8 +71,10 @@ The result of our analysis is shown as a heat map comparing every pair of versio
 
 %//TODO add content
 
-\section{Workflow}
+\section{Methodology}
 In this section, we will discuss the techniques used to perform the replication study.
+
+\subsection{Workflow}
 Our study consists of three clearly separable steps, preprocessing, code-clone finding and post-processing.
 The preprocessing step would normally consist of downloading the tool $CCFinder$ and the code of $Azureus/Vuze$.
 As we use the provided Virtual Machine to perform this assignment, the preprocessing step had already been performed.
@@ -83,13 +85,13 @@ Where $C_{ij}$ are the code clone segments between $V_i$ and $V_j$ and $Loc(x)$ 
 The purpose of our script is to output for every comparison of two versions a line consisting of the version numbers and the value of this metric.
 
 \subsection{Clone detection}
-In the code-cloning step, we chose to write a Bash script performing all comparisons needed.
+We consider 66 versions of Azureus/Vuze in our study. Only the \texttt{.java} files were considered.
+To do the code-cloning step, we chose to write a Bash script performing all comparisons needed.
 The script is attached in Appendix \ref{script}.
 To run the script, place it within a subfolder of the \texttt{ccfinder-src/ubuntu32} folder on the VM. 
 Then browse to that folder using the command line and run the script by running the command ./script (where``script") is the name of the script.
 If this does not work, make sure the checkbox``Allow executing file as program" is checked in the properties of the file (RMB on file, select properties, then choose tab ``Permissions")
 
-%If you decided to develop some of your tools yourself (e.g., scripts) please describe the functionality of these tools and add a listing as an appendix.
 In the script, we first list all folders in the \texttt{/home/ubuntu/ccfinder-src/source/source} folder.
 Each of these folders contains a single version of the $Azureus/Vuze$ program.
 Then, we loop over all folders and determine the number of lines of code of each version.
@@ -151,28 +153,24 @@ Also, to get a more appealing image, we hide the values of each cell in the tabl
 In this section, we discuss the code clone detection possibilities of the tool $CCFinder$ as well as the studied program $Azureus/Vuze$.
 
 \subsection{CCFinder}
+%Type 1-2-3-4 classification? What kind of clone detection does CCFinder perform: text-based, metrics-based, token-based, AST-based, PDG-based?
 
 
 \subsection{Azureus/Vuze}
-%What is its purpose?
-%How old is it?
-%How big is it now (number of lines of code, files and packages)?
-%Which versions of the application have you considered?
-%Why have you considered these versions?
 Vuze is a bittorrent client aimed to be ``an end-to-end software application for all your torrent needs" \footnote{vuze.com}.
 The project first started under the name ``Azureus" in June 2003, from June 2008, the project has continued under the name ``Vuze".
 At the time of this writing, the last stable release is version 5.3.0.0 and dates from February 7, 2014. \footnote{http://sourceforge.net/projects/azureus/}
-%//TODO It contains 3.887 files, y lines of code and has a size of 31.5 MB
-Azureus/Vuze is one of the most successful open source projects on Sourceforge, it has been downloaded a total of 540.2 million times from Sourceforge \footnote{http://sourceforge.net/top/}.
+This version contains 4430 files and folder, 895k lines of code and has a size of 33.7 MB. 
+In contrast to version 2.0.0.8, the first version considered in this study, which contains 228 files and folders, only 12.6k lines of code and has a size of 1.1 MB.
 
 We have considered the first 66 versions of the program of which the source code had been placed on the VM. 
-This choice has been made because of practical reasons. We ran the script on a single thread as we were informed that the multi threaded option of CCFinder might crash the program.
-Also, not all runs were performed uninterrupted. 
-%//TODO misschien weglaten
-If one leaves his computer on overnight to run the script, one does not expect to be stabbed in the back by his own operating system which decides to install updates and restart the machine whilst the script is running. 
-These are interesting versions because it contains early versions, from when it was known as ``Azureus" as well as later versions, when the program was renamed to ``Vuze".
+This choice has been made because of practical reasons. 
+We ran the script on a single thread as we were informed that the multi threaded option of CCFinder might crash the program. 
+Also, pair based calculation of the large versions takes a very long time and we do not expect to obtain results that deviate very much from what we have already seen.
+
+The are also interesting versions because it contains early versions, from when it was known as ``Azureus" as well as later versions, when the program was renamed to ``Vuze".
 There were more changes to the program than just a name change %//TODO source, uitleg
-and it is interesting to investigate if this is visible in the clone ratios. %//TODO clone ratios?
+and it is interesting to investigate if this is visible in the clone ratios.
 
 \section{Results and discussion}
 Figure \ref{fig:min-max} shows the heat map resulting from our study. 
@@ -185,6 +183,10 @@ As the largest value is just a little bit more than 0.5, a lot of detail is lost
 We now discuss findings from our study.
 In accordance to the findings of Livieri et al. and our own expectations, the highest coverage ratios are found near the diagonal.
 Also as expected, the lowest coverage ratios are found between versions that are the furthest apart in terms of version number.
+The highest coverage ratio found is 0.57. This is relatively low compared to the highest result of Livieri et al. (0.67).
+It can be explained by a two factors that have also lowered their results in comparison to their expectations:
+In accordance with the study by Livieri et al. we removed clones with a RNR smaller than 0.5. 
+Also, in the measurement of the number of lines of code, whitespace and comments are included.
 
 Versions 2.0.2.5 and 2.0.2.6 have the highest coverage ratio.
 This is not a surprising result as these are the versions that are also the closest together in terms of their release number. 
@@ -199,7 +201,10 @@ But interestingly, they do not all seem to be bounded by a single major or minor
 The triangle starting at version 3.1.0.0 is of particular interest as from that version on, the project Azureus was transformed to Vuze.
 In general, we can say that since the introduction of Vuze, the versions have become more similar, this could for example indicate a higher release frequency where there is fewer growth of the program in between releases.
 
-%//TODO much more! e.g. rectangles starting from 2.5.0.0
+The area below the diagonal becomes darker when the versions progress indicating more code clone coverage between versions that are further apart.
+This may have to do with the increasing size of the program. 
+We see that in early versions there is much less coverage between a version and for example a version 10 releases later.
+
 
 \begin{figure*}
 \center
