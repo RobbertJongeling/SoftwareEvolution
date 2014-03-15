@@ -134,13 +134,7 @@ This clean-up marks the end of the inner loop of the script.
 \subsection{Post processing}
 The output of the script is for every comparison a line in the following format: $V_iV_j$, $Coverage_{ij}(i,j)$.
 To create the heat map, we then import the outputted comma separated table into Microsoft Excel 2010.
-Let the column containing the folder names be $A$ and the column containing all the $Coverage$ values be $B$
-We then create a 2D table by listing all folders in the source folder on both the X and Y axes.
-
-We put the following formula in each cell $(m,n)$ of the table: 
-\texttt{=VLOOKUP(CONCATENATE(Ym;Xn); A1:B2145; 2; FALSE)}.
-This formula looks up the $Coverage$ value of a certain cell in columns A and B between rows 1 and 2145 by concatenating the version on the Y-axis and the version on the X-axis of the 2D table.
-If there is no value in the 1D table, it returns the error: \texttt{\#N/A}.
+We then create a 2D table consisting of two axes with all the version numbers on them and in every cell the coverage ratio between those versions.
 
 Now that we have a 2D table of the $Coverage$ values, we create a heat map by using the conditional formatting function of Excel.
 We create a new rule where the minimum value is the minimum value of all the coverage values and the maximum value is the maximal value of all the coverage values.
