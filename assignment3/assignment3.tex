@@ -65,8 +65,6 @@ In this paper, we follow their approach as closely as possible and apply it to 6
 For code clone detection we use the tool CCFinder, in contrast to Livieri et al. we do not use the distributed version of this tool.
 The result of our analysis is shown as a heat map comparing every pair of versions.
 
-%//TODO add content
-
 \section{Methodology}
 In this section, we will discuss the techniques used to perform the replication study.
 
@@ -85,7 +83,7 @@ We consider 66 versions of Azureus/Vuze in our study.
 Only the \texttt{.java} files were considered.
 All instances of \texttt{FileHandler.java} have been removed from the code base before studying it.
 
-To do the code-cloning step, we chose to write a Bash script performing all comparisons needed.
+To do the code-cloning step, we have written a Bash script performing all comparisons needed.
 The script is attached in Appendix \ref{script}.
 To run the script, place it within a subfolder of the \texttt{ccfinder-src/ubuntu32} folder on the VM. 
 Then browse to that folder using the command line and run the script by running the command ./script (where``script") is the name of the script.
@@ -108,7 +106,8 @@ The \texttt{-dn} part makes sure we consider all files in the specified folder.
 \texttt{-is} is a separator, indicating that the two specified folders belong to different groups. 
 This is used in the part \texttt{-w f-w-g+}, which makes sure we do not detect code clones within files or between files of the same file group but only between files from the distinct file groups.
 
-The result of that first command is a clone-data file. Following the approach by Livieri et al. we also remove clones with a Repeated Token Ratio (RNR) below 0.5. 
+The result of that first command is a clone-data file. 
+Following the approach by Livieri et al. we remove clones with a Repeated Token Ratio (RNR) below 0.5. to remove redundancy and uninteresting clones consisting of simple repeating patterns. 
 The command \texttt{../ccfx m \$folder-\$folder2.ccfxd -c -o clone-\$folder-\$folder2.tsv} calculates the clone metrics of the clone-data file and outputs this in tab separated format. 
 Next, we select from that file all clones with a RNR value of greater than or equal to 0.5, these are the clones we want to keep. 
 We then output these clones to a text file named to-remain-$<$folder$>$-$<$folder2$>$. 
@@ -116,7 +115,7 @@ The two steps are done by the following command: \texttt{../picosel -o toremain-
 
 Finally, we create a new clone-data file by filtering the original clone-data file and only keeping the clones with CID in the to-remain text file.
 This is done by the following command: \texttt{../ccfx s \$folder-\$folder2.ccfxd -o \$folder-\$folder2-filtered.ccfxd -ci toremain-\$folder-\$folder2.txt}.
-Where the \texttt{s} flag makes sure we filter the first argument, the input file with respect to the id provided by the \texttt{-ci} flag and the file provided as its argument.
+Where the argument \texttt{s} indicates we filter the first file, the input file with respect to the id provided by the \texttt{-ci} flag and the third file provided as argument.
 The output file is specified after the \texttt{-o} flag.
 
 What remains to be done now is to calculate the metric and to output it to a file.
@@ -134,17 +133,17 @@ This clean-up marks the end of the inner loop of the script.
 
 \subsection{Post processing}
 The output of the script is for every comparison a line in the following format: $V_iV_j$, $Coverage_{ij}(i,j)$.
-To create the heat map, we then import the outputted comma separated table and import in into Microsoft Excel 2010.
+To create the heat map, we then import the outputted comma separated table into Microsoft Excel 2010.
 Let the column containing the folder names be $A$ and the column containing all the $Coverage$ values be $B$
 We then create a 2D table by listing all folders in the source folder on both the X and Y axes.
 
 We put the following formula in each cell $(m,n)$ of the table: 
 \texttt{=VLOOKUP(CONCATENATE(Ym;Xn); A1:B2145; 2; FALSE)}.
-This formula looks up the $Coverage$ value of a certain cell by concatenating the version on the Y-axis and the version on the X-axis of the 2D table.
+This formula looks up the $Coverage$ value of a certain cell in columns A and B between rows 1 and 2145 by concatenating the version on the Y-axis and the version on the X-axis of the 2D table.
 If there is no value in the 1D table, it returns the error: \texttt{\#N/A}.
 
 Now that we have a 2D table of the $Coverage$ values, we create a heat map by using the conditional formatting function of Excel.
-We create a new rule where the minimum value is 0 and the maximum value is 1.
+We create a new rule where the minimum value is the minimum value of all the coverage values and the maximum value is the maximal value of all the coverage values.
 Also, to get a more appealing image, we hide the values of each cell in the table by setting the cells format to \texttt{;;;}, delete all \texttt{\#N/A} values and resize the cells to squares.
 
 \section{Case study}
@@ -170,24 +169,21 @@ CCFinder can detect type 3 clones by taking the length of a non-interrupted clon
 Or by considering non-interrupted clone sequences as parts of interrupted clone sequences.
 
 CCFinder can not detect type 4 clones.
-Type 4 clones are semantically equivalent. 
+Type 4 clones are clones that are semantically equivalent. 
 The approach of CCFinder aims at finding syntactical equivalence rather than semantical equivalence.
 
 \subsection{Azureus/Vuze}
 Vuze is a bittorrent client aimed to be ``an end-to-end software application for all your torrent needs" \footnote{http://www.vuze.com/}.
-The project first started under the name ``Azureus" in June 2003, from June 2008, the project has continued under the name ``Vuze".
+The project first started under the name ``Azureus" in June 2003.
+From June 2008, the project has continued under the name ``Vuze".
 At the time of this writing, the last stable release is version 5.3.0.0 and dates from February 7, 2014. \footnote{http://sourceforge.net/projects/azureus/}
-This version contains 4430 files and folder, 895k lines of code and has a size of 33.7 MB. 
-In contrast to version 2.0.0.8, the first version considered in this study, which contains 228 files and folders, only 12.6k lines of code and has a size of 1.1 MB.
+This version contains 4430 files and folders, 895k lines of code and has a size of 33.7 MB. 
+In contrast to version 2.0.0.8, the first version considered in this study, which contains 228 files and folders, 12.6k lines of code and has a size of 1.1 MB.
 
 We have considered the first 66 versions of the program of which the source code had been placed on the VM. 
-This choice has been made because of practical reasons. 
+This choice was made because of practical reasons. 
 We ran the script on a single thread as we were informed that the multi threaded option of CCFinder might crash the program. 
-Also, pair based calculation of the large versions takes a very long time and we do not expect to obtain results that deviate very much from what we have already seen.
-
-The are also interesting versions because it contains early versions, from when it was known as ``Azureus" as well as later versions, when the program was renamed to ``Vuze".
-There were more changes to the program than just a name change %//TODO source, uitleg
-and it is interesting to investigate if this is visible in the clone ratios.
+Also, pair based calculation of the large versions takes a very long time.
 
 \section{Results and discussion}
 Figure \ref{fig:min-max} shows the heat map resulting from our study. 
