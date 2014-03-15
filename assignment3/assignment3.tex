@@ -58,10 +58,6 @@
 
 \maketitle
 
-\begin{abstract}
-
-\end{abstract}
-
 \section{Introduction}
 The purpose of this paper is to perform a replication of the study performed by Livieri et al. in 2007 \cite{paper}.
 In this study, Livieri et al. analyze the evolution of the Linux Kernel using code-clone coverage.
@@ -85,7 +81,10 @@ Where $C_{ij}$ are the code clone segments between $V_i$ and $V_j$ and $Loc(x)$ 
 The purpose of our script is to output for every comparison of two versions a line consisting of the version numbers and the value of this metric.
 
 \subsection{Clone detection}
-We consider 66 versions of Azureus/Vuze in our study. Only the \texttt{.java} files were considered.
+We consider 66 versions of Azureus/Vuze in our study. 
+Only the \texttt{.java} files were considered.
+All instances of \texttt{FileHandler.java} have been removed from the code base before studying it.
+
 To do the code-cloning step, we chose to write a Bash script performing all comparisons needed.
 The script is attached in Appendix \ref{script}.
 To run the script, place it within a subfolder of the \texttt{ccfinder-src/ubuntu32} folder on the VM. 
@@ -123,7 +122,7 @@ The output file is specified after the \texttt{-o} flag.
 What remains to be done now is to calculate the metric and to output it to a file.
 First, we calculate the number of lines per clone.
 We do this by first using the execution mode \texttt{m} with flag \texttt{-w} which calculates line-based metrics.
-Among these metrics is CLOC, which is the ``Count of lines including at least one token of a code fragment of a code clone." \cite{gemx tutorial}.
+Among these metrics is CLOC, which is the ``Count of lines including at least one token of a code fragment of a code clone." \footnote{http://www.ccfinder.net/doc/10.2/en/tutorial-gemx.html}.
 The sum of the value of this metric for all versions is the numerator in the fraction that yields the $Coverage$ value.
 We extract this column from the line-based metrics file and save it to a new file.
 This file is then used to calculate the sum of all the values and save it to the variable $Cij$.
@@ -135,7 +134,7 @@ This clean-up marks the end of the inner loop of the script.
 
 \subsection{Post processing}
 The output of the script is for every comparison a line in the following format: $V_iV_j$, $Coverage_{ij}(i,j)$.
-To create the heatgraph, we then import the outputted comma separated table and import in into Microsoft Excel 2010.
+To create the heat map, we then import the outputted comma separated table and import in into Microsoft Excel 2010.
 Let the column containing the folder names be $A$ and the column containing all the $Coverage$ values be $B$
 We then create a 2D table by listing all folders in the source folder on both the X and Y axes.
 
@@ -148,16 +147,34 @@ Now that we have a 2D table of the $Coverage$ values, we create a heat map by us
 We create a new rule where the minimum value is 0 and the maximum value is 1.
 Also, to get a more appealing image, we hide the values of each cell in the table by setting the cells format to \texttt{;;;}, delete all \texttt{\#N/A} values and resize the cells to squares.
 
-
 \section{Case study}
 In this section, we discuss the code clone detection possibilities of the tool $CCFinder$ as well as the studied program $Azureus/Vuze$.
 
 \subsection{CCFinder}
-%Type 1-2-3-4 classification? What kind of clone detection does CCFinder perform: text-based, metrics-based, token-based, AST-based, PDG-based?
+In this study we detect clones between versions of the same program.
+We are not interested in clones within the same version.
+We use the tool CCFinder, as presented by Kaniya et al. in July 2002.
 
+CCFinder is a token-based code clone detection system. \cite{CCFinder}
+It first transforms the input source code by applying a set of transformation rules.
+These rules are designed to make the clone detection formatting independent.  
+
+CCFinder can detect multiple types of code clones.
+Type 1 clones, consisting of exact copies can be detected. 
+After applying the transformation rules, CCFinder replaces all identifiers of types, variables and constants with a special token.
+This allows it to also detect Type 2 clones, which are pairs that are equal up to renaming.
+
+CCFinder transforms input source code into a sequence of tokens.
+Type 3 clones would appear as interruptions of a cloned sequence. They are also called gapped clones.
+CCFinder can detect type 3 clones by taking the length of a non-interrupted clone sequence as a threshold for the length of the interruption.
+Or by considering non-interrupted clone sequences as parts of interrupted clone sequences.
+
+CCFinder can not detect type 4 clones.
+Type 4 clones are semantically equivalent. 
+The approach of CCFinder aims at finding syntactical equivalence rather than semantical equivalence.
 
 \subsection{Azureus/Vuze}
-Vuze is a bittorrent client aimed to be ``an end-to-end software application for all your torrent needs" \footnote{vuze.com}.
+Vuze is a bittorrent client aimed to be ``an end-to-end software application for all your torrent needs" \footnote{http://www.vuze.com/}.
 The project first started under the name ``Azureus" in June 2003, from June 2008, the project has continued under the name ``Vuze".
 At the time of this writing, the last stable release is version 5.3.0.0 and dates from February 7, 2014. \footnote{http://sourceforge.net/projects/azureus/}
 This version contains 4430 files and folder, 895k lines of code and has a size of 33.7 MB. 
@@ -205,7 +222,6 @@ The area below the diagonal becomes darker when the versions progress indicating
 This may have to do with the increasing size of the program. 
 We see that in early versions there is much less coverage between a version and for example a version 10 releases later.
 
-
 \begin{figure*}
 \center
 \includegraphics[width=\textwidth]{first66min-max.pdf}
@@ -213,12 +229,13 @@ We see that in early versions there is much less coverage between a version and 
 \label{fig:min-max}
 \end{figure*}
 
-\section{Conclusions}
-
 \begin{thebibliography}{9}
 \bibitem{paper}
 S. Livieri, Y. Higo, M. Matsushita, K. Inoue. \emph{Analysis of the Linux Kernel Evolution Using Code Clone Coverage.} Proceedings of the Fourth International Workshop on Mining Software Repositories (MSR 2007),  pp. 22-1 22-4, Washington, DC, USA, 2007.
+\bibitem{CCFinder}
+T. Kamiya, S. Kusumoto, K. Inoue. \emph{CCFinder: a multilinguistic token-based code clone detection system for large scale source code.} IEEE Transactions on Software Engineering, Volume 28, Issue 7, pages 654-670, July 2002.
 \end{thebibliography}
+
 
 \onecolumn
 \pagestyle{empty} %//TODO empty pagestyle or similar to rest of report?
