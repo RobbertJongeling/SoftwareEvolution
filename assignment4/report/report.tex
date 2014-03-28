@@ -1,0 +1,48 @@
+\documentclass[11pt,english,twocolumn]{article}
+
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{listings}
+\usepackage{appendix}
+
+\geometry{
+	includeheadfoot,
+	margin=2.54cm
+}
+
+\input{title}
+
+\begin{document}
+	\maketitle
+
+	\tableofcontents
+	\newpage
+
+	\section{Introduction}
+	\input{sections/intro}
+	
+	\section{Background}\label{background}
+	\input{sections/background}
+	
+	\section{Methodology}\label{methodology}
+	\input{sections/methodology}
+	
+	\section{Results and discussion}\label{results}
+	\input{sections/results}
+	\newpage
+
+	\section{Threats to validity}\label{threats}
+	\input{sections/threats}
+
+	\section{Conclusions}
+	\input{sections/conclusions}
+
+	\input{sections/bibliography}
+	\newpage
+	
+	\input{sections/appendices}
+\end{document}
+
