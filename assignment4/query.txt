@@ -7,7 +7,7 @@ SELECT projects.id, projects.name, users.login FROM projects INNER JOIN users ON
 ((SELECT COUNT(distinct(author_id)) FROM commits WHERE project_id = projects.id) >= 10) AND 
 --have at least 10 changes (commits or pull requests) during the previous month,	
 SELECT (SELECT COUNT(id) FROM commits WHERE project_id = projects.id AND TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), DATE_FORMAT(NOW(),'%Y-%m-%d')) <= 1) + 
-(SELECT COUNT(head_repo_id) FROM pull_requests, pull_request_history WHERE head_repo_id=projects.id AND pull_requests.id=pull_request_history.pull_request_id AND TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), DATE_FORMAT(NOW(),'%Y-%m-%d')) <= 1) >= 10 AND
+(SELECT COUNT(head_repo_id) FROM pull_requests, pull_request_history WHERE head_repo_id=projects.id AND pull_requests.id=pull_request_history.pull_request_id AND pull_request_history.action='opened' AND TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), DATE_FORMAT(NOW(),'%Y-%m-%d')) <= 1) >= 10 AND
 --at least one year old -works 4
 (TIMESTAMPDIFF(year, DATE_FORMAT(projects.created_at,'%Y-%m-%d'), DATE_FORMAT(NOW(),'%Y-%m-%d')) >= 1) AND 
 --at least one commit -works 5
