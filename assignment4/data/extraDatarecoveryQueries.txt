@@ -1,26 +1,32 @@
 --get nr of contributors per repo
 select count(user_id) from project_members where repo_id in (8,34) GROUP BY repo_id order by repo_id asc
 	
---get nr pull requests per project
+--get total nr pull requests per project --not opened because all that matters is check that not 0
 select base_repo_id, count(id) from pull_requests where base_repo_id in (8,34) group by base_repo_id order by base_repo_id asc
 
---get nr commits and age in months per project
-select TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') as commit_age_in_months, count(commits.id) from commits, project_commits where 
-    project_commits.project_id in (8,34) and 
-    project_commits.commit_id=commits.id and 
-    commits.project_id=project_commits.project_id 
-    group by project_commits.project_id order by project_commits.project_id asc
+--add projects with 0
+select id from projects where projects.id in (ids) and projects.id not in (allpullreqsnozero) 
+
+--get total nr commits per project
+select project_id, count(commits.id) from commits where commits.project_id in (8,34) group by project_id order by project_id asc
+
+--add projects with 0
+select id from projects where projects.id in () and projects.id not in () 
+
+--get nr commits and in last month per project
+select project_id as pid, count(id) as cid from commits where 
+    project_id in (8,19,34) and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') >= 0 group by project_id
 	
-select count(commits.id) from commits, project_commits where 
-    project_commits.project_id in (8,34) and 
-    project_commits.commit_id=commits.id and 
-    commits.project_id=project_commits.project_id and 
-	TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and
-	TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') >= 0
-    group by project_commits.project_id order by project_commits.project_id asc
+--add projects with 0
+select id from projects where projects.id in () and projects.id not in ()
+
 	
 --get nr pull requests and age in month per project (testing)
-select TIMESTAMPDIFF(month, DATE_FORMAT(created_at,'%Y-%m-%d'), '2014-03-06') as pull_req_age_in_months, 
- count(pull_request_history.id) from pull_request_history, pull_requests where 
+select pull_requests.base_repo_id, count(pull_request_id) from pull_request_history inner join pull_requests on pull_request_id=pull_requests.id and 
+    base_repo_id in (8,34) and 
     pull_request_history.action='opened' and 
-    pull_request_id in (select id from pull_requests where base_repo_id in (8,34)) group by base_repo_id order by base_repo_id asc
+    TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') >= 0 
+    ?group by base_repo_id? order by base_repo_id
