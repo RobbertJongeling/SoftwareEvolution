@@ -30,3 +30,7 @@ select pull_requests.base_repo_id, count(pull_request_id) from pull_request_hist
     TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and 
     TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') >= 0 
     ?group by base_repo_id? order by base_repo_id
+
+	
+--select owner
+	SELECT projects.id, users.login FROM projects INNER JOIN users ON projects.owner_id=users.id  where projects.id in ()
