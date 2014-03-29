@@ -40,6 +40,7 @@ module Run
 					contingency.save
 					project.contingency = contingency
 				rescue Travis::Client::NotFound => e
+				rescue Travis::Client::Error => e
 				end
 				project.processed!
 				project.save
