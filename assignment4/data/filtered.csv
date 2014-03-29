@@ -1,4 +1,4 @@
-"id","name","nr contributors","commits last month","pull reqs last month","changesLastMonth","age_in_days","language","commits all","pull reqs all","totalChanges"
+"id","name","nr_contributors","commits_last_month","pull_reqs_last_month","changes_last_month","age_in_days","language","commits_all","pull_reqs_all","total_changes"
 63,"unisubs",15,298,41,339,930,"Python",7540,330,7870
 127,"addon-sdk",17,89,87,176,1345,"Python",2617,1420,4037
 190,"SimianArmy",47,7,8,15,608,"Java",174,95,269
