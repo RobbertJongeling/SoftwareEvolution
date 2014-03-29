@@ -1,0 +1,8 @@
+source 'http://rubygems.org'
+
+gem 'commander'
+gem 'travis'
+gem 'activerecord'
+gem 'sqlite3'
+gem 'ripl'
+gem 'json'

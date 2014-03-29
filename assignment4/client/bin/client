@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+
+require 'csv'
+
+require 'rubygems'
+require 'bundler/setup'
+require 'commander/import'
+require 'active_record'
+require 'travis'
+require 'ripl'
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + "/../")
+
+require 'lib/client.rb'
+
+require 'config/database.rb'
+require 'config/schema.rb'
+
+program :version, '0.0.1'
+program :description, 'Using a list of GitHub projects, this program will gather the number of passed and failed builds on Travis CI for both traditional commits and pull requests.'
+ 
+command :load do |c|
+	c.syntax = 'client load <file>'
+	c.summary = 'Loads in a CSV file with at least two columns and a header row, with column `owner` being owners and `name` being repository names'
+	c.description = 'Loads in a CSV file with at least two columns and a header row. Column `owner` is the repository owner (GitHub username or organization). Column `name` is the repository name.'
+	c.example 'Load all repositories from file /tmp/repos.csv', 'client load /tmp/repos.csv'
+	c.action do |args, options|
+		filename = args.first
+		
+		loader = Load::ProjectLoader.new filename
+		loader.import
+	end
+end
+
+command :run do |c|
+	c.syntax = 'client run'
+	c.summary = 'Runs the analysis'
+	c.description = 'Executes the analysis on all the un-processed projects currently running'
+	c.action do |args, options|
+		Run::Runner.new.run
+	end
+end
+
+command :export do |c|
+	c.syntax = 'client export <file>'
+	c.summary = 'Exports analysis results to a CSV file'
+	c.description = 'Exports analysis results to a CSV file with the following headers: owner, name, commit_passed, commit_failed, pr_passed, pr_failed.'
+	c.example 'Save the analysis results to results.csv in the current folder', 'client export results.csv'
+	c.action do |args, options|
+		filename = args.first
+		
+		exporter = Export::CSVExporter.new filename
+		exporter.export
+	end
+end
+
+command :clean do |c|
+	c.syntax = 'client run'
+	c.summary = 'Deletes everything in the database'
+	c.description = 'Deletes everything in the database'
+	c.action do |args, options|
+		if agree('Really delete everything in the database?')
+			Project.destroy_all
+			puts 'Everything was deleted'
+		else
+			puts 'Nothing was deleted'
+		end
+	end
+end
+
+command :console do |c|
+	c.syntax = 'client console'
+	c.summary = 'Open a console with everything loaded'
+	c.description = 'Open a console with everything loaded'
+	c.action do |args, options|
+		ARGV.clear
+		Ripl.start :binding => binding
+	end
+end
