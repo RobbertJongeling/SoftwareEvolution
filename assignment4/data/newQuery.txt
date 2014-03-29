@@ -1,0 +1,7 @@
+select id, name, language, TIMESTAMPDIFF(day, DATE_FORMAT(projects.created_at,'%Y-%m-%d'), '2014-03-06') as age_in_days from projects where 
+    projects.deleted = 0 and
+    projects.forked_from is null and
+    (projects.language='Ruby' or projects.language='Java' or projects.language='Python') and 
+    TIMESTAMPDIFF(year, DATE_FORMAT(projects.created_at,'%Y-%m-%d'), '2014-03-06') >= 1 and 
+    (select count(user_id) from project_members where project_members.repo_id=projects.id) >= 10 
+    order by projects.id asc

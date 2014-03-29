@@ -1,0 +1,14 @@
+In this section we discuss the steps we perform to collect and analyze GitHub repositories.
+In this research, we collect meta-data of GitHub repositories and use this meta-data to select large and active independent projects.
+This meta-data can be queried using the relational database GHTorrent. \cite{ghtorrent}
+Large and active independent projects are defined to be projects that:
+\begin{itemize}
+\item are not forks of other repositories,
+\item have not been deleted,
+\item have at least 10 different contributors,
+\item have at least 10 changes (commits or pull requests) during the previous month,
+\item are at least one year old,
+\item have both commits and pull requests,
+\item have been developed in Java, Python or Ruby.
+\end{itemize}
+Of these projects, we are interested in analyzing the ones that use Travis CI.
