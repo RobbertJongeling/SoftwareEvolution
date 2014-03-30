@@ -1,3 +1,3 @@
 owner,name,commit_passed,commit_failed,pr_passed,pr_failed,travis_id,nr_contributors,nr_changes,age,lang
-intridea,grape,267,86,376,61,101,14,768,1312,Ruby
-Katello,katello,2985,1545,1682,324,122078,36,18985,693,Ruby
+intridea,grape,12,5,7,7,101,14,768,1312,Ruby
+Katello,katello,4,5,5,5,122078,36,18985,693,Ruby

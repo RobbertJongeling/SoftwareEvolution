@@ -1,9 +1,21 @@
-In this report we study a number of large, active software projects using GitHub and Trevis, a repository hosting service and a continuous integration (CI) tool respectively.
+In this report we study a number of large, active software projects using GitHub and Travis, a repository hosting service and a continuous integration (CI) tool respectively.
 Travis CI automatically builds a project when a change is made, such a change can be made by either a commit or a pull request.
 The purpose of this study is to determine what, if any, differences of the probability of a build to fail there are between changes introduced by commits and changes introduced by pull requests.
 
+To this end, we consider large and active independent projects hosted on GitHub that use Travis CI.
+Large and active independent projects are defined to be projects that:
+\begin{enumerate}
+\item are not forks of other repositories,
+\item have not been deleted,
+\item have at least 10 different contributors,
+\item have at least 10 changes (commits or pull requests) during the previous month,
+\item are at least one year old,
+\item have both commits and pull requests,
+\item have been developed in Java, Python or Ruby.
+\end{enumerate}
+Of these projects, we are interested in analyzing the ones that use Travis CI.
 
-In Section \ref{background}, we briefly discuss GitHub and Travis CI.
-Next, in Section \ref{methodology}, we describe how we obtained the data and what analysis we have performed on the obtained data.
-In Section \ref{results}, we present the obtained data and results of the statistical analysis.
-Then, we briefly reflect on threats to the validity of our results in Section \ref{threats}.
+%In Section \ref{background}, we briefly discuss GitHub and Travis CI.
+%Next, in Section \ref{methodology}, we describe how we obtained the data and what analysis we have performed on the obtained data.
+%In Section \ref{results}, we present the obtained data and results of the statistical analysis.
+%Then, we briefly reflect on threats to the validity of our results in Section \ref{threats}.
