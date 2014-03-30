@@ -6,7 +6,7 @@ dataFrame = read.csv(file="D:\\Documents\\github\\SoftwareEvolution\\assignment4
 
 #function doing all the work
 f <- function(r) {
-	if(r["relevant"] == "true") {	
+	if(r["relevant"] == 'true') {	
 		#create contingency table, map strings as read from csv to numeric
 		x <- c(r["commit_passed"], r["pr_passed"], r["commit_failed"], r["pr_failed"])
 		x <- as.numeric(x)
