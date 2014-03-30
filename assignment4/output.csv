@@ -41,6 +41,8 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 2244,thoughtbot,factory_girl,78,20,311,57,true,1116,81,474,2102,Ruby
 2247,newrelic,rpm,49,17,152,38,true,190514,13,4171,1952,Ruby
 2281,gradle,gradle,0,0,51,2,false,169501,15,9414,1639,Java
+2309,BroadleafCommerce,DemoSite,0,0,0,0,false,,14,928,695,Java
+2532,OpenMRS,openmrs-module-htmlformentry,0,0,0,0,false,,23,300,857,Java
 2713,openshift,rhc,0,0,0,0,false,,12,1301,961,Ruby
 2719,mperham,sidekiq,462,124,594,115,true,7939,13,1528,780,Ruby
 2812,diaspora,diaspora,1308,917,876,1525,true,42,28,12871,1268,Ruby
@@ -65,6 +67,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 4095,elasticsearch,elasticsearch,14,3,11,61,false,84396,10,10206,1487,Java
 4114,CocoaPods,CocoaPods,225,226,776,627,true,7722,48,2211,935,Ruby
 4179,meltmedia,cadmium,0,0,0,0,false,188123,40,787,680,Java
+4563,voldemort,voldemort,0,0,0,0,false,,18,550,1740,Java
 4573,infochimps-labs,ironfan,0,0,0,0,false,47426,16,684,1392,Ruby
 4660,twitter,twitter-cldr-rb,136,39,274,105,true,11495,226,554,740,Ruby
 4751,Catrobat,Catroid,0,0,0,0,false,875464,166,15001,646,Java
@@ -81,7 +84,6 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 5400,ooici,pyon,0,0,0,0,false,155445,44,2340,939,Python
 5465,isenseDev,iSENSE-Hardware,0,0,0,0,false,1278036,11,1984,811,Java
 5516,geoserver,geoserver,39,211,78,182,true,365717,30,3070,847,Java
-5520,CocoaPods,Specs,0,0,0,0,false,8424,440,22718,907,Ruby
 5520,CocoaPods,Specs,0,0,0,0,false,8424,440,22718,907,Ruby
 5556,Sage-Bionetworks,SynapseWebClient,0,0,0,0,false,1269957,16,3629,664,Java
 5591,puppetlabs,facter,430,112,464,9,true,21726,195,1722,1269,Ruby
@@ -102,6 +104,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 7511,Sage-Bionetworks,Synapse-Repository-Services,0,0,0,0,false,1269960,16,4187,653,Java
 7537,kivy,kivy,0,17,0,17,false,289210,11,4451,1219,Python
 7588,OpenMDAO,OpenMDAO-Framework,0,0,0,0,false,1393053,15,6629,983,Python
+7608,reddit,reddit,0,0,0,0,false,,15,3277,2087,Python
 7698,datamapper,do,6,8,40,36,true,1024,11,268,1865,Ruby
 7894,RubyMoney,money,157,30,312,30,true,484,65,758,1952,Ruby
 8127,matplotlib,matplotlib,1059,1165,547,493,true,60356,20,9978,1111,Python
@@ -166,7 +169,10 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 16401,nuxeo,nuxeo-webengine,0,0,0,0,false,1388736,22,117,812,Java
 16640,mozilla-services,mozservices,0,0,0,1,false,9876,11,220,869,Python
 16719,BaseXdb,basex,0,0,313,43,false,8236,14,4413,1114,Java
+16948,BroadleafCommerce,BroadleafCommerce,0,0,0,0,false,,12,4083,818,Java
 16968,crowdint,rails3-jquery-autocomplete,48,10,42,5,true,8326,33,200,1329,Ruby
+17032,Silverpeas,Silverpeas-Core,0,0,0,0,false,,11,3798,1130,Java
+17042,Silverpeas,Silverpeas-Components,0,0,0,0,false,,11,1970,1130,Java
 17196,basho,riak-python-client,68,98,106,131,true,11171,15,714,1420,Python
 17307,aptana,studio3-rcp,0,0,0,0,false,313359,18,237,1603,Java
 17345,jboss-switchyard,tools,0,0,0,0,false,245042,11,603,921,Java
@@ -176,6 +182,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 17735,fatfreecrm,fat_free_crm,40,44,520,613,true,2460,11,3442,1927,Ruby
 17919,spree,spree_i18n,0,0,0,0,false,54335,34,815,1278,Ruby
 18159,jenkinsci,warnings-plugin,0,0,0,0,false,73890,301,400,1178,Java
+18170,shoes,shoes4,339,66,702,69,true,16034,19,1321,651,Ruby
 18217,mozilla,zamboni,0,0,0,0,false,26191,30,11908,1595,Python
 18260,adhearsion,adhearsion,62,79,261,572,true,6230,10,2125,1409,Ruby
 18716,rubygems,rubygems,151,133,847,332,true,2221,13,5583,1420,Ruby
@@ -206,6 +213,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 23043,Netflix,astyanax,0,0,0,0,false,37766,105,541,967,Java
 23052,buildbot,buildbot,228,191,224,67,true,118394,12,3592,1339,Python
 23280,opscode-cookbooks,nginx,18,49,17,21,true,237086,31,423,722,Ruby
+23440,Zipwhip,zipwhip-api,0,0,0,0,false,,11,385,929,Java
 23593,radiant,radiant,4,18,128,173,false,1547,16,493,2085,Ruby
 23623,opscode,knife-ec2,107,52,91,9,true,143040,75,416,1095,Ruby
 23710,rcbops-cookbooks,nova,0,0,0,0,false,1128671,21,718,702,Ruby
@@ -218,6 +226,8 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 24828,jboss-switchyard,quickstarts,0,0,0,0,false,245039,11,460,1106,Java
 25097,plone,plone.app.theming,8,17,28,77,true,50922,235,316,893,Python
 25156,alphagov,govuk_content_models,65,10,169,20,true,26131,91,1025,661,Ruby
+25326,okfn,ckan,0,0,0,0,false,,18,13125,847,Python
+25467,CloudifySource,cloudify,72,14,3775,1011,true,36256,14,6213,770,Java
 25822,nltk,nltk,0,0,0,0,false,349990,11,8625,1641,Python
 26287,collective,collective.facets,0,0,3,13,false,140009,256,38,582,Python
 26423,CONNECT-Solution,CONNECT,0,34,0,20,false,1672115,29,7319,750,Java
@@ -234,9 +244,8 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 28030,exoplatform,forum,0,0,0,0,false,381415,11,314,667,Java
 28175,enthought,chaco,53,21,77,35,true,61819,83,1337,1133,Python
 28304,django-extensions,django-extensions,150,57,251,56,true,16618,11,689,1811,Python
-18170,shoes,shoes4,339,66,702,69,true,16034,19,1321,651,Ruby
-25467,CloudifySource,cloudify,72,14,3775,1011,true,36256,14,6213,770,Java
 28824,cloudfoundry,cloud_controller_ng,176,78,889,348,true,139061,104,2804,623,Ruby
+29408,OpenMRS,openmrs-module-xforms,0,0,0,0,false,,11,375,619,Java
 29465,unepwcmc,SAPI,0,0,924,155,false,100680,13,4984,665,Ruby
 30178,zendesk,zendesk_api_client_rb,57,4,414,48,false,16075,100,668,812,Ruby
 30491,spree,spree_gateway,25,25,69,72,true,54358,13,352,808,Ruby
@@ -256,6 +265,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 35311,puppetlabs,puppetlabs_spec_helper,0,0,0,0,false,21810,74,101,805,Ruby
 35349,lyonrb,biceps,4,0,17,0,false,115882,21,75,888,Ruby
 35378,sensu,sensu-community-plugins,385,117,228,9,true,49088,15,978,812,Ruby
+35649,gatein,gatein-portal,0,0,0,0,false,,19,4985,721,Java
 35704,tinkerpop,blueprints,31,40,262,137,true,72672,14,1503,1487,Java
 35770,rubygems,rubygems.org,127,68,473,246,true,1109,33,1373,1862,Ruby
 35846,JetBrains,kotlin,0,0,0,0,false,380340,20,18576,752,Java
@@ -296,6 +306,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 44682,mozilla-services,tokenserver,0,0,0,0,false,39041,11,437,804,Python
 44967,nuxeo,nuxeo,0,0,0,0,false,1388726,22,826,812,Python
 45316,openSUSE,open-build-service,298,200,1243,587,true,54205,13,11925,966,Ruby
+45348,oe-alliance,enigma2-plugins,0,0,0,0,false,,19,569,612,Python
 45527,dimagi,rapidsms-logistics,0,0,0,0,false,85569,20,529,973,Python
 45614,puppetlabs,puppetlabs-apache,634,159,224,2,false,21723,186,906,1282,Ruby
 45658,cloudera,hue,0,0,0,0,false,21855,34,2240,1354,Python
@@ -322,10 +333,10 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 51690,DawnScience,dawn-workflow,0,0,0,0,false,1284097,12,342,779,Java
 51802,DawnScience,dawn-isencia,0,0,0,0,false,1284093,12,39,779,Java
 52612,Kozea,pygal,0,0,0,0,false,55224,15,518,895,Python
+53198,IVPR,Weave,0,0,0,0,false,,30,3360,1044,Java
 53565,mantidproject,systemtests,0,0,0,0,false,535559,35,1020,875,Python
 54795,campaignmonitor,createsend-java,0,0,88,9,false,111997,10,159,1103,Java
 54878,imagej,imagej-tutorials,0,0,0,0,false,549491,14,82,581,Java
-55068,materialsproject,pymatgen,0,0,0,0,false,358325,28,2289,865,Python
 55068,materialsproject,pymatgen,0,0,0,0,false,358325,28,2289,865,Python
 55219,JetBrains,intellij-community,0,0,0,0,false,380334,23,100315,888,Java
 55816,collective,collective.quickupload,3,2,11,17,false,49729,256,199,745,Python
@@ -349,6 +360,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 59803,plone,plone.app.portlets,0,0,0,0,false,50920,234,504,893,Python
 59903,societies,SOCIETIES-SCE-Services,0,0,0,0,false,1899760,34,806,839,Java
 60101,Shopify,shopify_app,5,0,19,1,false,30638,97,175,1974,Ruby
+60686,jboss-reddeer,reddeer,0,0,0,0,false,,16,737,590,Java
 60891,codeforamerica,follow-all,4,0,491,82,false,190,62,571,1147,Ruby
 61494,nuxeo,nuxeo-jsf,0,0,0,0,false,1388732,22,1447,812,Java
 61551,mfoemmel,fig,0,0,0,0,false,1435479,15,488,1527,Ruby
@@ -374,6 +386,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 67874,openmicroscopy,openmicroscopy,2293,120,934,24,true,380237,50,16184,931,Java
 68102,enthought,enstaller,141,30,290,88,true,61826,74,1523,1142,Python
 68430,mulesoft,facebook-connector,0,0,0,0,false,107337,97,172,1053,Java
+68610,belaban,JGroups,0,0,0,0,false,,11,16267,1215,Java
 69299,nuxeo,nuxeo-drive,0,0,0,0,false,1388812,22,1638,643,Python
 69314,plone,plone.app.layout,0,0,0,0,false,50934,235,547,893,Python
 69357,mozilla,solitude,1,13,2,98,false,53669,25,731,639,Python
@@ -390,6 +403,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 71374,pentaho,data-access,0,0,0,0,false,882124,51,1204,916,Java
 72063,splunk,splunk-sdk-java,0,0,0,0,false,182082,58,855,1021,Java
 72578,psu-stewardship,scholarsphere,1,2,81,53,false,464312,10,1508,889,Ruby
+73635,digitalgreenorg,dg,0,0,0,0,false,,12,3804,848,Java
 73747,wwagner33,solar,0,0,0,0,false,513615,24,1238,1203,Ruby
 74063,opscode,omnibus-ruby,114,14,178,13,true,143060,46,711,751,Ruby
 74349,ella,ella,0,0,105,42,false,50022,11,675,1841,Python
@@ -419,7 +433,9 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 90432,ceph,ceph-cookbooks,4,11,9,0,false,448902,30,281,904,Ruby
 90565,nuxeo,nuxeo-agenda,0,0,0,0,false,1388795,22,119,688,Java
 91064,rapid7,nexpose-client,0,0,0,0,false,323761,42,328,867,Ruby
+92010,sot,eng_archive,0,0,0,0,false,,10,429,960,Python
 92224,genome,dgi-db,0,2,184,126,false,140764,41,761,633,Ruby
+92535,molgenis,molgenis,0,0,0,0,false,,31,2606,1353,Java
 94297,opscode-cookbooks,yum,11,12,33,25,true,237145,26,308,722,Ruby
 94375,sonatype,nexus-maven-plugins,0,0,0,0,false,165066,30,521,630,Java
 95180,rcbops-cookbooks,horizon,0,0,0,0,false,1128674,21,266,702,Ruby
@@ -433,6 +449,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 104697,xwiki,xwiki-enterprise,0,0,0,0,false,723906,17,2711,1094,Java
 105576,xwiki,xwiki-rendering,0,0,0,0,false,723893,17,457,1106,Java
 105762,akvo,akvo-flow,0,0,0,0,false,490913,13,1776,709,Java
+107290,alethiophile,KBDH-VN,0,0,0,0,false,,13,849,728,Python
 107969,jenkinsci,jclouds-plugin,0,0,0,0,false,73865,313,317,1179,Java
 111425,r888888888,danbooru,0,0,0,2,false,13407,18,1945,1491,Ruby
 112319,JFrogDev,build-info,0,0,0,0,false,591527,12,430,1110,Java
@@ -443,7 +460,9 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 119078,collectiveidea,tinder,12,5,39,6,true,1628,12,177,2217,Ruby
 120232,droolsjbpm,droolsjbpm-integration,0,0,0,0,false,806874,37,939,1116,Java
 122473,vmware-serengeti,serengeti-ws,0,0,0,0,false,631238,26,1131,635,Java
+122606,zkoss,zk,0,0,0,0,false,,17,858,1021,Java
 123437,saltstack,salt-contrib,0,0,0,0,false,318871,18,147,836,Python
+123568,oe-alliance,oe-alliance-plugins,0,0,0,0,false,,20,554,617,Python
 123745,jenkinsci,promoted-builds-plugin,0,0,0,0,false,73781,317,183,1179,Java
 125032,plone,Products.Archetypes,0,0,0,0,false,50948,234,509,889,Python
 125357,DawnScience,dawn-common,0,0,0,0,false,1284095,12,969,779,Java
@@ -460,6 +479,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 134768,conversation,babushka-deps,0,0,0,0,false,211564,12,629,1093,Ruby
 135818,unicefuganda,rapidsms-ureport,0,0,0,0,false,713416,11,986,933,Python
 137149,causes,buffet,0,0,0,0,false,683847,26,227,973,Ruby
+138238,bcdev,beam,0,0,0,0,false,,15,2996,1479,Java
 140309,lizardsystem,lizard-fewsjdbc,0,0,21,4,false,77900,16,246,661,Python
 140647,4teamwork,ftw.poodle,0,0,0,0,false,682089,14,229,826,Python
 141140,mindsnacks,Zinc,23,3,67,8,false,512666,19,439,735,Python
@@ -467,9 +487,12 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 141358,4teamwork,ftw.table,0,0,0,0,false,682045,14,540,1077,Python
 141927,rubyspec,rubyspec,0,2,0,6,false,29854,39,6700,2104,Ruby
 142225,xebialabs,community-plugins,0,0,0,0,false,702057,13,457,897,Java
+142238,BroadleafCommerce,blc-authorizenet,0,0,0,0,false,,12,101,577,Java
+142306,BroadleafCommerce,blc-paypal,0,0,0,0,false,,12,95,577,Java
 142564,jenkinsci,perforce-plugin,0,0,0,0,false,73782,317,210,1179,Java
 143729,threerings,clyde,0,0,0,0,false,214297,16,635,1051,Java
 144230,enStratus,documentation,0,0,0,0,false,144185,11,398,687,Python
+144429,OpenMRS,openmrs-module-reporting,0,0,0,0,false,,33,695,625,Java
 145091,plone,archetypes.referencebrowserwidget,0,0,0,0,false,37344,236,229,897,Python
 145822,mysociety,mapit,16,0,70,17,false,90755,22,547,1353,Python
 146799,plone,plonetheme.sunburst,0,0,0,0,false,50921,235,392,893,Python
@@ -496,6 +519,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 163173,Jasig,CalendarPortlet,0,0,0,0,false,209528,17,73,722,Java
 163853,novoda,SQLiteProvider,0,0,0,0,false,232621,14,102,1209,Java
 164170,socialcast,socialcast-command-line,21,0,56,16,false,10936,29,189,1364,Ruby
+165427,sot,xija,0,0,0,0,false,,10,197,1030,Python
 168215,plone,plone.app.contenttypes,0,22,20,127,false,50966,236,655,850,Python
 168886,lizardsystem,flooding-lib,0,0,0,0,false,77908,15,708,636,Python
 169529,phpmyadmin,website,0,0,0,0,false,290714,10,587,760,Python
@@ -506,8 +530,10 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 178035,abiquo,commons-amqp,0,0,0,0,false,101449,27,302,899,Java
 184142,jenkinsci,mercurial-plugin,0,0,0,0,false,73757,298,282,1179,Java
 185366,alphagov,smokey,0,0,0,0,false,26162,101,606,841,Ruby
+188939,Slowpoke101,FTBLaunch,0,0,0,0,false,,14,580,573,Java
 190783,alphagov,trade-tariff-frontend,64,1,271,10,false,178479,97,1351,661,Ruby
 194056,DIRACGrid,VMDIRAC,0,0,0,0,false,663849,22,248,863,Python
+195656,bcdev,ceres,0,0,0,0,false,,11,1156,1479,Java
 196147,projecthydra,hydra-head,101,19,227,37,true,140422,22,1265,1091,Ruby
 198021,Kozea,Multicorn,0,0,0,0,false,55206,15,522,1005,Python
 201224,enthought,traitsui,20,7,25,17,true,61855,74,1151,1053,Python
@@ -519,6 +545,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 211549,Freeseer,freeseer,277,178,188,30,true,388828,23,2717,1556,Python
 213686,zilkey,active_hash,3,5,14,6,false,57700,21,213,1688,Ruby
 213856,iFixit,git-scripts,0,0,0,0,false,114631,20,568,776,Ruby
+218083,pm4j,org.pm4j,0,0,0,0,false,,11,766,788,Java
 218181,openmicroscopy,ome-documentation,1005,37,486,7,true,380239,41,2167,779,Python
 219631,jenkinsci,integrity-plugin,0,0,0,0,false,73966,296,111,1101,Java
 230938,jenkinsci,analysis-core-plugin,0,0,0,0,false,73540,301,220,1179,Java
@@ -527,14 +554,18 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 232705,opscode,knife-windows,48,6,50,4,false,143048,60,196,1098,Ruby
 234674,plone,plone.app.upgrade,0,0,0,0,false,50928,149,304,893,Python
 235039,BlueKai,bluekai_middleware,0,0,0,0,false,286053,27,111,666,Ruby
+241678,id774,automaticruby,0,0,0,0,false,,12,285,746,Ruby
 242675,xebia,Xebium,6,0,36,13,false,431714,92,172,1239,Java
+247032,metsci,glimpse,0,0,0,0,false,,11,172,728,Java
 252194,jubatus,jubatus-java-client,0,0,0,0,false,103877,14,102,692,Java
 252680,aerogear,aerogear-android,115,2,115,1,false,151733,13,941,605,Java
 253596,droolsjbpm,droolsjbpm-tools,0,0,0,0,false,806872,37,452,1120,Java
+256086,bitcoin,bitcoin.org,0,0,0,0,false,,10,1493,918,Ruby
 257425,inviqa,chef-magento,0,0,73,63,false,120616,57,222,598,Ruby
 261125,CocoaPods,Xcodeproj,68,27,309,63,true,7374,31,486,850,Ruby
 270016,leonardofl,radar_parlamentar,22,6,243,16,true,423666,17,610,818,Python
 274836,jenkinsci,email-ext-plugin,0,0,0,0,false,73630,311,383,1179,Java
+278099,jcryptool,crypto,0,0,0,0,false,,12,776,938,Java
 285763,tillnagel,unfolding,0,0,0,0,false,201183,12,788,695,Java
 288440,alphagov,EFG,24,4,216,35,false,185138,101,2753,660,Ruby
 289935,mkovatsc,Californium,2,7,87,9,false,469022,10,781,1088,Java
@@ -550,6 +581,7 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 322949,opscode-cookbooks,firewall,2,3,4,2,false,237050,26,63,722,Ruby
 324846,transmart,Rmodules,0,0,0,0,false,697515,11,100,681,Java
 326632,omaciel,robottelo,229,81,127,6,true,1799282,12,842,693,Python
+331002,janfaessler,FHNW-Informatik-Zusammenfassungen,0,0,0,0,false,,14,312,717,Java
 333400,jclouds,jclouds-examples,0,0,0,0,false,267112,19,199,1121,Java
 333984,alphagov,gds-sso,0,0,0,0,false,26126,55,343,974,Ruby
 344679,plone,Products.ATContentTypes,0,0,0,0,false,50978,149,218,838,Python
@@ -559,8 +591,6 @@ ghtorrent_id,owner,name,commit_passed,commit_failed,pr_passed,pr_failed,relevant
 352799,alphagov,calendars,23,2,85,3,false,26110,90,555,849,Ruby
 356033,mojolingo,Telephony-Dev-Box,0,0,0,0,false,91698,11,235,909,Ruby
 359432,ooici,coverage-model,0,0,0,0,false,155458,20,618,603,Python
-361214,phoet,on_ruby,0,0,0,0,false,58134,10,907,1179,Ruby
-361214,phoet,on_ruby,0,0,0,0,false,58134,10,907,1179,Ruby
 361214,phoet,on_ruby,0,0,0,0,false,58134,10,907,1179,Ruby
 380886,mulesoft,dropbox-connector,0,0,0,0,false,107334,74,55,882,Java
 394661,devbliss,apitester,0,0,0,0,false,370435,32,129,609,Java
