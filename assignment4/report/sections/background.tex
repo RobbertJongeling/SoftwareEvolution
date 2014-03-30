@@ -4,11 +4,14 @@ In this section we discuss GitHub and Trevis CI.
 GitHub can be used to host software projects that use the GIT revision control system. 
 The GitHub system provides a number of services related to managing these projects. 
 A project is hosted in a repository. 
-Several developers can contribute to a repository by means of commits. 
-A different way of contributing to a repository is to fork the main development branch.
-Then commit changes to that branch and when you want to integrate your changes into the main branch, issue a pull request.
-Then a developer on the main branch that is entitled to do this will accept or deny the request.
-On acceptance of the pull request, the changes made in the separate branch will be conducted in the main branch.
+Several developers can contribute to a repository by means of commits to this single repository.
+This is calle the Shared Repository Model.
+ 
+A different way of contributing to a repository is the Fork and Pull model.
+In this model, anyone is allowed to fork a repository and make changes to their own fork.
+To make the changes to the main repository, a pull request must be issued.
+The project maintainer will then accept or deny this request.
+On acceptance of the pull request, the changes made in the fork will be conducted in the main repository.
 
 Furthermore, GitHub provides functionality to improve collaboration of multiple developers on the same project.
 Issues can be created and assigned to a contributor. 

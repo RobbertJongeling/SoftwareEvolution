@@ -2,7 +2,7 @@ In this section we discuss the steps we perform to collect and analyze GitHub re
 In this research, we collect meta-data of GitHub repositories and use this meta-data to select large and active independent projects.
 This meta-data can be queried using the relational database GHTorrent. \cite{ghtorrent}
 Large and active independent projects are defined to be projects that:
-\begin{itemize}
+\begin{enumerate}
 \item are not forks of other repositories,
 \item have not been deleted,
 \item have at least 10 different contributors,
@@ -10,5 +10,27 @@ Large and active independent projects are defined to be projects that:
 \item are at least one year old,
 \item have both commits and pull requests,
 \item have been developed in Java, Python or Ruby.
-\end{itemize}
+\end{enumerate}
 Of these projects, we are interested in analyzing the ones that use Travis CI.
+
+\subsection{GHTorrent}
+We queried the GHTorrent MySQL database by using the web interface available at \url{ghtorrent.org/dblite}. 
+Because of the instability of this endpoint, we decided to use relatively simple queries and do most of the filtering in a spreadsheet.
+
+First, we queried for repositories adhering to points 1,2,3,5 and 7 as enumerated in the definition of large and active independent projects.
+The query used is included in appendix \ref{app:firstquery}.
+The database contains data up to and including march 6th 2014 so in this and following queries we chose that date to relate the age of projects, commits and pull requests to.
+
+We then execute a number of small queries to gather information such as the number of contributors per repository. 
+We also queried the projects owner and the total number of commits and pull requests per project. 
+From them, we get information that enables us to filter on point 6 of the definition of large and active independent projects. 
+This information also enables us to provide the necessary input for the Travis API.
+These queries are included in appendix \ref{app:smallqueries}. 
+They do not necessarily return a value for all project ids found in the first query.
+In order to get a complete list, we add values of 0 for every project for which no total number of commits or total number of pull requests has been found.
+
+We now only need to verify point 4 of the definition of large and active independent projects. 
+The way of working is very similar to the execution of the smaller queries. 
+The queries to retrieve the number of commits and the number of pull requests in the last month per project are included in appendix \ref{app:lastMonth}
+
+
