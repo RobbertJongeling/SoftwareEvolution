@@ -1,3 +1,59 @@
 \begin{appendices}
+\section{First query} \label{app:firstquery}
+\begin{scriptsize}
+\begin{verbatim}
+select id, name, language, TIMESTAMPDIFF(day, DATE_FORMAT(projects.created_at,'%Y-%m-%d'), '2014-03-06') as age_in_days 
+  from projects where 
+    projects.deleted = 0 and
+    projects.forked_from is null and
+    (projects.language='Ruby' or projects.language='Java' or projects.language='Python') and 
+    TIMESTAMPDIFF(year, DATE_FORMAT(projects.created_at,'%Y-%m-%d'), '2014-03-06') >= 1 and 
+    (select count(user_id) from project_members where project_members.repo_id=projects.id) >= 10 
+    order by projects.id asc
+\end{verbatim}
+\end{scriptsize}
+
+\section{Small queries} \label{app:smallqueries}
+Here we show the smaller queries executed to retrieve more detailed data of the projects. All the project ids of the projects found in the first query are listed and here abbreviated by \texttt{allIDs}.
+\begin{scriptsize}
+\begin{verbatim}
+--get number of contributors per repository
+select count(user_id) from project_members where 
+  repo_id in (allIDs) GROUP BY repo_id order by repo_id asc
+	
+--get total nr pull requests per project --not opened because all that matters is check that not 0
+select base_repo_id, count(id) from pull_requests where 
+  base_repo_id in (allIDs) group by base_repo_id order by base_repo_id asc
+
+--get total nr commits per project
+select project_id, count(commits.id) from commits where 
+  commits.project_id in (allIDs) group by project_id order by project_id asc
+
+--select owner
+SELECT projects.id, users.login FROM projects INNER JOIN users ON projects.owner_id=users.id  where 
+  projects.id in (allIDs) 
+\end{verbatim}
+\end{scriptsize}
+
+\section{Last month queries} \label{app:lastMonth}
+Here we show the smaller queries executed to retrieve commit and pull request data in the last month. All the project ids of the projects found in the first query are listed and here abbreviated by \texttt{allIDs}. Here we also check if the time difference is greater than or equal to zero months because the database contains records of commits in the future.
+\begin{scriptsize}
+\begin{verbatim}
+--get number of commits and in last month per project
+select project_id as pid, count(id) as cid from commits where 
+    project_id in (allIDs) and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(commits.created_at,'%Y-%m-%d'), '2014-03-06') >= 0 group by project_id
+
+--get nr pull requests and age in month per project 
+select pull_requests.base_repo_id, count(pull_request_id) from 
+  pull_request_history inner join pull_requests on pull_request_id=pull_requests.id and 
+    base_repo_id in (8,34) and 
+    pull_request_history.action='opened' and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') <= 1 and 
+    TIMESTAMPDIFF(month, DATE_FORMAT(pull_request_history.created_at,'%Y-%m-%d'), '2014-03-06') >= 0 
+    group by base_repo_id order by base_repo_id
+\end{verbatim}
+\end{scriptsize}
 
 \end{appendices}
