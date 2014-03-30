@@ -4,30 +4,34 @@ module Export
 			@filename = filename
 		end
 		
-		def export all = true
-			contingencies = []
-			if all
-				contingencies = Contingency.all
-			else
-				contingencies = Contingency.where(Contingency.relevant?)
-			end
+		def export
+			projects = Project.all
 		
 			CSV.open(@filename, "wb", :write_headers => true, :headers => headers) do |csv|
-				contingencies.each do |contingency|
+				projects.each do |project|
+					if project.contingency.nil?
+						project.contingency = Contingency.new({
+							:commit_passed => 0,
+							:commit_failed => 0,
+							:pr_passed => 0,
+							:pr_failed => 0,
+							:project => project
+						})
+					end
 					csv << [
-						contingency.project.ghtorrentid,
-						contingency.project.owner,
-						contingency.project.name,
-						contingency.commit_passed,
-						contingency.commit_failed,
-						contingency.pr_passed,
-						contingency.pr_failed,
-						contingency.relevant?,
-						contingency.project.travisid,
-						contingency.project.nr_contributors,
-						contingency.project.nr_changes,
-						contingency.project.age,
-						contingency.project.lang
+						project.ghtorrentid,
+						project.owner,
+						project.name,
+						project.contingency.commit_passed,
+						project.contingency.commit_failed,
+						project.contingency.pr_passed,
+						project.contingency.pr_failed,
+						project.contingency.relevant?,
+						project.travisid,
+						project.nr_contributors,
+						project.nr_changes,
+						project.age,
+						project.lang
 					]
 				end
 			end
