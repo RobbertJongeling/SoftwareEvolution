@@ -6,6 +6,7 @@ ActiveRecord::Schema.define do
 			table.column :processed, :boolean
 			table.column :contingency_id, :integer
 			table.column :travisid, :integer
+			table.column :ghtorrentid, :integer
 			table.column :nr_contributors, :integer
 			table.column :nr_changes, :integer
 			table.column :age, :integer

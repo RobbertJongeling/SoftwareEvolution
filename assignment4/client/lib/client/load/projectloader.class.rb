@@ -12,8 +12,19 @@ module Load
 					:nr_contributors => row['nr_contributors'],
 					:nr_changes => row['total_changes'],
 					:age => row['age_in_days'],
-					:lang => row['language']
+					:lang => row['language'],
+					:ghtorrentid => row['id']
 				})
+			end
+		end
+		
+		def import_ghids
+			CSV.foreach(@filename, :headers => true) do |row|
+				project = Project.find_by_owner_and_name(row['owner'], row['name'])
+				unless project.nil?
+					project.ghtorrentid = row['id']
+					project.save
+				end
 			end
 		end
 	end
