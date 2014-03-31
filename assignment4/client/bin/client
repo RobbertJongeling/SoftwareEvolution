@@ -21,8 +21,8 @@ program :description, 'Using a list of GitHub projects, this program will gather
  
 command :load do |c|
 	c.syntax = 'client load <file>'
-	c.summary = 'Loads in a CSV file with at least two columns and a header row, with column `owner` being owners and `name` being repository names'
-	c.description = 'Loads in a CSV file with at least two columns and a header row. Column `owner` is the repository owner (GitHub username or organization). Column `name` is the repository name.'
+	c.summary = 'Loads in a CSV file with the required fields (see description)'
+	c.description = 'Loads in a CSV file with the following fields: `name`, `owner`, `nr_contributors`, `total_changes`, `age_in_days`, `language`, `id`'
 	c.example 'Load all repositories from file /tmp/repos.csv', 'client load /tmp/repos.csv'
 	c.action do |args, options|
 		filename = args.first
@@ -44,7 +44,7 @@ end
 command :export do |c|
 	c.syntax = 'client export <file>'
 	c.summary = 'Exports analysis results to a CSV file'
-	c.description = 'Exports analysis results to a CSV file with the following headers: owner, name, commit_passed, commit_failed, pr_passed, pr_failed.'
+	c.description = 'Exports analysis results to a CSV file with the following headers: `ghtorrent_id`, `owner`, `name`, `commit_passed`, `commit_failed`, `pr_passed`, `pr_failed`, `relevant`, `travis_id`, `nr_contributors`, `nr_changes`, `age`, `lang`.'
 	c.example 'Save the analysis results to results.csv in the current folder', 'client export results.csv'
 	c.action do |args, options|
 		filename = args.first
