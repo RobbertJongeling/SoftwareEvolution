@@ -34,8 +34,7 @@ We see that the average number of contributors for the identified Java projects 
 %What can you say about popularity of direct code modifications (commit) vs. indirect code modifications (pull requests) in those projects present on Travis CI as opposed to all projects you have identified? 
 %Can any differences between projects written in different programming languages be observed? How can you explain your observations?
 
-
-\subsection{Statistical analysis}
+\subsubsection*{Not enough data}
 %Discuss the projects that did not have enough data to be subjected to statistical analysis. 
 %How many of them have you found?
 %Which cell in the contingency table was usually the one with less than five instances? 
@@ -55,3 +54,100 @@ The fact that the number of commits is lower than the number of pull requests fo
 Of the projects that 114 projects that do not have enough data to be suitable for our statistical analysis, 55 are written in Ruby, 37 in Python and 22 in Java.
 This is an interesting observation as we saw earlier that the number projects is evenly distributed over the three programming languages.
 There is no clear reason for this difference between the programming languages.
+
+\subsection{Statistical analysis}
+%Discuss the results of the statistical analysis. You should try and identify patterns in the results of the tests you have performed by addressing the following questions:
+%Can you claim that the way the code modification is submitted affects the build success/failure?
+%With respect to this relation, do you observed differences between repositories containing source code written in different languages?
+%With respect to this relation, do you observed differences between repositories of different age?
+%With respect to this relation, do you observed differences between repositories with different numbers of contributors?
+%With respect to this relation, do you observed differences between repositories with different number of changes in the last month?
+%Would your answers be affected if instead of the 0.05 threshold you would have considered thresholds of 0.01 or 0.1?
+
+Now, we discuss the results of the statistical analysis on the 193 projects that have enough data to perform the statistical analysis as described in Section \ref{methodology}.
+Of these 193 projects, 84 (43.5\%) have a p-value of the chi-squared test of less than 0.05. 
+We can not refute the null hypothesis that the success of a build is independent of the way a code change is introdced.
+With confidence intervals of 0.01 and 0.1 there are 68(35.2\%) and 96 (49.7\%) projects for which the null hypothesis can be refuted respectively.
+
+When comparing different programming languages we observe few differences between the languages.
+Table \ref{tab:p-for-lang} contains for each of the studied languages the number of projects having a p-value lower than 0.05.
+\begin{table}[h]
+\begin{tabular}{ l | l l l}
+ & p $<$ 0.05 & total & \%\\
+\hline
+Java & 7 & 19 & 36.8\\
+Python & 31 & 59 & 52.5 \\
+Ruby & 46 & 115 & 40.0
+\end{tabular}
+\caption{Number of projects per programming language for which the p-value is smaller than 0.05.}
+\label{tab:p-for-lang}
+\end{table}
+There is a relatively large difference between Python and the other languages. 
+For the Java projects there are too few projects to really say anything about this result.
+
+When comparing the projects on age we identify three categories; age between 365 and 730 days, age between 731 and 1461 days and older projects.
+Table \ref{tab:p-for-age} contains for each of the studied ages the number of projects having a p-value lower than 0.05.
+\begin{table}[h]
+\begin{tabular}{ l | l l l}
+ & p $<$ 0.05 & total & \%\\
+\hline
+1-2 years & 15 & 45 & 33.3\\
+3-4 years & 49 & 108 & 45.4 \\
+5+ years & 20 & 40 & 50.0
+\end{tabular}
+\caption{Number of projects per age group for which the p-value is smaller than 0.05.}
+\label{tab:p-for-age}
+\end{table}
+We see that for older projects there are more rejections of the null hypothesis. 
+
+When comparing the projects on the number of contributors we identify three categories; between 10-24 contributors, 25-50 contributors and 51 or more contributors.
+Table \ref{tab:p-for-contributors} contains for each of the studied number of contributors the number of projects having a p-value lower than 0.05.
+\begin{table}[h]
+\begin{tabular}{ l | l l l}
+ & p $<$ 0.05 & total & \%\\
+\hline
+10-24 contributors & 54 & 104 & 51.9\\
+25-50 contributors & 20 & 47 & 42.6 \\
+50+ contributors & 10 & 42 & 23.9
+\end{tabular}
+\caption{Number of projects per grouped number of contributors for which the p-value is smaller than 0.05.}
+\label{tab:p-for-contributors}
+\end{table}
+We see that for projects with more contributors there are fewer where there is a statistically significant relation between the success of a build and the way the changes are introduced.
+
+When comparing the projects on the number of changes in the last month, we identify three categories; between 10-49 changes, 50-140 changes and more than 150 changes.
+Table \ref{tab:p-for-changes} contains for each of the studied number of changes in the last month the number of projects having a p-value lower than 0.05.
+\begin{table}[h]
+\begin{tabular}{ l | l l l}
+ & p $<$ 0.05 & total & \%\\
+\hline
+10-49 changes & 22 & 68 & 32.4\\
+50-150 changes & 22 & 61 & 36.1 \\
+150+ changes & 40 & 64 & 62.5
+\end{tabular}
+\caption{Number of projects per grouped number of changes in the last month for which the p-value is smaller than 0.05.}
+\label{tab:p-for-changes}
+\end{table}
+An interesting observation here is that from the active projects, a lot more refute the null hypothesis. 
+This indicates that for more active projects, there is more likely a relation between the success of a build and the way the changes are introduced.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
