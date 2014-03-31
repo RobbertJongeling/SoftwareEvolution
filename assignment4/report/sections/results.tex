@@ -1,0 +1,33 @@
+In this section we present and analyze the results obtained from the various steps as described in Section \ref{methodology}.
+
+\subsection{Identified repositories}
+We identified 734 projects adhering to our definition of large and active independent projects.
+On average these projects have 49.4 contributors. 
+Note that these are all contributors with commit access to the repository.
+The project with the most amount of contributors (440) also has the most changes in the last month (4441).
+The average amount of changes in the last month is 141.9.
+The average age of the identified projects is 966.0 days. 
+As we are looking for large projects, that are also at least one year old, this average is likely much higher than the overall average age of all GitHub projects.
+
+Of the total of 734 identified projects, 263 are written in Java, 239 in Ruby and 232 in Python. 
+This is a bit surprising because in 2012, there were almost twice as many Ruby projects than Python projects created on GitHub. \footnote{http://adambard.com/blog/top-github-languages-for-2013-so-far/}
+In Table \ref{tab:allChanges} we present the average number of commits and pull requests per programming language.
+\begin{table}[h]
+\begin{tabular}{ l | l l }
+ & commits & pull requests\\
+\hline
+Java & 2371.9 & 197.8 \\
+Python & 1833.6 & 332.1 \\
+Ruby & 1893.3 & 341.2
+\end{tabular}
+\caption{Average number of commits and pull requests of the identified projects per programming language.}
+\label{tab:allChanges}
+\end{table}
+A clear difference can be seen between Java and the other programming languages. 
+Where the total number of changes is similar across programming languages, in Java a third more changes are made through commits as compared to Python and Ruby.
+This might have to do with the difference in the number of contributors to projects, an active community where more people are working together should yield more pull requests as those people will work on forks more in order to not mess up the project. 
+We see that the average number of contributors for the identified Java projects is 43.4, whereas this average is 53.4 and 52.2 for Python and Ruby projects respectively.
+
+\subsection{Travis}
+
+\subsection{Statistical analysis}
