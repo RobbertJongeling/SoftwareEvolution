@@ -3,7 +3,7 @@ In this section we discuss the steps we perform to collect and analyze GitHub re
 \subsection{Finding projects on GHTorrent}
 In this research, we collect meta-data of GitHub repositories and use it to select large and active independent projects.
 This meta-data can be queried using the relational database GHTorrent. \cite{ghtorrent}
-We query the GHTorrent MySQL database by using the web interface available at \url{ghtorrent.org/dblite}. 
+We query the GHTorrent MySQL database by using the web interface available at \url{http://ghtorrent.org/dblite}. 
 Because of the instability of this endpoint, we decided to use relatively simple queries and do most of the filtering of the resulting \texttt{.csv} files in a spreadsheet program.
 
 First, we queried for repositories adhering to points 1,2,3,5 and 7 as enumerated in the definition of large and active independent projects.
@@ -58,9 +58,9 @@ The tool supports the following commands:
 
 \subsection{Statistical analysis with R}
 For each large and active independent project that uses Travis CI, we have now identified four numbers; for both commits and pull requests the number of corresponding builds to pass and fail.
-For each projects, we added a column \texttt{relevant} which is "true" if and only if all these numbers are greater than or equal to 5.
+For each projects, we added a column \texttt{relevant} which is ``true" if and only if all these numbers are greater than or equal to 5.
 We perform chi-squared test on the input and as known in the literature, a good rule of thumb for the chi-squared test is that the value of each cell in the contingency table is at least 5.
-Therefore we are not interested in the other projects and the value of the column \texttt{relevant} for those projects is "false".
+Therefore we are not interested in the other projects and the value of the column \texttt{relevant} for those projects is ``false".
 
 As mentioned, we perform a chi-squared test on the contingency table of every project.
 This contingency table is a 2x2 matrix with rows corresponding to commits and pull requests and columns corresponding to passed and failed builds.
