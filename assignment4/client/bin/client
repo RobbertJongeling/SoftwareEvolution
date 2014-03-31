@@ -32,19 +32,6 @@ command :load do |c|
 	end
 end
 
-command :loadids do |c|
-	c.syntax = 'client loadids <file>'
-	c.summary = 'Loads in CSV file to add id\'s to existing repo\'s.'
-	c.action do |args, options|
-		filename = args.first
-		
-		loader = Load::ProjectLoader.new filename
-		loader.import_ghids
-	end
-end
-
-
-
 command :run do |c|
 	c.syntax = 'client run'
 	c.summary = 'Runs the analysis'

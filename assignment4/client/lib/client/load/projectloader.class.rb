@@ -17,15 +17,5 @@ module Load
 				})
 			end
 		end
-		
-		def import_ghids
-			CSV.foreach(@filename, :headers => true) do |row|
-				project = Project.find_by_owner_and_name(row['owner'], row['name'])
-				unless project.nil?
-					project.ghtorrentid = row['id']
-					project.save
-				end
-			end
-		end
 	end
 end
