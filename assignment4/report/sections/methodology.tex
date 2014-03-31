@@ -33,12 +33,17 @@ Therefore we are not interested in the other projects and the value of the colum
 
 As mentioned, we perform a chi-squared test on the contingency table of every project.
 This contingency table is a 2x2 matrix with rows corresponding to commits and pull requests and columns corresponding to passed and failed builds.
-%//TODO waarom chi-squared? McNemar's test?
-After performing the chi-squared test, we calculate its p-value and residuals. %//TODO why?
-Then, we calculate the odds ratio of the contingency table and report its measure and p-value. %/TODO why?
+After performing the chi-squared test, we calculate its p-value and residuals.
+Then, we calculate the odds ratio of the contingency table and report its measure and p-value. 
 The script used to perform the statistical analysis has been included in Appendix \ref{app:R-script}
 
-%wellicht een nieuwe alinea met uitleg waarom die stappen
+%//TODO wellicht een bronvermelding van de opdracht tekst, dit is er wel erg op geinspireerd
+We perform the chi-squared test in order to find out whether the values in the contingency table are independent or not, i.e., whether the success or failure of a build is independent from the way the change is made.
+The null hypothesis is that the values are independent, to judge whether the result is statistically significant, we calculate the p-value.
+We will state that the null hypothesis can be rejected if the p-value is lower than 0.05.
 
-
+We inspect the residuals of the chi-squared test to find out how the number of occurrences %//TODO of what?
+observed relates to the expected number under the independence assumption.
+To formalize the strength of this dependence, we calculate the odds ratio and corresponding p-value. 
+Here, we also use the standard 95\% confidence interval
 
