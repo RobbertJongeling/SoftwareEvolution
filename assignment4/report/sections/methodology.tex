@@ -24,6 +24,37 @@ The way of working is very similar to the execution of the smaller queries.
 The queries to retrieve the number of commits and the number of pull requests in the last month per project are included in appendix \ref{app:lastMonth}
 
 \subsection{Retrieving information from the Travis CI API}
+To interface with Travis, we use the official Travis API client library, \texttt{travis.rb}.
+
+We wrote a small command line tool that loads in the output from the previous step, processes it and outputs the result.
+To make it easy to recover from possible errors during the proces, we separated all the steps and save all intermediary results within an SQLite database.
+The tool supports the following commands:
+
+\begin{description}
+	\item[\texttt{load}] Loads projects from a CSV file into the database
+	\item[\texttt{run}] Runs the Travis analysis on all non-processed projects
+	\item[\texttt{export}] Exports the analysis results to a CSV file
+	\item[\texttt{console}] Opens an interactive console with the model loaded so it's possible to query the database through the \texttt{activerecord} interface. (For instance, run \texttt{Project.\-where(:processed => true)\.count} to get the number of processed projects).
+	\item[\texttt{clean}] Cleans the database
+	\item[\texttt{help [command]}] Outputs general help, or a detailed description of a certain command (with examples of usage)
+\end{description}
+
+	\subsubsection{Installation}
+	A copy of the tool has been included along with this report.
+	
+	Besides \texttt{travis.rb}, the tool depends on a number of libraries.
+	We use the popular library dependency manager \texttt{bundler} for this.
+	To get the required libraries, make sure \texttt{bundler} is installed and run \texttt{bundle install} from the root directory of the tool.
+	
+	Once all dependencies are installed, the tool can be run as \texttt{./bin/client $<$command$>$}.
+
+	\subsubsection{Analysis workflow}
+	When running the analysis, the tool first sets up a \texttt{Travis::Client} instance with the special endpoint "tue.travis-ci.org".
+	Then, for each unprocessed project in the database, it gets that project using \texttt{Travis::Client::repo}.
+	
+	When the repository is loaded, the tool loops through all available builds (using the \texttt{each\_build} method) and increases the value in one of the cells of the contingency table that belongs to the project based on the build status (we considered \texttt{passed} and \texttt{failed}) and type (either pull request or commit).
+	
+	Once this is completed, the contingency table is saved and the project is marked as processed.
 
 \subsection{Statistical analysis with R}
 For each large and active independent project that uses Travis CI, we have now identified four numbers; for both commits and pull requests the number of corresponding builds to pass and fail.
