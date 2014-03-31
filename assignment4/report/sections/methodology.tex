@@ -1,14 +1,14 @@
 In this section we discuss the steps we perform to collect and analyze GitHub repositories.
 
 \subsection{Finding projects on GHTorrent}
-In this research, we collect meta-data of GitHub repositories and use this meta-data to select large and active independent projects.
+In this research, we collect meta-data of GitHub repositories and use it to select large and active independent projects.
 This meta-data can be queried using the relational database GHTorrent. \cite{ghtorrent}
 We query the GHTorrent MySQL database by using the web interface available at \url{ghtorrent.org/dblite}. 
-Because of the instability of this endpoint, we decided to use relatively simple queries and do most of the filtering of the resulting csv files in a spreadsheet program.
+Because of the instability of this endpoint, we decided to use relatively simple queries and do most of the filtering of the resulting \texttt{.csv} files in a spreadsheet program.
 
 First, we queried for repositories adhering to points 1,2,3,5 and 7 as enumerated in the definition of large and active independent projects.
 The query used is included in Appendix~\ref{app:firstquery}.
-The database contains data up to and including march 6th 2014 so in this and following queries we chose that date to relate the age of projects, commits and pull requests to.
+The database contains data up to and including March 6th 2014 so in this and following queries we chose that date to relate the age of projects, commits and pull requests to.
 
 We then execute a number of small queries to gather information such as the number of contributors per repository. 
 We also queried the projects owner and the total number of commits and pull requests per project. 
@@ -48,8 +48,8 @@ The tool supports the following commands:
 	
 	Once all dependencies are installed, the tool can be run as \texttt{./bin/client $<$command$>$}.
 
-	\subsubsection{Analysis workflow}
-	When running the analysis, the tool first sets up a \texttt{Travis::Client} instance with the special endpoint "tue.travis-ci.org".
+	\subsubsection{Workflow analysis}
+	When running the analysis, the tool first sets up a \texttt{Travis::Client} instance with the special endpoint ``tue.travis-ci.org".
 	Then, for each unprocessed project in the database, it gets that project using \texttt{Travis::Client::repo}.
 	
 	When the repository is loaded, the tool loops through all available builds (using the \texttt{each\_build} method) and increases the value in one of the cells of the contingency table that belongs to the project based on the build status (we considered \texttt{passed} and \texttt{failed}) and type (either pull request or commit).
