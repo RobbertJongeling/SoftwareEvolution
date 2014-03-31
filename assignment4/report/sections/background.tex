@@ -1,7 +1,7 @@
 In this section we discuss GitHub and Trevis CI.
 
 \subsection{GitHub}
-GitHub can be used to host software projects that use the GIT revision control system. 
+GitHub can be used to host software projects that use the \texttt{git} revision control system. 
 The GitHub system provides a number of services related to managing these projects. 
 A project is hosted in a repository. 
 Several developers can contribute to a repository by means of commits to this single repository.
@@ -18,3 +18,20 @@ Issues can be created and assigned to a contributor.
 On every line of every commit any contributor can comment, this enhances the collaborative code review process.
 
 \subsection{Travis CI}
+Travis is a system that enables developers to easily set up continuous integration.
+Continuous integration is the practice of building a software project from source to product frequently.
+Completing the entire build process on a regular basis should prevent integration problems that can occur once the project is due for a release.
+
+Normally, most developers only test their parts of the system when they have made a change.
+With continuous integration, the goal is to test the entire system by any availble means.
+This includes unit testing, but can also include the generation and deployment of documentation or the deployment of the software itself.
+Usually, a log of the test results is kept so progress can be visualized.
+
+Travis is a hosted service, which means users do not have to set up software themselves, but can use the Travis platform.
+Furthermore, Travis makes it really easy for GitHub users to use the service, as every public GitHub repository already has a Travis profile.
+The only thing repository maintainers have to do is enable a callback to Travis whenever an interesting event happens and configure Travis by checking a configuration file called \texttt{.travis.yml} into the root of their repository.
+
+In the case of Travis, buidling 'frequently' is every time a change is pushed to (any branch of) the repository on GitHub or when someone issues a pull request.
+Travis keeps a log of everything that has happened during the build process, enabling developers to inspect what went wrong in case of a failure.
+
+In addition, Travis can be configured to send notifications when a build has completed, for instance through email or IRC.
