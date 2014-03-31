@@ -1,4 +1,4 @@
-In this section we present and analyze the results obtained from the various steps as described in Section \ref{methodology}.
+In this section we present and analyze the results obtained from the various steps as described in Section~\ref{methodology}.
 
 \subsection{Identified repositories}
 We identified 734 projects adhering to our definition of large and active independent projects.
@@ -11,7 +11,7 @@ As we are looking for large projects, that are also at least one year old, this 
 
 Of the total of 734 identified projects, 263 are written in Java, 239 in Ruby and 232 in Python. 
 This is a bit surprising because in 2012, there were almost twice as many Ruby projects than Python projects created on GitHub. \footnote{http://adambard.com/blog/top-github-languages-for-2013-so-far/}
-In Table \ref{tab:allChanges} we present the average number of commits and pull requests per programming language.
+In Table~\ref{tab:allChanges} we present the average number of commits and pull requests per programming language.
 \begin{table}[h]
 \begin{tabular}{ l | l l }
  & commits & pull requests\\
@@ -57,13 +57,13 @@ This is an interesting observation as we saw earlier that the number projects is
 There is no clear reason for this difference between the programming languages.
 
 \subsection{Statistical analysis}
-Now, we discuss the results of the statistical analysis on the 193 projects that have enough data to perform the statistical analysis as described in Section \ref{methodology}.
+Now, we discuss the results of the statistical analysis on the 193 projects that have enough data to perform the statistical analysis as described in Section~\ref{methodology}.
 Of these 193 projects, 84 (43.5\%) have a p-value of the chi-squared test of less than 0.05. 
 We can not refute the null hypothesis that the success of a build is independent of the way a code change is introduced.
 With confidence intervals of 0.01 and 0.1 there are 68(35.2\%) and 96 (49.7\%) projects for which the null hypothesis can be refuted respectively.
 
 When comparing different programming languages we observe few differences between the languages.
-Table \ref{tab:p-for-lang} contains for each of the studied languages the number of projects having a p-value lower than 0.05.
+Table~\ref{tab:p-for-lang} contains for each of the studied languages the number of projects having a p-value lower than 0.05.
 \begin{table}[h]
 \begin{tabular}{ l | l l l}
  & p $<$ 0.05 & total & \%\\
@@ -79,7 +79,7 @@ There is a relatively large difference between Python and the other languages.
 For the Java projects there are too few projects to really say anything about this result.
 
 When comparing the projects on age we identify three categories; age between 365 and 730 days, age between 731 and 1461 days and older projects.
-Table \ref{tab:p-for-age} contains for each of the studied ages the number of projects having a p-value lower than 0.05.
+Table~\ref{tab:p-for-age} contains for each of the studied ages the number of projects having a p-value lower than 0.05.
 \begin{table}[h]
 \begin{tabular}{ l | l l l}
  & p $<$ 0.05 & total & \%\\
@@ -94,7 +94,7 @@ Table \ref{tab:p-for-age} contains for each of the studied ages the number of pr
 We see that for older projects there are more rejections of the null hypothesis. 
 
 When comparing the projects on the number of contributors we identify three categories; between 10-24 contributors, 25-50 contributors and 51 or more contributors.
-Table \ref{tab:p-for-contributors} contains for each of the studied number of contributors the number of projects having a p-value lower than 0.05.
+Table~\ref{tab:p-for-contributors} contains for each of the studied number of contributors the number of projects having a p-value lower than 0.05.
 \begin{table}[h]
 \begin{tabular}{ l | l l l}
  & p $<$ 0.05 & total & \%\\
@@ -109,7 +109,7 @@ Table \ref{tab:p-for-contributors} contains for each of the studied number of co
 We see that for projects with more contributors there are fewer where there is a statistically significant relation between the success of a build and the way the changes are introduced.
 
 When comparing the projects on the number of changes in the last month, we identify three categories; between 10-49 changes, 50-140 changes and more than 150 changes.
-Table \ref{tab:p-for-changes} contains for each of the studied number of changes in the last month the number of projects having a p-value lower than 0.05.
+Table~\ref{tab:p-for-changes} contains for each of the studied number of changes in the last month the number of projects having a p-value lower than 0.05.
 \begin{table}[h]
 \begin{tabular}{ l | l l l}
  & p $<$ 0.05 & total & \%\\
