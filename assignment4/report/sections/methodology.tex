@@ -34,7 +34,7 @@ The tool supports the following commands:
 	\item[\texttt{load}] Loads projects from a CSV file into the database
 	\item[\texttt{run}] Runs the Travis analysis on all non-processed projects
 	\item[\texttt{export}] Exports the analysis results to a CSV file
-	\item[\texttt{console}] Opens an interactive console with the model loaded so it is possible to query the database through the \texttt{activerecord} interface. (For instance, run \texttt{Project.\-where(:processed => true)\.count} to get the number of processed projects).
+	\item[\texttt{console}] Opens an interactive console with the model loaded so it is possible to query the database through the \texttt{activerecord} interface. (For instance, run \texttt{Project.\-where(:processed => true).\-count} to get the number of processed projects).
 	\item[\texttt{clean}] Cleans the database
 	\item[\texttt{help [command]}] Outputs general help, or a detailed description of a certain command (with examples of usage)
 \end{description}
