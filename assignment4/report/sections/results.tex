@@ -29,5 +29,29 @@ This might have to do with the difference in the number of contributors to proje
 We see that the average number of contributors for the identified Java projects is 43.4, whereas this average is 53.4 and 52.2 for Python and Ruby projects respectively.
 
 \subsection{Travis}
+%Can you say that Travis CI is more popular for projects in one programming language than in the other? 
+%How would you explain this phenomenon? 
+%What can you say about popularity of direct code modifications (commit) vs. indirect code modifications (pull requests) in those projects present on Travis CI as opposed to all projects you have identified? 
+%Can any differences between projects written in different programming languages be observed? How can you explain your observations?
+
 
 \subsection{Statistical analysis}
+%Discuss the projects that did not have enough data to be subjected to statistical analysis. 
+%How many of them have you found?
+%Which cell in the contingency table was usually the one with less than five instances? 
+%How would you explain this observation? 
+%Can you observe differences in Java, Python and Ruby repositories in this respect?
+Of the identified 735 projects, there are 307 projects for which at least one of the fields \textit{commits passed, commits failed, pull requests passed} and \textit{pull requests failed} is greater than zero.
+Of these 307, 193 projects had a value of 5 or higher in each of those fields, which makes them suitable for out statistical analysis.
+This means that 114 projects that did use Travis CI do not have enough data to be analyzed. 
+Of these projects, the fields concerning the number of commits have a value less than 5 more often than the fields concerning pull requests.
+
+The field that most often contains a value of less than 5 is the field concerning failed builds after a commit, in 90 of the 114 cases, this value is less than 5.
+This can be explained by the fact that this is also the field that has the lowest average value for all projects and these four fields. 
+The average value of the fields \textit{commits passed, commits failed, pull requests passed} and \textit{pull requests failed} is 231.7, 90.6, 350.2 and 147.6 respectively.
+The fraction of failed commits of the total number of commits is 28.1\%. This is very similar to the fraction of failed pull requests of the total number of pull requests, which is 29.7\%.
+The fact that the number of commits is lower than the number of pull requests for these 307 projects may have to do with the use of Travis CI, which indicates a more professional approach to the development which would yield more people to work in the fork and pull model.
+
+Of the projects that 114 projects that do not have enough data to be suitable for our statistical analysis, 55 are written in Ruby, 37 in Python and 22 in Java.
+This is an interesting observation as we saw earlier that the number projects is evenly distributed over the three programming languages.
+There is no clear reason for this difference between the programming languages.
